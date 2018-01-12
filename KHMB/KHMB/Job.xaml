@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Job" Height="300" Width="300">
     <Grid>
-        
+        <DatePicker x:Name="dtpick_Deadline" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,81,0,0"/>
     </Grid>
 </Window>

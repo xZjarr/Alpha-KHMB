@@ -14,14 +14,29 @@ using System.Windows.Shapes;
 
 namespace KHMB
 {
-    /// <summary>
-    /// Interaction logic for Job.xaml
-    /// </summary>
     public partial class Job : Window
     {
+        int ResourceID, CreatedUserID, JobID, Priority;
+        string JobName;
+        bool Succes;
         public Job()
         {
+            DateTime Deadline = Convert.ToDateTime(dtpick_Deadline.Text);
+            DateTime Created = DateTime.Today;
             InitializeComponent();
+        }
+        public static void CreateJob(int JobID, String User, int Priority)
+        {
+            
+        }
+        public void EditJob(int JobID, string User)
+        {
+
+        }
+        public bool DeleteJob(int JobID, string User)
+        {
+            
+            return Succes;
         }
     }
 }
