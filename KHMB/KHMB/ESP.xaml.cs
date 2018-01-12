@@ -38,10 +38,12 @@ namespace KHMB
         {
 
         }
+        // (StartDate, EndDate)
         static void CheckAvailable()
         {
 
         }
+        // (StartDate, EndDate)
         static void GetESPs()
         {
 

@@ -22,6 +22,31 @@ namespace KHMB
         public Tarif()
         {
             InitializeComponent();
+            DateTime StartDate; //including StartTime
+            DateTime EndDate; //Including EndTime
+            Double EnergySurplus;
+        }
+        static void Create()
+        {
+
+        }
+        static void Edit()
+        {
+
+        }
+        static void Delete()
+        {
+
+        }
+        // (StartDate, EndDate)
+        static void CheckAvailable()
+        {
+
+        }
+        // (StartDate, EndDate)
+        static void GetESPs()
+        {
+
         }
     }
 }
