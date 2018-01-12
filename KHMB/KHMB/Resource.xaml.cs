@@ -22,6 +22,24 @@ namespace KHMB
         public Resource()
         {
             InitializeComponent();
+
+            string name;
+            int typeID;
+            int resourceID;
+            string connectionStr;
+            double energyComsumption;
+        }
+        static void CreateResource()
+        {
+
+        }
+        static void EditResource()
+        {
+
+        }
+        static void DeleteResource()
+        {
+
         }
     }
 }
