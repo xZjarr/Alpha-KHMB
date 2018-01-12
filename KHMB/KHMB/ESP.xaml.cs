@@ -22,6 +22,29 @@ namespace KHMB
         public ESP()
         {
             InitializeComponent();
+            DateTime StartDate; //including StartTime
+            DateTime EndDate; //Including EndTime
+            Double EnergySurplus;
+        }
+        static void Create()
+        {
+
+        }
+        static void Edit()
+        {
+
+        }
+        static void Delete()
+        {
+
+        }
+        static void CheckAvailable()
+        {
+
+        }
+        static void GetESPs()
+        {
+
         }
     }
 }

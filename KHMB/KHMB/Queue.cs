@@ -8,5 +8,25 @@ namespace KHMB
 {
     class Queue
     {
+        static void AddJobToQueue()
+        {
+
+        }
+        static void GetCurrentlyStartingJob()
+        {
+
+        }
+        static void CurrentlyAvailable()
+        {
+
+        }
+        static void ReEvaluateJob()
+        {
+
+        }
+        static void ReEvaluateQueue()
+        {
+
+        }
     }
 }
