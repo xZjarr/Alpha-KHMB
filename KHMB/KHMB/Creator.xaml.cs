@@ -14,9 +14,7 @@ using System.Windows.Shapes;
 
 namespace KHMB
 {
-    /// <summary>
-    /// Interaction logic for Creator.xaml
-    /// </summary>
+    // her samler vi knapper til de forskellige "create" knapper
     public partial class Creator : Window
     {
         public Creator()
