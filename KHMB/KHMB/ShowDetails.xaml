@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ShowDetails" Height="300" Width="300">
     <Grid>
-        <Button x:Name="btn_Close" Content="Close" HorizontalAlignment="Left" Margin="186,223,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button x:Name="btn_Close" Content="Close" HorizontalAlignment="Left" Margin="186,228,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button x:Name="btn_Edit" Content="Edit" HorizontalAlignment="Left" Margin="30,198,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_Delete" Content="Delete" HorizontalAlignment="Left" Margin="30,228,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBlock x:Name="txtblock_Name" HorizontalAlignment="Left" Margin="30,26,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
