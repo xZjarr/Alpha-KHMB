@@ -14,14 +14,38 @@ using System.Windows.Shapes;
 
 namespace KHMB
 {
-    /// <summary>
-    /// Interaction logic for User.xaml
-    /// </summary>
     public partial class User : Window
     {
+        string UserName, Password, FirstName, SurName;
+        int UserID;
+        bool IsAdmin, LogInSucces;
         public User()
         {
             InitializeComponent();
+        }
+        public void CreateUser()
+        {
+
+        }
+        public void EditUser()
+        {
+
+        }
+        public void DeleteUser()
+        {
+            
+        }
+        public bool CheckJob()
+        {
+            return IsAdmin;
+        }
+        public void CheckAviableUsrName()
+        {
+
+        }
+        public bool LogIn(string UserName, string Password)
+        {
+            return LogInSucces;
         }
     }
 }
