@@ -29,11 +29,16 @@ namespace KHMB
             //Get info from db of the chosen object from drop down.
             DB.CloseConnection();
         }
-
+        public static void ShowDetails()
+        {
+            //Show details of the chosen job/whatever when clicking on job.
+        }
         private void btn_Show_Click(object sender, RoutedEventArgs e)
         {
-            ShowDetails sd = new ShowDetails();
-            sd.Show();
+            //Show information of the chosen object.
+            //(Klaus) Skal ændres til: Åbne nyt vindue med baseret på hvad der skal vises??
+            MainWindow returnWindow = new MainWindow();
+            returnWindow.Show();
             this.Close();
         }
 

@@ -61,17 +61,16 @@
     <Compile Include="ESP.xaml.cs">
       <DependentUpon>ESP.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Queue.cs" />
     <Compile Include="Resource.xaml.cs">
       <DependentUpon>Resource.xaml</DependentUpon>
     </Compile>
     <Compile Include="ResourceType.xaml.cs">
       <DependentUpon>ResourceType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scheduler.cs" />
     <Compile Include="Show.xaml.cs">
       <DependentUpon>Show.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ShowDetails.xaml.cs">
-      <DependentUpon>ShowDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tarif.xaml.cs">
       <DependentUpon>Tarif.xaml</DependentUpon>
@@ -115,10 +114,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Show.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ShowDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
