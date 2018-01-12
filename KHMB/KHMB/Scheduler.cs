@@ -8,5 +8,26 @@ namespace KHMB
 {
     class Scheduler
     {
+        Job JobToBeScheduled = new Job();
+        public void FindPlaceInQueue()
+        {
+
+        }
+        public void GetResources()
+        {
+
+        }
+        public void GetJobs()
+        {
+
+        }
+        public void GetESPs()
+        {
+
+        }
+        public void GetTarif()
+        {
+
+        }
     }
 }
