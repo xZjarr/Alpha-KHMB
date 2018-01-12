@@ -11,14 +11,14 @@ namespace KHMB
     class DB
     {
         static SqlConnection myConnection;
-        private static void OpenConnection()
+        public static void OpenConnection()
         {
             myConnection = new SqlConnection(
                 "Data Source=.;Initial Catalog=Alpha-KHMB;Integrated Security=True"
                 );
             myConnection.Open();
         }
-        private static void CloseConnection()
+        public static void CloseConnection()
         {
             myConnection.Close();
         }

@@ -25,11 +25,29 @@ namespace KHMB
         }
         static void ShowList()
         {
-            //Show the chosen object from dropdown menu, when clicking button.
+            DB.OpenConnection();
+            //Get info from db of the chosen object from drop down.
+            DB.CloseConnection();
         }
         public static void ShowDetails()
         {
             //Show details of the chosen job/whatever when clicking on job.
         }
+        private void btn_Show_Click(object sender, RoutedEventArgs e)
+        {
+            //Show information of the chosen object.
+            //(Klaus) Skal ændres til: Åbne nyt vindue med baseret på hvad der skal vises??
+            MainWindow returnWindow = new MainWindow();
+            returnWindow.Show();
+            this.Close();
+        }
+
+        private void btn_Return_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow returnWindow = new MainWindow();
+            returnWindow.Show();
+            this.Close();
+        }
+
     }
 }
