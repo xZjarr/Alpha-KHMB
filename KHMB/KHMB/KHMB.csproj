@@ -70,6 +70,9 @@
     <Compile Include="Show.xaml.cs">
       <DependentUpon>Show.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShowDetails.xaml.cs">
+      <DependentUpon>ShowDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tarif.xaml.cs">
       <DependentUpon>Tarif.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Show.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShowDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
