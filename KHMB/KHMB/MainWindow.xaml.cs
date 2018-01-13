@@ -24,5 +24,13 @@ namespace KHMB
         {
             InitializeComponent();
         }
+
+        //Made by Klaus
+        private void btn_Show_Click(object sender, RoutedEventArgs e)
+        {
+            Show showWindow = new Show();
+            showWindow.Show();
+            this.Close();
+        }
     }
 }
