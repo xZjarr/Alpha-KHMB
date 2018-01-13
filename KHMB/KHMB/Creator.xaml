@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KHMB"
         mc:Ignorable="d"
-        Title="Creator" Height="300" Width="300">
+        Title="Creator" Height="350" Width="300">
     <Grid>
-        
+        <Button x:Name="btn_CreateResourceType" Content="Create Resourcetype" HorizontalAlignment="Left" Margin="39,112,0,0" VerticalAlignment="Top" Width="118" Height="38" Click="btn_CreateResourceType_Click"/>
+        <Button x:Name="NewJob" Content="Nyt Job" HorizontalAlignment="Left" Height="33" Margin="39,175,0,0" VerticalAlignment="Top" Width="118" Click="NewJob_Click"/>
+        <Button x:Name="btn_CreateUser" Content="Create User" HorizontalAlignment="Left" Margin="39,229,0,0" VerticalAlignment="Top" Width="118" Height="34" Click="btn_CreateUser_Click"/>
+        <Button x:Name="btn_CreateResource" Content="Create Resource" HorizontalAlignment="Left" Margin="39,56,0,0" VerticalAlignment="Top" Width="118" Height="36" Click="btn_CreateResource_Click"/>
+        <Button x:Name="btn_Return" Content="Return" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="btn_Return_Click"/>
+        <Button Content="Create Tarif" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="183,56,0,0" Height="36" Click="Button_Click"/>
+        <Button Content="Create ESP" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="183,114,0,0" Height="36" Click="Button_Click_1"/>
+
     </Grid>
 </Window>

@@ -21,5 +21,54 @@ namespace KHMB
         {
             InitializeComponent();
         }
+
+        private void NewJob_Click(object sender, RoutedEventArgs e)
+        {
+            Job NJ = new Job();
+            NJ.ShowDialog();
+        }
+
+        private void btn_ShowScreen_Click(object sender, RoutedEventArgs e)
+        {
+            Show showScreen = new Show();
+            showScreen.ShowDialog();
+        }
+        // skal kun kunne ses af admin
+        private void btn_CreateResourceType_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceType createRT = new ResourceType();
+            createRT.ShowDialog();
+        }
+        // skal kun kunne ses af admin
+        private void btn_CreateUser_Click(object sender, RoutedEventArgs e)
+        {
+            User newUser = new User();
+            newUser.Show();
+        }
+        // skal kun kunne ses af admin
+        private void btn_CreateResource_Click(object sender, RoutedEventArgs e)
+        {
+            Resource createR = new Resource();
+            createR.ShowDialog();
+        }
+
+        private void btn_Return_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow returnWindow = new MainWindow();
+            returnWindow.Show();
+            this.Close();
+        }
+        // skal kun kunne ses af admin
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Tarif CT = new Tarif();
+            CT.ShowDialog();
+        }
+        // skal kun kunne ses af admin
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ESP CESP = new ESP();
+            CESP.ShowDialog();
+        }
     }
 }

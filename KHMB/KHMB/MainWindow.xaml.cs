@@ -32,5 +32,12 @@ namespace KHMB
             showWindow.Show();
             this.Close();
         }
+
+        private void btn_Create_Click(object sender, RoutedEventArgs e)
+        {
+            Creator creatorWindow = new Creator();
+            creatorWindow.Show();
+            this.Close();
+        }
     }
 }
