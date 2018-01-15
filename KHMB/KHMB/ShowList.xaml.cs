@@ -23,15 +23,23 @@ namespace KHMB
         {
             InitializeComponent();
             lbl_Title.Content = chosenObject;
-            List<> items = DB.();
-            listbox_Show.ItemsSource = items;
+            //List<> items = DB.();
+            //listbox_Show.ItemsSource = items;
 
         }
         static void ShowListOfChosenObject()
         {
             DB.OpenConnection();
+
             //Get info from db of the chosen object from drop down.
             DB.CloseConnection();
+        }
+
+        private void btn_Close_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow returnWindow = new MainWindow();
+            returnWindow.Show();
+            this.Close();
         }
     }
 }
