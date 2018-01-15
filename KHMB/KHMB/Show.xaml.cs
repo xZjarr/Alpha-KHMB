@@ -29,10 +29,7 @@ namespace KHMB
             //Get info from db of the chosen object from drop down.
             DB.CloseConnection();
         }
-        public static void ShowDetails()
-        {
-            //Show details of the chosen job/whatever when clicking on job.
-        }
+
         private void btn_Show_Click(object sender, RoutedEventArgs e)
         {
             //Show information of the chosen object.
