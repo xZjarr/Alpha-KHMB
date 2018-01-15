@@ -19,13 +19,11 @@ namespace KHMB
     /// </summary>
     public partial class ResourceType : Window
     {
-        string NameUsrInput { get; set; }
-        int ID { get; set; }
         //<List> Resources
         bool Access;
         public ResourceType()
-        {
-                InitializeComponent();
+        { 
+            InitializeComponent();
         }
         public void GetResources(int ID)
         {
