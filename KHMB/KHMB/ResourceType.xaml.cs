@@ -19,13 +19,11 @@ namespace KHMB
     /// </summary>
     public partial class ResourceType : Window
     {
-        string NameUsrInput { get; set; }
-        int ID { get; set; }
         //<List> Resources
         bool Access;
         public ResourceType()
-        {
-                InitializeComponent();
+        { 
+            InitializeComponent();
         }
         public void GetResources(int ID)
         {
@@ -43,6 +41,12 @@ namespace KHMB
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
             CreateResourceType(Bx_Nm.Text);
+            this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

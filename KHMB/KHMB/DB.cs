@@ -25,6 +25,16 @@ namespace KHMB
         {
             myConnection.Close();
         }
+
+        public static void InsertR(string R)
+        {
+            OpenConnection();
+            SqlCommand insertR = new SqlCommand("INSERT INTO Resource (name) VALUES (@name)", myConnection);
+            insertR.Parameters.Add("@name", SqlDbType.VarChar);
+            insertR.Parameters["@name"].Value = R;
+            insertR.ExecuteNonQuery();
+            CloseConnection();
+        }
         public static void InsertRT(string RT)
         {
             OpenConnection();
@@ -34,19 +44,19 @@ namespace KHMB
             insertRT.ExecuteNonQuery();
             CloseConnection();
         }
-        public static List<ResourceType> SelectAllResourceTypes()
+        public static List<RTO> SelectAllResourceTypes()
         {
-            List<ResourceType> rtList = new List<ResourceType>();
+            List<RTO> rtList = new List<RTO>();
             OpenConnection();
             SqlCommand getRT = new SqlCommand("SELECT * FROM ResourceType", myConnection);
             SqlDataReader reader = getRT.ExecuteReader();
             while (reader.Read())
             {
-                ResourceType rt = new ResourceType();
-                rt.Name = reader.GetString(0);
+                RTO rt = new RTO();
+                rt.Name = reader.GetString(1);
+                rtList.Add(rt);
             }
             CloseConnection();
-
             return rtList;
         }
 

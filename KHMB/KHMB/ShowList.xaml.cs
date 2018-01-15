@@ -23,18 +23,11 @@ namespace KHMB
         {
             InitializeComponent();
             lbl_Title.Content = chosenObject;
-
             if (chosenObject == "ResourceTypes")
             {
                 ShowResourceType();
             }
-        }
-        static void ShowListOfChosenObject()
-        {
-            DB.OpenConnection();
 
-            //Get info from db of the chosen object from drop down.
-            DB.CloseConnection();
         }
 
         private void btn_Close_Click(object sender, RoutedEventArgs e)
@@ -45,7 +38,7 @@ namespace KHMB
         }
         private void ShowResourceType()
         {
-            List<ResourceType> rt = DB.SelectAllResourceTypes();
+            List<RTO> rt = DB.SelectAllResourceTypes();
             listbox_Show.ItemsSource = rt;
         }
     }

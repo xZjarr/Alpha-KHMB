@@ -68,6 +68,7 @@
     <Compile Include="ResourceType.xaml.cs">
       <DependentUpon>ResourceType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RTO.cs" />
     <Compile Include="Scheduler.cs" />
     <Compile Include="Show.xaml.cs">
       <DependentUpon>Show.xaml</DependentUpon>

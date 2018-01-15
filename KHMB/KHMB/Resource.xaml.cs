@@ -19,25 +19,35 @@ namespace KHMB
     /// </summary>
     public partial class Resource : Window
     {
+
+        string Name { get; set; }
+        int TypeID { get; set; }
+        int ResourceID { get; set; }
+        string ConnectionStr { get; set; }
+        double EnergyComsumption { get; set; }
         public Resource()
         {
             InitializeComponent();
-
-            string name;
-            int typeID;
-            int resourceID;
-            string connectionStr;
-            double energyComsumption;
         }
-        static void CreateResource()
+        static void CreateResource(string name)
         {
-
+            DB.InsertR(name);
         }
         static void EditResource()
         {
 
         }
         static void DeleteResource()
+        {
+
+        }
+
+        private void Btn_Sv_Click(object sender, RoutedEventArgs e)
+        {
+            CreateResource(Bx_N.Text);
+        }
+
+        private void Bx_RT_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
