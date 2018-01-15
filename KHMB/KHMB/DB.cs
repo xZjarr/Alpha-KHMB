@@ -38,12 +38,12 @@ namespace KHMB
         {
             List<ResourceType> rtList = new List<ResourceType>();
             OpenConnection();
-            SqlCommand getBudgets = new SqlCommand("SELECT * FROM ResourceType", myConnection);
-            SqlDataReader reader = getBudgets.ExecuteReader();
+            SqlCommand getRT = new SqlCommand("SELECT * FROM ResourceType", myConnection);
+            SqlDataReader reader = getRT.ExecuteReader();
             while (reader.Read())
             {
                 ResourceType rt = new ResourceType();
-                rt.Name = reader.GetString(1);
+                rt.Name = reader.GetString(0);
             }
             CloseConnection();
 
