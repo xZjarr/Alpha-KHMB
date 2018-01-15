@@ -28,9 +28,11 @@ namespace KHMB
         public static void InsertRT(string RT)
         {
             OpenConnection();
-            SqlCommand cmd = new SqlCommand(
-            string.Format("INSERT INTO ResourceType (Name) VALUES (,{0}')", RT), myConnection);
-            cmd.ExecuteNonQuery();
+            SqlCommand insertRT = new SqlCommand("INSERT INTO ResourceType (name) VALUES (@name)", myConnection);
+            insertRT.Parameters.Add("@name", SqlDbType.VarChar);
+            insertRT.Parameters["@name"].Value = RT;
+            insertRT.ExecuteNonQuery();
+            CloseConnection();
         }
     }
 

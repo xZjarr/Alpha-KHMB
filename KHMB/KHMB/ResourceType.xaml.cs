@@ -42,8 +42,7 @@ namespace KHMB
 
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
-            NameUsrInput = Bx_Nm.Text;
-            CreateResourceType(NameUsrInput);
+            CreateResourceType(Bx_Nm.Text);
         }
     }
 }
