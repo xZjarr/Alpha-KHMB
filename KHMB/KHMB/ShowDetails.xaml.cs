@@ -23,5 +23,17 @@ namespace KHMB
         {
             InitializeComponent();
         }
+
+        private void Btn_Close_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow returnWindow = new MainWindow();
+            returnWindow.Show();
+            this.Close();
+        }
+
+        private void Btn_Edit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
