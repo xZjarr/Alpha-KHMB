@@ -5,9 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KHMB"
         mc:Ignorable="d"
-        Title="Job" Height="300" Width="300">
+        Title="Job" Height="313.5" Width="339">
     <Grid>
-        <DatePicker x:Name="dtpick_Deadline" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,81,0,0"/>
-        <Button x:Name="btn_AddJob" Content="Submit job" HorizontalAlignment="Left" Margin="207,239,0,0" VerticalAlignment="Top" Width="75" Click="btn_AddJob_Click"/>
+        <DatePicker x:Name="dtpick_Deadline" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="68,42,0,0" SelectedDateChanged="dtpick_Deadline_SelectedDateChanged"/>
+        <Button x:Name="btn_AddJob" Content="Submit job" HorizontalAlignment="Left" Margin="246,253,0,0" VerticalAlignment="Top" Width="75" Click="btn_AddJob_Click"/>
+        <ComboBox x:Name="cbx_Deadline" HorizontalAlignment="Left" Margin="68,121,0,0" VerticalAlignment="Top" Width="102" IsEnabled="False">
+            <ComboBoxItem IsSelected="True" Content="00"></ComboBoxItem>
+            <ComboBoxItem Content="01"></ComboBoxItem>
+            <ComboBoxItem Content="02"></ComboBoxItem>
+            <ComboBoxItem Content="03"></ComboBoxItem>
+            <ComboBoxItem Content="04"></ComboBoxItem>
+            <ComboBoxItem Content="05"></ComboBoxItem>
+            <ComboBoxItem Content="06"></ComboBoxItem>
+            <ComboBoxItem Content="07"></ComboBoxItem>
+            <ComboBoxItem Content="08"></ComboBoxItem>
+            <ComboBoxItem Content="09"></ComboBoxItem>
+            <ComboBoxItem Content="10"></ComboBoxItem>
+            <ComboBoxItem Content="11"></ComboBoxItem>
+            <ComboBoxItem Content="12"></ComboBoxItem>
+            <ComboBoxItem Content="13"></ComboBoxItem>
+            <ComboBoxItem Content="14"></ComboBoxItem>
+            <ComboBoxItem Content="15"></ComboBoxItem>
+            <ComboBoxItem Content="16"></ComboBoxItem>
+            <ComboBoxItem Content="17"></ComboBoxItem>
+            <ComboBoxItem Content="18"></ComboBoxItem>
+            <ComboBoxItem Content="19"></ComboBoxItem>
+            <ComboBoxItem Content="20"></ComboBoxItem>
+            <ComboBoxItem Content="21"></ComboBoxItem>
+            <ComboBoxItem Content="22"></ComboBoxItem>
+            <ComboBoxItem Content="23"></ComboBoxItem>
+            <ComboBoxItem Content="24"></ComboBoxItem>
+        </ComboBox>
+        <Label Content="Select deadline date" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Select priority" HorizontalAlignment="Left" Margin="30,170,0,0" VerticalAlignment="Top"/>
+        <Label Content="Select resource" HorizontalAlignment="Left" Margin="221,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbx_Priority" HorizontalAlignment="Left" Margin="68,201,0,0" VerticalAlignment="Top" Width="102">
+            <ComboBoxItem IsSelected="True" Content="1"></ComboBoxItem>
+            <ComboBoxItem Content="2"></ComboBoxItem>
+            <ComboBoxItem Content="3"></ComboBoxItem>
+        </ComboBox>
+        <Label Content="Select deadline time" HorizontalAlignment="Left" Margin="30,90,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="lbx_Resources" HorizontalAlignment="Left" Height="187" Margin="221,36,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="lbx_Resources_SelectionChanged"/>
     </Grid>
 </Window>

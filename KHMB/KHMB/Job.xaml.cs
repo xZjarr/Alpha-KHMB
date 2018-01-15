@@ -19,26 +19,61 @@ namespace KHMB
         int ResourceID, CreatedUserID, JobID, Priority;
         string JobName;
         bool Succes;
+        DateTime Deadline;
+        DateTime Created;
+
         public Job()
         {
             InitializeComponent();
-            DateTime Created = DateTime.Today;
+            FillResourceList();
+            Created = DateTime.Today;
+        }
+
+        private void FillResourceList()
+        {
+            List<int> resources = new List<int>();
+            //Get a list from the database. For now, manually add an item.
+            resources.Add(42);
+            lbx_Resources.ItemsSource = resources;
         }
 
         private void btn_AddJob_Click(object sender, RoutedEventArgs e)
         {
-            //Crashes if user doesn't select a date.
-            CreateJob(JobID, "Userguy", Priority, dtpick_Deadline);
+            Deadline = Deadline.Date + DeadlineTimeConverter(cbx_Deadline).TimeOfDay;
+            Priority = Convert.ToInt32(cbx_Priority.Text);
+            CreateJob(ResourceID, CreatedUserID, Priority, Deadline);
         }
 
-        public static void CreateJob(int JobID, String User, int Priority, DatePicker dtpick_Deadline)
+        private DateTime DeadlineTimeConverter(ComboBox cbx_time)
         {
-             DateTime Deadline = Convert.ToDateTime(dtpick_Deadline.Text);           
+            string temp = $"{cbx_time.Text}:00:00";
+            DateTime time = Convert.ToDateTime(temp);
+            return time;
         }
+
+
+        private void dtpick_Deadline_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Deadline = Convert.ToDateTime(dtpick_Deadline.Text);
+            cbx_Deadline.IsEnabled = true;
+        }
+
+        private void lbx_Resources_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ResourceID = (int)lbx_Resources.SelectedItem;
+        }
+
+
+        public static void CreateJob(int Resource, int User, int Priority, DateTime Deadline)
+        {
+            //Send info to the scheduler, let it handle putting the job in the queue
+        }
+
         public void EditJob(int JobID, string User)
         {
 
         }
+
         public bool DeleteJob(int JobID, string User)
         {
             
