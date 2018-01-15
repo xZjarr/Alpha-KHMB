@@ -7,14 +7,17 @@
         mc:Ignorable="d"
         Title="Show" Height="300" Width="300">
     <Grid>
-        <ComboBox x:Name="cmbBox_Chose" HorizontalAlignment="Left" Margin="83,116,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox x:Name="cmbBox_Chose" HorizontalAlignment="Left" Margin="48,112,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem IsSelected="True" Content="Jobs"></ComboBoxItem>
             <ComboBoxItem Content="Resources"></ComboBoxItem>
             <ComboBoxItem Content="ResourceTypes"></ComboBoxItem>
             <ComboBoxItem Content="Users"></ComboBoxItem>
+            <ComboBoxItem Content="Tarif"></ComboBoxItem>
+            <ComboBoxItem Content="ESPs"></ComboBoxItem>
+
         </ComboBox>
         <Button x:Name="btn_Show" Content="Show" HorizontalAlignment="Left" Margin="174,206,0,0" VerticalAlignment="Top" Width="75" Click="btn_Show_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="48,78,0,0" TextWrapping="Wrap" Text="Choose you want shown:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="48,92,0,0" TextWrapping="Wrap" Text="Choose:" VerticalAlignment="Top"/>
         <Button x:Name="btn_Return" Content="Return" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="btn_Return_Click"/>
 
     </Grid>
