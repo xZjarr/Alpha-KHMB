@@ -36,7 +36,7 @@ namespace KHMB
         }
         private void ShowResourceType()
         {
-            List<ResourceType> rt = DB.InsertRT();
+            List<ResourceType> rt = DB.SelectAllResourceTypes();
 
         }
     }
