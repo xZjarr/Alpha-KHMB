@@ -48,8 +48,8 @@ namespace KHMB
         {
             List<RTO> rtList = new List<RTO>();
             OpenConnection();
-            SqlCommand getBudgets = new SqlCommand("SELECT * FROM ResourceType", myConnection);
-            SqlDataReader reader = getBudgets.ExecuteReader();
+            SqlCommand getRT = new SqlCommand("SELECT * FROM ResourceType", myConnection);
+            SqlDataReader reader = getRT.ExecuteReader();
             while (reader.Read())
             {
                 RTO rt = new RTO();

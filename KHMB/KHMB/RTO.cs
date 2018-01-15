@@ -8,8 +8,10 @@ namespace KHMB
 {
     class RTO
     {
-        public int ResourceTypeID { get; set; }
         public string Name { get; set; }
+    public override string ToString()
+    {
+        return string.Format("Name of resource type: {0}", Name);
     }
     public override string ToString()
     {
