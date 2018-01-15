@@ -43,6 +43,7 @@ namespace KHMB
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
             CreateResourceType(Bx_Nm.Text);
+            this.Close();
         }
     }
 }
