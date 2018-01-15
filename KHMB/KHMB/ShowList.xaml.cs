@@ -23,8 +23,10 @@ namespace KHMB
         {
             InitializeComponent();
             lbl_Title.Content = chosenObject;
-            //List<> items = DB.();
-            //listbox_Show.ItemsSource = items;
+            if (chosenObject == "ResourceTypes")
+            {
+                ShowResourceType();
+            }
 
         }
 
@@ -37,7 +39,7 @@ namespace KHMB
         private void ShowResourceType()
         {
             List<ResourceType> rt = DB.SelectAllResourceTypes();
-
+            listbox_Show.ItemsSource = rt;
         }
     }
 }
