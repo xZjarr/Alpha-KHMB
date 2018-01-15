@@ -27,6 +27,7 @@ namespace KHMB
 
         private void btn_AddJob_Click(object sender, RoutedEventArgs e)
         {
+            //Crashes if user doesn't select a date.
             CreateJob(JobID, "Userguy", Priority, dtpick_Deadline);
         }
 
