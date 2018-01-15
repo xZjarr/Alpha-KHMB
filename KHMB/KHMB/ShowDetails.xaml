@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KHMB"
         mc:Ignorable="d"
-        Title="ShowDetails" Height="300" Width="300">
+        Title="Show Details" Height="300" Width="300">
     <Grid>
-        
+        <Label x:Name="lbl_NameTitle" Content="Name:" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="58"/>
+        <Label x:Name="lbl_IntervalTitle" Content="Created by:" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_EndTitle" Content="Priority:" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_StartTitle" Content="Deadline:" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_descriptionTitle" Content="Description:" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_NameFill" Content="" HorizontalAlignment="Left" Margin="104,24,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label x:Name="lbl_CreatedFill" Content="" HorizontalAlignment="Left" Margin="104,148,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label x:Name="lbl_PriorityFill" Content="" HorizontalAlignment="Left" Margin="104,117,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label x:Name="lbl_DeadlineFill" Content="" HorizontalAlignment="Left" Margin="104,86,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label x:Name="lbl_DescFill" Content="" HorizontalAlignment="Left" Margin="104,55,0,0" VerticalAlignment="Top" Width="180"/>
+        <!--Ressource and resourcetype.-->
+
     </Grid>
 </Window>
