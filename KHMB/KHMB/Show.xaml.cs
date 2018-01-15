@@ -23,20 +23,15 @@ namespace KHMB
         {
             InitializeComponent();
         }
-        static void ShowList()
-        {
-            DB.OpenConnection();
-            //Get info from db of the chosen object from drop down.
-            DB.CloseConnection();
-        }
+
 
         private void btn_Show_Click(object sender, RoutedEventArgs e)
         {
             //Show information of the chosen object.
             //(Klaus) Skal ændres til: Åbne nyt vindue med baseret på hvad der skal vises??
-            ShowList();
-            MainWindow returnWindow = new MainWindow();
-            returnWindow.Show();
+            string chosen = cmbBox_Chose.Text;
+            ShowList sl = new ShowList(chosen);
+            sl.Show();
             this.Close();
         }
 
