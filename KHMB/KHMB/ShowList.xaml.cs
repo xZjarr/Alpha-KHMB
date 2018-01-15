@@ -38,7 +38,7 @@ namespace KHMB
         }
         private void ShowResourceType()
         {
-            List<ResourceTypes> rt = DB.SelectAllResourceTypes(); //HBM Make ResourceTypesObject.
+            List<RTO> rt = DB.SelectAllResourceTypes();
             listbox_Show.ItemsSource = rt;
         }
     }

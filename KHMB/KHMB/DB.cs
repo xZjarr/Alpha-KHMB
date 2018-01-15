@@ -44,19 +44,19 @@ namespace KHMB
             insertRT.ExecuteNonQuery();
             CloseConnection();
         }
-        public static List<ResourceType> SelectAllResourceTypes()
+        public static List<RTO> SelectAllResourceTypes()
         {
-            List<ResourceType> rtList = new List<ResourceType>();
+            List<RTO> rtList = new List<RTO>();
             OpenConnection();
             SqlCommand getBudgets = new SqlCommand("SELECT * FROM ResourceType", myConnection);
             SqlDataReader reader = getBudgets.ExecuteReader();
             while (reader.Read())
             {
-                ResourceType rt = new ResourceType();
+                RTO rt = new RTO();
                 rt.Name = reader.GetString(1);
+                rtList.Add(rt);
             }
             CloseConnection();
-
             return rtList;
         }
 
