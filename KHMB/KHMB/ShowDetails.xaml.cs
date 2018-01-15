@@ -22,6 +22,11 @@ namespace KHMB
         public ShowDetails()
         {
             InitializeComponent();
+            //lbl_CreatedFill.Content =
+            //lbl_DeadlineFill.Content =
+            //lbl_DescFill.Content =
+            //lbl_NameFill.Content =
+            //lbl_PriorityFill.Content =
         }
 
         private void Btn_Close_Click(object sender, RoutedEventArgs e)
