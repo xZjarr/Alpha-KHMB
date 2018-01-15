@@ -29,13 +29,6 @@ namespace KHMB
                 ShowResourceType();
             }
         }
-        static void ShowListOfChosenObject()
-        {
-            DB.OpenConnection();
-
-            //Get info from db of the chosen object from drop down.
-            DB.CloseConnection();
-        }
 
         private void btn_Close_Click(object sender, RoutedEventArgs e)
         {
