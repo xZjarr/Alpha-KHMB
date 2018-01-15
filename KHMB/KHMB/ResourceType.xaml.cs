@@ -19,21 +19,31 @@ namespace KHMB
     /// </summary>
     public partial class ResourceType : Window
     {
-        string NameUsrInput;
-        int ID;
+        string NameUsrInput { get; set; }
+        int ID { get; set; }
         //<List> Resources
-        bool Required;
+        bool Access;
         public ResourceType()
         {
-            InitializeComponent();
+                InitializeComponent();
         }
         public void GetResources(int ID)
         {
 
         }
-        public void CreateResourceType(string NameUsrINput)
+        public void CreateResourceType(string RTName)
         {
+            DB.InsertRT(RTName);
+        }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+        }
+
+        private void Btn_Save_Click(object sender, RoutedEventArgs e)
+        {
+            NameUsrInput = Bx_Nm.Text;
+            CreateResourceType(NameUsrInput);
         }
     }
 }

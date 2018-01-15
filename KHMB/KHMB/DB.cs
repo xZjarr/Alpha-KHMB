@@ -22,6 +22,11 @@ namespace KHMB
         {
             myConnection.Close();
         }
+        public static void InsertRT(string RT)
+        {
+            OpenConnection();
+
+        }
     }
 
 }
