@@ -46,5 +46,10 @@ namespace KHMB
         {
             CreateResource(Bx_N.Text);
         }
+
+        private void Bx_RT_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

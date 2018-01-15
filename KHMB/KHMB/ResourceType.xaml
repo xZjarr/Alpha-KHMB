@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         Title="ResourceType" Height="300" Width="300">
     <Grid>
-        <Button x:Name="Btn_Save" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="207,239,0,0" Click="Btn_Save_Click"/>
+        <Button x:Name="Btn_Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="207,239,0,0" Click="Btn_Save_Click"/>
         <TextBox x:Name="Bx_Nm" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="0,91,0,0" TextChanged="TextBox_TextChanged"/>
-        <Label Content="Resource Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,60,0,0" Width="110"/>
+        <Label Content="Resource Type Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,60,0,0" Width="146"/>
+        <Button Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="207,0,0,0" Click="Button_Click"/>
 
     </Grid>
 </Window>
