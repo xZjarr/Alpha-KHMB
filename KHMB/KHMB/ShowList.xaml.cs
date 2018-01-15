@@ -41,5 +41,10 @@ namespace KHMB
             returnWindow.Show();
             this.Close();
         }
+        private void ShowResourceType()
+        {
+            List<ResourceType> rt = DB.InsertRT();
+
+        }
     }
 }
