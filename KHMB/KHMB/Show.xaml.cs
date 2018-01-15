@@ -37,6 +37,7 @@ namespace KHMB
         {
             //Show information of the chosen object.
             //(Klaus) Skal ændres til: Åbne nyt vindue med baseret på hvad der skal vises??
+            ShowList();
             MainWindow returnWindow = new MainWindow();
             returnWindow.Show();
             this.Close();

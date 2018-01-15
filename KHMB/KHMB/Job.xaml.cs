@@ -21,13 +21,18 @@ namespace KHMB
         bool Succes;
         public Job()
         {
-            DateTime Deadline = Convert.ToDateTime(dtpick_Deadline.Text);
-            DateTime Created = DateTime.Today;
             InitializeComponent();
+            DateTime Created = DateTime.Today;
         }
-        public static void CreateJob(int JobID, String User, int Priority)
+
+        private void btn_AddJob_Click(object sender, RoutedEventArgs e)
         {
-            
+            CreateJob(JobID, "Userguy", Priority, dtpick_Deadline);
+        }
+
+        public static void CreateJob(int JobID, String User, int Priority, DatePicker dtpick_Deadline)
+        {
+             DateTime Deadline = Convert.ToDateTime(dtpick_Deadline.Text);           
         }
         public void EditJob(int JobID, string User)
         {
