@@ -59,6 +59,21 @@ namespace KHMB
             CloseConnection();
             return rtList;
         }
+        public static List<RO> SelectAllResource()
+        {
+            List<RO> rList = new List<RO>();
+            OpenConnection();
+            SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
+            SqlDataReader reader = getR.ExecuteReader();
+            while (reader.Read())
+            {
+                RO r = new RO();
+                r.Name = reader.GetString(1);
+                rList.Add(r);
+            }
+            CloseConnection();
+            return rList;
+        }
 
     }
 }
