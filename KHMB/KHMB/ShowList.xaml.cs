@@ -27,6 +27,11 @@ namespace KHMB
             {
                 ShowResourceType();
             }
+            else if (chosenObject == "Resources")
+            {
+                ShowResource();
+                //ShowResourceType();
+            }
 
         }
 
@@ -40,6 +45,11 @@ namespace KHMB
         {
             List<RTO> rt = DB.SelectAllResourceTypes();
             listbox_Show.ItemsSource = rt;
+        }
+        private void ShowResource()
+        {
+            List<RO> r = DB.SelectAllResource();
+            listbox_Show.ItemsSource = r;
         }
     }
 }

@@ -49,7 +49,8 @@ namespace KHMB
 
         private void Bx_RT_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            List<RTO> rt = DB.SelectAllResourceTypes();
+            Bx_RT.ItemsSource = rt.ToString();
         }
     }
 }
