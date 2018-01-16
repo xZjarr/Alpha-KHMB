@@ -30,7 +30,7 @@ namespace KHMB
             else if (chosenObject == "Resources")
             {
                 ShowResource();
-                //ShowResourceType();
+                ShowResourceType();
             }
         }
         private void btn_Close_Click(object sender, RoutedEventArgs e)
@@ -49,26 +49,26 @@ namespace KHMB
             List<RO> r = DB.SelectAllResource();
             listbox_Show.ItemsSource = r;
         }
-        private void ShowJob()
-        {
-            //List<__> job = DB.SelectAllJobs();
-            //listbox_Show.ItemsSource = job;
-        }
-        private void ShowUsers()
-        {
-            //List<__> users = DB.SelectAllUsers();
-            //listbox_Show.ItemsSource = users;
-        }
-        private void ShowTarif()
-        {
-            //List<__> tarif = DB.SelectAllTarifs();
-            //listbox_Show.ItemsSource = tarif;
-        }
-        private void ShowESPs()
-        {
-            //List<__> esps = DB.SelectAllEsps();
-            //listbox_Show.ItemsSource = esps;
-        }
+        //private void ShowJob()
+        //{
+        //    List<__> job = DB.SelectAllJobs();
+        //   listbox_Show.ItemsSource = job;
+        //}
+        //private void ShowUsers()
+        //{
+        //    List<__> users = DB.SelectAllUsers();
+        //    listbox_Show.ItemsSource = users;
+        //}
+        //private void ShowTarif()
+        //{
+        //    List<__> tarif = DB.SelectAllTarifs();
+        //    listbox_Show.ItemsSource = tarif;
+        //}
+        //private void ShowESPs()
+        //{
+        //    List<__> esps = DB.SelectAllEsps();
+        //    listbox_Show.ItemsSource = esps;
+        //}
 
     }
 }

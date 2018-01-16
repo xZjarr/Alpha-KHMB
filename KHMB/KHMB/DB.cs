@@ -13,7 +13,7 @@ namespace KHMB
 {
     class DB
     {
-        static SqlConnection myConnection;
+        public static SqlConnection myConnection;
         public static void OpenConnection()
         {
             myConnection = new SqlConnection(
@@ -65,17 +65,17 @@ namespace KHMB
             OpenConnection();
             SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
             SqlDataReader reader = getR.ExecuteReader();
-            while (reader.Read())
-            {
-                RO r = new RO();
-                r.Name = reader.GetString(1);
-                rList.Add(r);
-            }
+                while (reader.Read())
+                {
+                    RO r = new RO();
+                    r.Name = reader.GetString(1);
+                    rList.Add(r);
+                }
             CloseConnection();
             return rList;
         }
 
-        public static List<Job> FillQueue(int resource)
+public static List<Job> FillQueue(int resource)
         {
             //Get jobs to add to the queue
             List<Job> queueJobs = new List<Job>();
