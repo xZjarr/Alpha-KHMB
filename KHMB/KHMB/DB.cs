@@ -38,7 +38,7 @@ namespace KHMB
             insertRName.Parameters["@Name"].Value = FrstName;
             insertRName.Parameters.Add("@Surname", SqlDbType.VarChar);
             insertRName.Parameters["@Surname"].Value = SrNm;
-            insertRName.Parameters.Add("@IsAdmin", SqlDbType.Bit);
+            insertRName.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
             insertRName.Parameters["@IsAdmin"].Value = IsDmn;
             insertRName.ExecuteNonQuery();
         }
@@ -145,7 +145,7 @@ namespace KHMB
             while (reader.Read())
             {
                 JobO j = new JobO();
-                //j.ExeTime = reader.GetDateTime(0);
+                //j.ExeTime = reader.GetDateTime(2);
                 queueJobs.Add(j);
             }
             CloseConnection();
