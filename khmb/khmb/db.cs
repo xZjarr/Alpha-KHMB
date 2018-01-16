@@ -29,7 +29,7 @@ namespace KHMB
         public static void InsertUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, string UserName)
         {
             OpenConnection();
-            SqlCommand insertRName = new SqlCommand("INSERT INTO User (UserName, Password, Name, Surname, IsAdmin) VALUES (@UserName,@Password,@Name,@SurName,@IsAdmin)", myConnection);
+            SqlCommand insertRName = new SqlCommand("INSERT INTO [User] (UserName, Password, Name, Surname, IsAdmin) VALUES (@UserName,@Password,@Name,@SurName,@IsAdmin)", myConnection);
             insertRName.Parameters.Add("@UserName", SqlDbType.VarChar);
             insertRName.Parameters["@UserName"].Value = UserName;
             insertRName.Parameters.Add("@Password", SqlDbType.VarChar);
@@ -114,6 +114,24 @@ namespace KHMB
             CloseConnection();
             return jList;
         }
+        public static List<UserO> SelectAllUsers()
+        {
+            List<UserO> uList = new List<UserO>();
+            OpenConnection();
+            SqlCommand getU = new SqlCommand("SELECT * FROM [User]", myConnection);
+            SqlDataReader reader = getU.ExecuteReader();
+            while (reader.Read())
+            {
+                UserO u = new UserO();
+                u.FirstName = reader.GetString(3);
+                u.SurName = reader.GetString(4);
+                u.UserName = reader.GetString(1);
+                u.IsAdmin = reader.GetBoolean(5);
+                uList.Add(u);
+            }
+            CloseConnection();
+            return uList;
+        }
 
         public static List<JobO> FillQueue(int resource)
         {
@@ -127,7 +145,7 @@ namespace KHMB
             while (reader.Read())
             {
                 JobO j = new JobO();
-                j.ExeTime = reader.GetDateTime(0);
+                //j.ExeTime = reader.GetDateTime(2);
                 queueJobs.Add(j);
             }
             CloseConnection();
