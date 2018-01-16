@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="ESP" Height="300" Width="300">
     <Grid>
-        
+        <Label Content="Opret Estimeret Energi Overskud" HorizontalAlignment="Left" Height="30" Margin="10,30,0,0" VerticalAlignment="Top" Width="184"/>
+        <Label Content="Kilo Watt Timer:" HorizontalAlignment="Left" Height="30" Margin="10,60,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label Content="Start klokkeslæt:" HorizontalAlignment="Left" Height="30" Margin="10,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label Content="Slut klokkeslæt:" HorizontalAlignment="Left" Height="30" Margin="10,120,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label Content="Start dato:" HorizontalAlignment="Left" Height="30" Margin="10,150,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label Content="Slut dato:" HorizontalAlignment="Left" Height="30" Margin="10,180,0,0" VerticalAlignment="Top" Width="95"/>
+        <TextBox  HorizontalAlignment="Left" Name="txtBox_ESPValue" Height="25" Margin="110,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="90"/>
+        <ComboBox HorizontalAlignment="Left" Name="drpBox_ESPStartClock" Height="28" Margin="110,90,0,0" VerticalAlignment="Top" Width="90"/>
+        <ComboBox HorizontalAlignment="Left" Name="drpBox_ESPEndClock" Height="28" Margin="110,120,0,0" VerticalAlignment="Top" Width="90"/>
+        <DatePicker HorizontalAlignment="Left" Name="datePicker_ESPStartDate"  Margin="110,150,0,0" VerticalAlignment="Top" FirstDayOfWeek="Monday"/>
+        <DatePicker HorizontalAlignment="Left" Name="datePicker_ESPEndDate"  Margin="110,180,0,0" VerticalAlignment="Top" FirstDayOfWeek="Monday"/>
+
     </Grid>
 </Window>
