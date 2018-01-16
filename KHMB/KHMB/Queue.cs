@@ -15,7 +15,6 @@ namespace KHMB
             jobsInQueue = DB.FillQueue(resource);
         }
 
-        List<Job> jobsInQueue = new List<Job>();
         static void AddJobToQueue()
         {
 

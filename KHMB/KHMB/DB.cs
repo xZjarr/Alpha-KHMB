@@ -93,5 +93,15 @@ namespace KHMB
             CloseConnection();
             return queueJobs;
         }
+
+        public static void InsertQueue(string RT)
+        {
+            OpenConnection();
+            SqlCommand insertQue = new SqlCommand("INSERT INTO Job (name) VALUES (@name)", myConnection);
+            insertQue.Parameters.Add("@name", SqlDbType.VarChar);
+            insertQue.Parameters["@name"].Value = RT;
+            insertQue.ExecuteNonQuery();
+            CloseConnection();
+        }
     }
 }
