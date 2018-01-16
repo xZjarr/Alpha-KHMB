@@ -8,7 +8,7 @@ namespace KHMB
 {
     class Queue
     {
-        public List<Job> jobsInQueue = new List<Job>();
+        public List<JobO> jobsInQueue = new List<JobO>();
 
         public Queue(int resource)
         {

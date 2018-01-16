@@ -35,7 +35,7 @@ namespace KHMB
             List<int> resources = new List<int>();
             //Get a list from the database. For now, manually add an item.
             //Resource temp = new Resource();
-            resources.Add(48);
+            resources.Add(1);
             lbx_Resources.ItemsSource = resources;
         }
 
@@ -68,7 +68,7 @@ namespace KHMB
 
         public static void CreateJob(int Resource, int User, int Priority, DateTime Deadline)
         {
-            Job jobToBeScheduled = new Job();
+            JobO jobToBeScheduled = new JobO();
             jobToBeScheduled.ResourceID = Resource;
             jobToBeScheduled.CreatedUserID = User;
             jobToBeScheduled.Priority = Priority;

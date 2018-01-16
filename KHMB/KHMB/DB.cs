@@ -75,10 +75,10 @@ namespace KHMB
             return rList;
         }
 
-public static List<Job> FillQueue(int resource)
+        public static List<JobO> FillQueue(int resource)
         {
             //Get jobs to add to the queue
-            List<Job> queueJobs = new List<Job>();
+            List<JobO> queueJobs = new List<JobO>();
             OpenConnection();
             SqlCommand getJobs = new SqlCommand("SELECT * FROM Job WHERE ResourceID = @resource", myConnection);
             getJobs.Parameters.Add("@resource", SqlDbType.Int);
@@ -86,21 +86,23 @@ public static List<Job> FillQueue(int resource)
             SqlDataReader reader = getJobs.ExecuteReader();
             while (reader.Read())
             {
-                Job j = new Job();
-                j.Priority = reader.GetByte(0);
+                JobO j = new JobO();
+                //j.Priority = reader.GetByte(0);
                 queueJobs.Add(j);
             }
             CloseConnection();
             return queueJobs;
         }
 
-        public static void InsertQueue(string RT)
+        public static void InsertJob(JobO jobToAdd)
         {
             OpenConnection();
-            SqlCommand insertQue = new SqlCommand("INSERT INTO Job (name) VALUES (@name)", myConnection);
-            insertQue.Parameters.Add("@name", SqlDbType.VarChar);
-            insertQue.Parameters["@name"].Value = RT;
-            insertQue.ExecuteNonQuery();
+            SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,3,'2019-01-01 00:00:00','2017-01-01 00:00:00',1,'2018-01-01 00:00:00'); ", myConnection);
+            insertJob.Parameters.Add("@name", SqlDbType.VarChar);
+            insertJob.Parameters["@name"].Value = jobToAdd.JobName;
+            insertJob.Parameters.Add("@resource", SqlDbType.Int);
+            insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
+            insertJob.ExecuteNonQuery();
             CloseConnection();
         }
     }
