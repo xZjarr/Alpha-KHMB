@@ -19,7 +19,7 @@ namespace KHMB
         public static Queue GetJobs(int  Resource)
         {
             //Make a queue and fill it with jobs from database with the corresponding resource(Replace new Queue() with a databse command)
-            Queue queue = new Queue();
+            Queue queue = new Queue(Resource);
             return queue;
         }
         public static void GetESPs()

@@ -75,5 +75,23 @@ namespace KHMB
             return rList;
         }
 
+        public static List<Job> FillQueue(int resource)
+        {
+            //Get jobs to add to the queue
+            List<Job> queueJobs = new List<Job>();
+            OpenConnection();
+            SqlCommand getJobs = new SqlCommand("SELECT * FROM Job WHERE ResourceID = @resource", myConnection);
+            getJobs.Parameters.Add("@resource", SqlDbType.Int);
+            getJobs.Parameters["@resource"].Value = resource;
+            SqlDataReader reader = getJobs.ExecuteReader();
+            while (reader.Read())
+            {
+                Job j = new Job();
+                j.Priority = reader.GetByte(0);
+                queueJobs.Add(j);
+            }
+            CloseConnection();
+            return queueJobs;
+        }
     }
 }

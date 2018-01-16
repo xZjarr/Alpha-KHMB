@@ -8,6 +8,12 @@ namespace KHMB
 {
     class Queue
     {
+        public Queue(int resource)
+        {
+            DB.FillQueue(resource);
+        }
+
+        List<Job> jobsInQueue = new List<Job>();
         static void AddJobToQueue()
         {
 
