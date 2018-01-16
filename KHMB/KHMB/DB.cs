@@ -59,23 +59,23 @@ namespace KHMB
             CloseConnection();
             return rtList;
         }
-        ////public static List<RO> SelectAllResource()
-        //{
-        //    List<RO> rList = new List<RO>();
-        //    OpenConnection();
-        //    SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
-        //    SqlDataReader reader = getR.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        RO r = new RO();
-        //        r.Name = reader.GetString(1);
-        //        rList.Add(r);
-        //    }
-        //    CloseConnection();
-        //    return rList;
-        //}
+        public static List<RO> SelectAllResource()
+        {
+            List<RO> rList = new List<RO>();
+            OpenConnection();
+            SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
+            SqlDataReader reader = getR.ExecuteReader();
+                while (reader.Read())
+                {
+                    RO r = new RO();
+                    r.Name = reader.GetString(1);
+                    rList.Add(r);
+                }
+            CloseConnection();
+            return rList;
+        }
 
-        public static List<Job> FillQueue(int resource)
+public static List<Job> FillQueue(int resource)
         {
             //Get jobs to add to the queue
             List<Job> queueJobs = new List<Job>();
@@ -92,6 +92,16 @@ namespace KHMB
             }
             CloseConnection();
             return queueJobs;
+        }
+
+        public static void InsertQueue(string RT)
+        {
+            OpenConnection();
+            SqlCommand insertQue = new SqlCommand("INSERT INTO Job (name) VALUES (@name)", myConnection);
+            insertQue.Parameters.Add("@name", SqlDbType.VarChar);
+            insertQue.Parameters["@name"].Value = RT;
+            insertQue.ExecuteNonQuery();
+            CloseConnection();
         }
     }
 }
