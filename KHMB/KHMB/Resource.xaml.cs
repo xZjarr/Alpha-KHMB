@@ -11,6 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using System.ComponentModel;
+using System.Drawing;
+
 
 namespace KHMB
 {
@@ -25,9 +31,35 @@ namespace KHMB
         int ResourceID { get; set; }
         string ConnectionStr { get; set; }
         double EnergyComsumption { get; set; }
+        public string Query;
+        public ComboBox RT;
         public Resource()
         {
             InitializeComponent();
+            FillCombo();
+        }
+        void FillCombo()
+        {
+            //FJERN IKKE DET HER, IT WORKS, DON'T FIX IT
+            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=Alpha-KHMB;Integrated Security=True");
+            string sql = "SELECT* FROM ResourceType";
+            SqlCommand cmd = new SqlCommand(sql,con);
+            SqlDataReader myreader;
+            //FJERN IKKE DET HER, IT WORKS, DON'T FIX IT
+            try
+            {
+                con.Open();
+                myreader = cmd.ExecuteReader();
+                while (myreader.Read())
+                {
+                    string sname = myreader.GetString(1);
+                    Bx_RT.Items.Add(sname);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         static void CreateResource(string name)
         {
@@ -49,8 +81,11 @@ namespace KHMB
 
         private void Bx_RT_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<RTO> rt = DB.SelectAllResourceTypes();
-            Bx_RT.ItemsSource = rt.ToString();
+        }
+
+        private void btn_Test_Click(object sender, RoutedEventArgs e)
+        {
+            FillCombo();
         }
     }
 }
