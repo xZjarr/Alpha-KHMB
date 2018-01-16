@@ -60,7 +60,7 @@ namespace KHMB
                 MessageBox.Show(ex.Message);
             }
         }
-        void CreateResource(string typeID)
+        void CreateResource(int typeID)
         {
         DB.InsertR(Bx_N.Text, typeID);
         }
@@ -75,8 +75,9 @@ namespace KHMB
 
         private void Btn_Sv_Click(object sender, RoutedEventArgs e)
         {
-            string RTID = ((ComboBoxItem)Bx_RT.SelectedItem).Content.ToString();
-            CreateResource(RTID);
+            string RTID = (string)Bx_RT.SelectedValue;
+            int ID = Convert.ToInt32(RTID.Substring(0, 2));
+            CreateResource(ID);
         }
 
         private void Bx_RT_SelectionChanged(object sender, SelectionChangedEventArgs e)
