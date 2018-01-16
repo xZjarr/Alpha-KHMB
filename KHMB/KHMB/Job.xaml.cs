@@ -73,6 +73,7 @@ namespace KHMB
             jobToBeScheduled.CreatedUserID = User;
             jobToBeScheduled.Priority = Priority;
             jobToBeScheduled.Deadline = Deadline;
+            jobToBeScheduled.Created = DateTime.Now;
             //Hardcoded user ID fix when user is created
             jobToBeScheduled.CreatedUserID = 3;
             Scheduler.FindPlaceInQueue(jobToBeScheduled);

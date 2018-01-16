@@ -116,19 +116,19 @@ namespace KHMB
         public static void InsertJob(JobO jobToAdd)
         {
             OpenConnection();
-            SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@exeTime,'2017-01-01 00:00:00',1,'2018-01-01 00:00:00'); ", myConnection);
+            SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@deadline,@creationDate,@priority,@exeTime); ", myConnection);
             insertJob.Parameters.Add("@name", SqlDbType.VarChar);
             insertJob.Parameters["@name"].Value = jobToAdd.JobName;
             insertJob.Parameters.Add("@resource", SqlDbType.Int);
             insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
             insertJob.Parameters.Add("@userID", SqlDbType.Int);
             insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
-            insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
-            insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
-            insertJob.Parameters.Add("@resource", SqlDbType.Int);
-            insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
-            insertJob.Parameters.Add("@userID", SqlDbType.Int);
-            insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
+            insertJob.Parameters.Add("@deadline", SqlDbType.DateTime);
+            insertJob.Parameters["@deadline"].Value = jobToAdd.Deadline;
+            insertJob.Parameters.Add("@creationDate", SqlDbType.DateTime);
+            insertJob.Parameters["@creationDate"].Value = jobToAdd.Created;
+            insertJob.Parameters.Add("@priority", SqlDbType.TinyInt);
+            insertJob.Parameters["@priority"].Value = jobToAdd.Priority;
             insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
             insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
             insertJob.ExecuteNonQuery();
