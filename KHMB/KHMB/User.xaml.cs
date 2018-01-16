@@ -70,7 +70,7 @@ namespace KHMB
             {
             string UserName;
             int UserID = rnd.Next(100, 999);
-            UserName = firstName + UserID.ToString();
+            UserName = firstName.Substring(0,4) + UserID.ToString();
             return UserName;
             }
     }

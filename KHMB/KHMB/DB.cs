@@ -29,7 +29,7 @@ namespace KHMB
         public static void InsertUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, string UserName)
         {
             OpenConnection();
-            SqlCommand insertRName = new SqlCommand("INSERT INTO User (UserName, Password, Name, Surname, IsAdmin) VALUES (@UserName,@Password,@Name,@SurName,@IsAdmin)", myConnection);
+            SqlCommand insertRName = new SqlCommand("INSERT INTO [User] (UserName, Password, Name, Surname, IsAdmin) VALUES (@UserName,@Password,@Name,@SurName,@IsAdmin)", myConnection);
             insertRName.Parameters.Add("@UserName", SqlDbType.VarChar);
             insertRName.Parameters["@UserName"].Value = UserName;
             insertRName.Parameters.Add("@Password", SqlDbType.VarChar);
@@ -38,7 +38,7 @@ namespace KHMB
             insertRName.Parameters["@Name"].Value = FrstName;
             insertRName.Parameters.Add("@Surname", SqlDbType.VarChar);
             insertRName.Parameters["@Surname"].Value = SrNm;
-            insertRName.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
+            insertRName.Parameters.Add("@IsAdmin", SqlDbType.Bit);
             insertRName.Parameters["@IsAdmin"].Value = IsDmn;
             insertRName.ExecuteNonQuery();
         }
@@ -127,7 +127,7 @@ namespace KHMB
             while (reader.Read())
             {
                 JobO j = new JobO();
-                j.ExeTime = reader.GetDateTime(0);
+                //j.ExeTime = reader.GetDateTime(0);
                 queueJobs.Add(j);
             }
             CloseConnection();
