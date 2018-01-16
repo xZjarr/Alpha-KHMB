@@ -8,6 +8,7 @@ namespace KHMB
 {
     static class Scheduler
     {
+        //By Klaus
         public static void FindPlaceInQueue(JobO JobToBeScheduled)
         {
             Queue queue = GetJobs(JobToBeScheduled.ResourceID);
@@ -18,6 +19,7 @@ namespace KHMB
             //queue.jobsInQueue.Add(JobToBeScheduled);
         }
 
+        //By Klaus
         private static DateTime CalculateBestSpot(Queue queue)
         {
             //Is supposed to calculate the best spot in queue. For now, just give it any spot available
@@ -41,6 +43,8 @@ namespace KHMB
         {
 
         }
+
+        //Klaus
         public static Queue GetJobs(int  resource)
         {
             //Make a queue and fill it with jobs from database with the corresponding resource

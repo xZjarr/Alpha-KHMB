@@ -130,6 +130,12 @@ namespace KHMB
             insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
             insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
             insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
+            insertJob.Parameters.Add("@resource", SqlDbType.Int);
+            insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
+            insertJob.Parameters.Add("@userID", SqlDbType.Int);
+            insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
+            insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
+            insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
             insertJob.ExecuteNonQuery();
             CloseConnection();
         }
