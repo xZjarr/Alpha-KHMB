@@ -61,6 +61,7 @@
     <Compile Include="ESP.xaml.cs">
       <DependentUpon>ESP.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JobO.cs" />
     <Compile Include="Queue.cs" />
     <Compile Include="Resource.xaml.cs">
       <DependentUpon>Resource.xaml</DependentUpon>

@@ -6,26 +6,28 @@ using System.Threading.Tasks;
 
 namespace KHMB
 {
-    class Scheduler
+    static class Scheduler
     {
-        Job JobToBeScheduled = new Job();
-        public void FindPlaceInQueue()
+        public static void FindPlaceInQueue(Job JobToBeScheduled)
+        {
+            Queue queue = GetJobs(JobToBeScheduled.ResourceID);
+            queue.jobsInQueue.Add(JobToBeScheduled);
+        }
+        public static void GetResources()
         {
 
         }
-        public void GetResources()
+        public static Queue GetJobs(int  resource)
+        {
+            //Make a queue and fill it with jobs from database with the corresponding resource(Replace new Queue() with a databse command)
+            Queue queue = new Queue(resource);
+            return queue;
+        }
+        public static void GetESPs()
         {
 
         }
-        public void GetJobs()
-        {
-
-        }
-        public void GetESPs()
-        {
-
-        }
-        public void GetTarif()
+        public static void GetTarif()
         {
 
         }

@@ -39,7 +39,7 @@ namespace KHMB
         {
             return IsAdmin;
         }
-        public void CheckAviableUsrName()
+        public void CheckAviableUserName()
         {
 
         }

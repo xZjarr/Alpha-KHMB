@@ -23,8 +23,6 @@ namespace KHMB
         {
             InitializeComponent();
         }
-
-
         private void btn_Show_Click(object sender, RoutedEventArgs e)
         {
             //Show information of the chosen object.
