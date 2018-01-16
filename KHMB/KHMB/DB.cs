@@ -78,25 +78,20 @@ namespace KHMB
             CloseConnection();
             return rList;
         }
-        public static List<JobO> SelectAllJobs()
+        public static List<RO> SelectAllJobs()
         {
-            List<JobO> jList = new List<JobO>();
+            List<RO> rList = new List<RO>();
             OpenConnection();
-            SqlCommand getJ = new SqlCommand("SELECT * FROM Job", myConnection);
-            SqlDataReader reader = getJ.ExecuteReader();
+            SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
+            SqlDataReader reader = getR.ExecuteReader();
             while (reader.Read())
             {
-                JobO j = new JobO();
-                j.JobName = reader.GetString(6);
-                j.Priority = reader.GetByte(5);
-                j.ResourceID = reader.GetInt32(1);
-                j.Deadline = reader.GetDateTime(3);
-                j.Created = reader.GetDateTime(4);
-                j.CreatedUserID = reader.GetInt32(2);
-                jList.Add(j);
+                RO r = new RO();
+                r.Name = reader.GetString(1);
+                rList.Add(r);
             }
             CloseConnection();
-            return jList;
+            return rList;
         }
 
         public static List<JobO> FillQueue(int resource)

@@ -35,7 +35,7 @@ namespace KHMB
             List<int> resources = new List<int>();
             //Get a list from the database. For now, manually add an item.
             //Resource temp = new Resource();
-            resources.Add(6);
+            resources.Add(1);
             lbx_Resources.ItemsSource = resources;
         }
 
