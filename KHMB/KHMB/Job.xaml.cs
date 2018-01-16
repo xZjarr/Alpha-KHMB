@@ -16,7 +16,7 @@ namespace KHMB
 {
     public partial class Job : Window
     {
-        int ResourceID, CreatedUserID, JobID, Priority;
+        public int ResourceID, CreatedUserID, JobID, Priority;
         string JobName;
         bool Succes;
         DateTime Deadline;
@@ -33,7 +33,8 @@ namespace KHMB
         {
             List<int> resources = new List<int>();
             //Get a list from the database. For now, manually add an item.
-            resources.Add(42);
+            //Resource temp = new Resource();
+            resources.Add(48);
             lbx_Resources.ItemsSource = resources;
         }
 
@@ -66,7 +67,12 @@ namespace KHMB
 
         public static void CreateJob(int Resource, int User, int Priority, DateTime Deadline)
         {
-            //Send info to the scheduler, let it handle putting the job in the queue
+            Job jobToBeScheduled = new Job();
+            jobToBeScheduled.ResourceID = Resource;
+            jobToBeScheduled.CreatedUserID = User;
+            jobToBeScheduled.Priority = Priority;
+            jobToBeScheduled.Deadline = Deadline;
+            Scheduler.FindPlaceInQueue(jobToBeScheduled);
         }
 
         public void EditJob(int JobID, string User)
