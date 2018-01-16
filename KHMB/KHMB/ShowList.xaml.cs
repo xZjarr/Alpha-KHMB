@@ -30,7 +30,11 @@ namespace KHMB
             else if (chosenObject == "Resources")
             {
                 ShowResource();
-                ShowResourceType();
+                //ShowResourceType();
+            }
+            else if (chosenObject == "Jobs")
+            {
+                ShowJob();
             }
         }
         private void btn_Close_Click(object sender, RoutedEventArgs e)
