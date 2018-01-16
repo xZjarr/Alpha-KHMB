@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 namespace KHMB
 {
+    //Class made by Klaus
     public partial class Job : Window
     {
         public int ResourceID, CreatedUserID, JobID, Priority;
