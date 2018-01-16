@@ -122,7 +122,7 @@ namespace KHMB
             while (reader.Read())
             {
                 JobO j = new JobO();
-                //j.Priority = reader.GetByte(0);
+                j.ExeTime = reader.GetDateTime(0);
                 queueJobs.Add(j);
             }
             CloseConnection();
