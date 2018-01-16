@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="User" Height="300" Width="300">
     <Grid>
-        
+        <Button Content="Create User" HorizontalAlignment="Left" Margin="28,67,0,0" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </Window>
