@@ -49,11 +49,11 @@ namespace KHMB
             List<RO> r = DB.SelectAllResource();
             listbox_Show.ItemsSource = r;
         }
-        //private void ShowJob()
-        //{
-        //    List<__> job = DB.SelectAllJobs();
-        //   listbox_Show.ItemsSource = job;
-        //}
+        private void ShowJob()
+        {
+            List<JobO> job = DB.SelectAllJobs();
+            listbox_Show.ItemsSource = job;
+        }
         //private void ShowUsers()
         //{
         //    List<__> users = DB.SelectAllUsers();
