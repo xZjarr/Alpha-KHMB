@@ -69,12 +69,27 @@ namespace KHMB
             OpenConnection();
             SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
             SqlDataReader reader = getR.ExecuteReader();
-                while (reader.Read())
-                {
-                    RO r = new RO();
-                    r.Name = reader.GetString(1);
-                    rList.Add(r);
-                }
+            while (reader.Read())
+            {
+                RO r = new RO();
+                r.Name = reader.GetString(1);
+                rList.Add(r);
+            }
+            CloseConnection();
+            return rList;
+        }
+        public static List<RO> SelectAllJobs()
+        {
+            List<RO> rList = new List<RO>();
+            OpenConnection();
+            SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
+            SqlDataReader reader = getR.ExecuteReader();
+            while (reader.Read())
+            {
+                RO r = new RO();
+                r.Name = reader.GetString(1);
+                rList.Add(r);
+            }
             CloseConnection();
             return rList;
         }
