@@ -25,8 +25,6 @@ namespace KHMB
     /// </summary>
     public partial class Resource : Window
     {
-
-        string Name { get; set; }
         int TypeID { get; set; }
         int ResourceID { get; set; }
         string ConnectionStr { get; set; }
@@ -52,8 +50,9 @@ namespace KHMB
                 myreader = cmd.ExecuteReader();
                 while (myreader.Read())
                 {
+                    int RTID = myreader.GetInt32(0);
                     string sname = myreader.GetString(1);
-                    Bx_RT.Items.Add(sname);
+                    Bx_RT.Items.Add(RTID + " " + sname);
                 }
             }
             catch (Exception ex)
@@ -61,9 +60,9 @@ namespace KHMB
                 MessageBox.Show(ex.Message);
             }
         }
-        static void CreateResource(string name)
+        void CreateResource(string typeID)
         {
-            DB.InsertR(name);
+        DB.InsertR(Bx_N.Text, typeID);
         }
         static void EditResource()
         {
@@ -76,7 +75,8 @@ namespace KHMB
 
         private void Btn_Sv_Click(object sender, RoutedEventArgs e)
         {
-            CreateResource(Bx_N.Text);
+            string RTID = ((ComboBoxItem)Bx_RT.SelectedItem).Content.ToString();
+            CreateResource(RTID);
         }
 
         private void Bx_RT_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,5 +87,9 @@ namespace KHMB
         {
             FillCombo();
         }
+        //public override string ToString()
+        //{
+        //    return string.Format("Name: {0}", Name);
+        //}
     }
 }

@@ -26,13 +26,15 @@ namespace KHMB
             myConnection.Close();
         }
 
-        public static void InsertR(string R)
+        public static void InsertR(string R, string RT)
         {
             OpenConnection();
-            SqlCommand insertR = new SqlCommand("INSERT INTO Resource (name) VALUES (@name)", myConnection);
-            insertR.Parameters.Add("@name", SqlDbType.VarChar);
-            insertR.Parameters["@name"].Value = R;
-            insertR.ExecuteNonQuery();
+            SqlCommand insertRName = new SqlCommand("INSERT INTO Resource (name) VALUES (@name)", myConnection);
+            insertRName.Parameters.Add("@name", SqlDbType.VarChar);
+            insertRName.Parameters["@name"].Value = R;
+            insertRName.ExecuteNonQuery();
+            //SqlCommand insertRName = new SqlCommand("INSERT INTO Resource (name) VALUES (@name)", myConnection);
+
             CloseConnection();
         }
         public static void InsertRT(string RT)
