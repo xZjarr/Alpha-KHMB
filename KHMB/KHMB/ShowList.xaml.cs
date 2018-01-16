@@ -58,6 +58,13 @@ namespace KHMB
             List<JobO> job = DB.SelectAllJobs();
             listbox_Show.ItemsSource = job;
         }
+
+        private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowDetails sd = new ShowDetails();
+            sd.Show();
+            this.Close();
+        }
         //private void ShowUsers()
         //{
         //    List<__> users = DB.SelectAllUsers();
