@@ -32,10 +32,10 @@ namespace KHMB
 
         private void FillResourceList()
         {
-            List<int> resources = new List<int>();
+            List<RO> resources = new List<RO>();
             //Get a list from the database. For now, manually add an item.
             //Resource temp = new Resource();
-            resources.Add(3);
+            resources = DB.SelectAllResource();
             lbx_Resources.ItemsSource = resources;
         }
 
