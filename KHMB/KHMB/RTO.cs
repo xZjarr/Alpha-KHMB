@@ -13,6 +13,5 @@ namespace KHMB
         {
             return string.Format("Name: {0}", Name);
         }
-
     }
 }

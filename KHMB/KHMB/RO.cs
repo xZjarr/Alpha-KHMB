@@ -9,9 +9,13 @@ namespace KHMB
     class RO
     {
         public string Name { get; set; }
+
+        //List<RTO> rtlist = DB.SelectAllResourceTypes();
+
+
         public override string ToString()
         {
-            return string.Format("Name: {0}", Name);
+            return string.Format("Name: {0}\tResourceType: {1}", Name);
         }
     }
 }
