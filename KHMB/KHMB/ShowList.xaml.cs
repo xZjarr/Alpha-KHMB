@@ -36,6 +36,10 @@ namespace KHMB
             {
                 ShowJob();
             }
+            else if (chosenObject == "Users")
+            {
+                ShowUsers();
+            }
         }
         private void btn_Close_Click(object sender, RoutedEventArgs e)
         {
@@ -65,11 +69,11 @@ namespace KHMB
             sd.Show();
             this.Close();
         }
-        //private void ShowUsers()
-        //{
-        //    List<__> users = DB.SelectAllUsers();
-        //    listbox_Show.ItemsSource = users;
-        //}
+        private void ShowUsers()
+        {
+            List<UserO> users = DB.SelectAllUsers();
+            listbox_Show.ItemsSource = users;
+        }
         //private void ShowTarif()
         //{
         //    List<__> tarif = DB.SelectAllTarifs();
