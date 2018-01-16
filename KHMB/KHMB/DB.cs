@@ -114,6 +114,24 @@ namespace KHMB
             CloseConnection();
             return jList;
         }
+        public static List<UserO> SelectAllUsers()
+        {
+            List<UserO> uList = new List<UserO>();
+            OpenConnection();
+            SqlCommand getU = new SqlCommand("SELECT * FROM [User]", myConnection);
+            SqlDataReader reader = getU.ExecuteReader();
+            while (reader.Read())
+            {
+                UserO u = new UserO();
+                u.FirstName = reader.GetString(3);
+                u.SurName = reader.GetString(4);
+                u.UserName = reader.GetString(1);
+                u.IsAdmin = reader.GetBoolean(5);
+                uList.Add(u);
+            }
+            CloseConnection();
+            return uList;
+        }
 
         public static List<JobO> FillQueue(int resource)
         {
