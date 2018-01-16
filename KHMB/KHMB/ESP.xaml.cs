@@ -25,7 +25,18 @@ namespace KHMB
             DateTime startDate; //including StartTime
             DateTime endDate; //Including EndTime
             Double energySurplus;
+            fillStartDropDown();
         }
+
+        private void fillStartDropDown()
+        {
+            for (int hour=0; hour<=24; hour++)
+            {
+                drpBox_ESPStartClock.Items.Add(hour +":00");
+            }
+            
+        }
+
         static void Create()
         {
 
