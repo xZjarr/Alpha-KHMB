@@ -209,9 +209,15 @@ namespace KHMB
             insertJob.ExecuteNonQuery();
             CloseConnection();
         }
-        public static void LogIn()
+        public static DataSet LogIn()
         {
-
+            SqlCommand cmd = new SqlCommand("SELECT * WHERE UserName=@UserName AND Password=@Password", myConnection);
+            myConnection.Open();
+            SqlDataAdapter adapt = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+            adapt.Fill(ds);
+            myConnection.Close();
+            return ds;
         }
     }
 }
