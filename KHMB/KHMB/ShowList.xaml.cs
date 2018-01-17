@@ -45,6 +45,10 @@ namespace KHMB
             {
                 ShowTarif();
             }
+            else if (chosenObject == "ESPs")
+            {
+                ShowESPs();
+            }
         }
 
         private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,7 +56,7 @@ namespace KHMB
             if ((string)lbl_Title.Content == "Jobs")
             {
                 JobO chosenJob = (JobO)listbox_Show.SelectedItem;
-                SelectedTempJob.ChosenJob = chosenJob;
+                SelectedTemp.ChosenJob = chosenJob;
                 ShowDetails sdJ = new ShowDetails((string)lbl_Title.Content);
                 sdJ.Show();
                 this.Close();
@@ -60,7 +64,7 @@ namespace KHMB
             else if ((string)lbl_Title.Content == "Users")
             {
                 UserO chosenUser = (UserO)listbox_Show.SelectedItem;
-                SelectedTempUser.ChosenUser = chosenUser;
+                SelectedTemp.ChosenUser = chosenUser;
                 ShowDetails sdU = new ShowDetails((string)lbl_Title.Content);
                 sdU.Show();
                 this.Close();
@@ -68,13 +72,36 @@ namespace KHMB
             else if ((string)lbl_Title.Content == "Tarif")
             {
                 TO chosenTarif = (TO)listbox_Show.SelectedItem;
-                SelectedTempTarif.ChosenTarif = chosenTarif;
+                SelectedTemp.ChosenTarif = chosenTarif;
                 ShowDetails sdT = new ShowDetails((string)lbl_Title.Content);
                 sdT.Show();
                 this.Close();
             }
+            else if ((string)lbl_Title.Content == "ESPs")
+            {
+                ESPO chosenESP = (ESPO)listbox_Show.SelectedItem;
+                SelectedTemp.ChosenESP = chosenESP;
+                ShowDetails sdESP = new ShowDetails((string)lbl_Title.Content);
+                sdESP.Show();
+                this.Close();
+            }
+            else if ((string)lbl_Title.Content == "Resources")
+            {
+                RO chosenR = (RO)listbox_Show.SelectedItem;
+                SelectedTemp.ChosenR = chosenR;
+                ShowDetails sdR = new ShowDetails((string)lbl_Title.Content);
+                sdR.Show();
+                this.Close();
+            }
+            else if ((string)lbl_Title.Content == "ResourceTypes")
+            {
+                RTO chosenRT = (RTO)listbox_Show.SelectedItem;
+                SelectedTemp.ChosenRT = chosenRT;
+                ShowDetails sdRT = new ShowDetails((string)lbl_Title.Content);
+                sdRT.Show();
+                this.Close();
+            }
         }
-
         private void btn_Close_Click(object sender, RoutedEventArgs e)
         {
             Show returnWindow = new Show();
@@ -101,18 +128,16 @@ namespace KHMB
             List<UserO> users = DB.SelectAllUsers();
             listbox_Show.ItemsSource = users;
         }
-
         private void ShowTarif()
         {
             List<TO> tarif = DB.SelectAllTarifs();
             listbox_Show.ItemsSource = tarif;
         }
-
-        //private void ShowESPs()
-        //{
-        //    List<__> esps = DB.SelectAllEsps();
-        //    listbox_Show.ItemsSource = esps;
-        //}
+        private void ShowESPs()
+        {
+            List<ESPO> esps = DB.SelectAllESP();
+            listbox_Show.ItemsSource = esps;
+        }
 
     }
 }

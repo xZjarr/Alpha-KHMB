@@ -22,9 +22,6 @@ namespace KHMB
         public ESP()
         {
             InitializeComponent();
-            DateTime startDate; //including StartTime
-            DateTime endDate; //Including EndTime
-            Double energySurplus;
             fillStartDropDown();
             fillEndDropDown();
 
@@ -64,7 +61,7 @@ namespace KHMB
         {
 
         }
-        static void Edit()
+        public static void Edit()
         {
 
         }

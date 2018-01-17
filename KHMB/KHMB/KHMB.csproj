@@ -77,10 +77,7 @@
     <Compile Include="RO.cs" />
     <Compile Include="RTO.cs" />
     <Compile Include="Scheduler.cs" />
-    <Compile Include="SelectedTempESP.cs" />
-    <Compile Include="SelectedTempJob.cs" />
-    <Compile Include="SelectedTempTarif.cs" />
-    <Compile Include="SelectedTempUser.cs" />
+    <Compile Include="SelectedTemp.cs" />
     <Compile Include="Show.xaml.cs">
       <DependentUpon>Show.xaml</DependentUpon>
     </Compile>

@@ -48,5 +48,13 @@ namespace KHMB
         {
             this.Close();
         }
+        public static void Edit(string name)
+        {
+
+        }
+        public static void Delete()
+        {
+
+        }
     }
 }

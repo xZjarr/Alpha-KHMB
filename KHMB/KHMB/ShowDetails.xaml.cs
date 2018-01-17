@@ -26,7 +26,7 @@ namespace KHMB
             if (subject == "Jobs")
             {
                 lbl_Title.Content = "Job";
-                JobO chosenJob = SelectedTempJob.ChosenJob;
+                JobO chosenJob = SelectedTemp.ChosenJob;
                 lbl_CreatedFill.Content = chosenJob.Created;
                 lbl_DeadlineFill.Content = chosenJob.Deadline;
                 lbl_CreatedByFill.Content = chosenJob.Created;
@@ -36,7 +36,7 @@ namespace KHMB
             else if (subject == "Users")
             {
                 lbl_Title.Content = "User";
-                UserO chosenUser = SelectedTempUser.ChosenUser;
+                UserO chosenUser = SelectedTemp.ChosenUser;
                 lbl_NameTitle.Content = ("Username: ");
                 lbl_CreatedByTitle.Content = ("Fornavn: ");
                 lbl_CreatedTitle.Content = ("Efternavn: ");
@@ -51,7 +51,7 @@ namespace KHMB
             else if (subject == "Tarif")
             {
                 lbl_Title.Content = "Tarif";
-                TO chosenTarif = SelectedTempTarif.ChosenTarif;
+                TO chosenTarif = SelectedTemp.ChosenTarif;
                 lbl_NameTitle.Content = ("Price: ");
                 lbl_CreatedByTitle.Content = ("Start: ");
                 lbl_CreatedTitle.Content = ("End: ");
@@ -61,8 +61,44 @@ namespace KHMB
                 lbl_CreatedByFill.Content = chosenTarif.StartTime;
                 lbl_CreatedFill.Content = chosenTarif.EndTime;
             }
+            else if (subject == "ESPs")
+            {
+                lbl_Title.Content = "ESP";
+                ESPO chosenESP = SelectedTemp.ChosenESP;
+                lbl_NameTitle.Content = ("Energy Surplus: ");
+                lbl_CreatedByTitle.Content = ("Start date: ");
+                lbl_CreatedTitle.Content = ("End date: ");
+                lbl_DeadlineTitle.Content = ("start time: ");
+                lbl_PriorityTitle.Content = ("End time: ");
+                lbl_NameFill.Content = chosenESP.EnergySurplus;
+                lbl_CreatedByFill.Content = chosenESP.StartDate;
+                lbl_CreatedFill.Content = chosenESP.EndDate;
+                lbl_DeadlineFill.Content = chosenESP.StartTime;
+                lbl_PriorityFill.Content = chosenESP.EndTime;
+            }
+            else if (subject == "Resources")
+            {
+                RO chosenR = SelectedTemp.ChosenR;
+                lbl_Title.Content = "Resource";
+                lbl_NameTitle.Content = ("Name: ");
+                lbl_CreatedByTitle.Content = ("");
+                lbl_CreatedTitle.Content = ("");
+                lbl_DeadlineTitle.Content = ("");
+                lbl_PriorityTitle.Content = ("");
+                lbl_NameFill.Content = chosenR.Name;
+            }
+            else if (subject == "ResourceTypes")
+            {
+                RTO chosenRT = SelectedTemp.ChosenRT;
+                lbl_Title.Content = "Resource type";
+                lbl_NameTitle.Content = ("Name: ");
+                lbl_CreatedByTitle.Content = ("");
+                lbl_CreatedTitle.Content = ("");
+                lbl_DeadlineTitle.Content = ("");
+                lbl_PriorityTitle.Content = ("");
+                lbl_NameFill.Content = chosenRT.Name;
+            }
         }
-
         private void Btn_Close_Click(object sender, RoutedEventArgs e)
         {
             Show returnWindow = new Show();
@@ -75,17 +111,29 @@ namespace KHMB
             if ((string)lbl_Title.Content == "Job")
             {
                 Job chosenJob = new Job();
-                chosenJob.EditJob(SelectedTempJob.ChosenJob.JobID, SelectedTempJob.ChosenJob.CreatedUserID);
+                chosenJob.EditJob(SelectedTemp.ChosenJob.JobID, SelectedTemp.ChosenJob.CreatedUserID);
             }
             else if ((string)lbl_Title.Content == "User")
             {
                 User chosenUser = new User();
-                UserO selectedUser = SelectedTempUser.ChosenUser;
+                UserO selectedUser = SelectedTemp.ChosenUser;
                 chosenUser.EditUser(selectedUser.UserID);
             }
             else if ((string)lbl_Title.Content == "Tarif")
             {
-                Tarif.Edit(SelectedTempTarif.ChosenTarif.Cost, SelectedTempTarif.ChosenTarif.StartTime, SelectedTempTarif.ChosenTarif.EndTime);
+                Tarif.Edit(SelectedTemp.ChosenTarif.Cost, SelectedTemp.ChosenTarif.StartTime, SelectedTemp.ChosenTarif.EndTime);
+            }
+            else if ((string)lbl_Title.Content == "ESP")
+            {
+                ESP.Edit();
+            }
+            else if ((string)lbl_Title.Content == "Resource")
+            {
+                Resource.EditResource(SelectedTemp.ChosenR.ResourceID);
+            }
+            else if ((string)lbl_Title.Content == "Resource type")
+            {
+                ResourceType.Edit(SelectedTemp.ChosenRT.Name);
             }
         }
     }
