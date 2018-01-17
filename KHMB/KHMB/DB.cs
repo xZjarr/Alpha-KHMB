@@ -225,5 +225,9 @@ namespace KHMB
         {
 
         }
+        public static void LogIn()
+        {
+
+        }
     }
 }
