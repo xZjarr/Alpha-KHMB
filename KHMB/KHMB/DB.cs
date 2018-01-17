@@ -338,5 +338,27 @@ namespace KHMB
                 return false;
             }
         }
+
+        public static bool Delete(string callerClass, int callerID)
+        {
+            OpenConnection();
+            try
+            {
+                SqlCommand delete = new SqlCommand("DELETE FROM @table WHERE @IDcolumn = @ID;", myConnection);
+                delete.Parameters.Add("@table", SqlDbType.VarChar);
+                delete.Parameters["@table"].Value = callerClass;
+                delete.Parameters.Add("@IDcolumn", SqlDbType.VarChar);
+                delete.Parameters["@IDcolumn"].Value = (callerClass+"ID");
+                delete.Parameters.Add("@ID", SqlDbType.Int);
+                delete.Parameters["@ID"].Value = SelectedTemp.ChosenUser.UserID;
+                delete.ExecuteNonQuery();
+                CloseConnection();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

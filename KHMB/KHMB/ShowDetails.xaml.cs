@@ -151,7 +151,7 @@ namespace KHMB
                 case "User":
                     {
                         User chosenUser = new User();
-                        chosenUser.DeleteUser();
+                        chosenUser.DeleteUser(chosenUser.UserID);
                     }
                     break;
                 case "Tarif":
