@@ -65,7 +65,9 @@ namespace KHMB
         {
 
         }
-        static void Delete()
+
+        //By Klaus Kristensen
+        public void Delete()
         {
 
         }

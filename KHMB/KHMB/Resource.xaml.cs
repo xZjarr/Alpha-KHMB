@@ -69,7 +69,7 @@ namespace KHMB
         {
 
         }
-        static void DeleteResource()
+        public void DeleteResource()
         {
 
         }

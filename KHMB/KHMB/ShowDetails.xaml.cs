@@ -136,5 +136,51 @@ namespace KHMB
                 ResourceType.Edit(SelectedTemp.ChosenRT.Name);
             }
         }
+
+        //By Klaus
+        private void btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            switch ((string)lbl_Title.Content)
+            {
+                case "Job":
+                    {
+                        Job chosenJob = new Job();
+                        chosenJob.DeleteJob(SelectedTemp.ChosenJob.JobID);
+                    }
+                    break;
+                case "User":
+                    {
+                        User chosenUser = new User();
+                        chosenUser.DeleteUser(chosenUser.UserID);
+                    }
+                    break;
+                case "Tarif":
+                    {
+                        Tarif chosenTarif = new Tarif();
+                        chosenTarif.Delete();
+                    }
+                    break;
+                case "ESP":
+                    {
+                        ESP chosenESP = new ESP();
+                        chosenESP.Delete();
+                    }
+                    break;
+                case "Resource":
+                    {
+                        Resource chosenResource = new Resource();
+                        chosenResource.DeleteResource();
+                    }
+                    break;
+                case "Resource type":
+                    {
+                        ResourceType chosenType = new ResourceType();
+                        chosenType.Delete();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

@@ -63,7 +63,9 @@ namespace KHMB
         {
 
         }
-        static void Delete()
+
+        //By Klaus
+        public void Delete()
         {
 
         }

@@ -76,6 +76,7 @@ namespace KHMB
             jobToBeScheduled.Deadline = Deadline;
             jobToBeScheduled.CreatedUserID = CurrentUser.ID;
             jobToBeScheduled.Created = DateTime.Now;
+            jobToBeScheduled.DurationHours = 4;
             bool isSucces = Scheduler.FindPlaceInQueue(jobToBeScheduled);
             if (isSucces)
             {
@@ -92,10 +93,9 @@ namespace KHMB
 
         }
 
-        public bool DeleteJob(int JobID, string User)
+        public void DeleteJob(int JobID)
         {
-            
-            return Succes;
+            DB.Delete("Job",SelectedTemp.ChosenJob.JobID);
         }
     }
 }

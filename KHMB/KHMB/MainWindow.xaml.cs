@@ -29,6 +29,7 @@ namespace KHMB
             }
             else
             {
+                Btn_SignInOut.Content = "Sign Out";
                 btn_Create.IsEnabled = true;
             }
         }
@@ -51,9 +52,19 @@ namespace KHMB
 
         private void LogInTest_Click(object sender, RoutedEventArgs e)
         {
-            LogIn lgin = new LogIn();
-            lgin.Show();
-            this.Close();
+            if (CurrentUser.ID <= 0)
+            {
+                LogIn lgin = new LogIn();
+                lgin.Show();
+                this.Close();
+            }
+            else
+            {
+                CurrentUser.ID = 0;
+                Btn_SignInOut.Content = "Sign In";
+                btn_Create.IsEnabled = false;
+            }
+            
         }
     }
 }
