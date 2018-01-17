@@ -58,11 +58,6 @@ namespace KHMB
             }
 
         }
-
-        static void Create()
-        {
-
-        }
         static void Edit()
         {
 

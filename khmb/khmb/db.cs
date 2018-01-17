@@ -41,6 +41,7 @@ namespace KHMB
             insertRName.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
             insertRName.Parameters["@IsAdmin"].Value = IsDmn;
             insertRName.ExecuteNonQuery();
+            CloseConnection();
         }
         public static void InsertR(string R, int RTID)
         {
@@ -161,6 +162,7 @@ namespace KHMB
                 u.SurName = reader.GetString(4);
                 u.UserName = reader.GetString(1);
                 u.IsAdmin = reader.GetBoolean(5);
+                u.Password = reader.GetString(2);
                 uList.Add(u);
             }
             CloseConnection();
@@ -186,7 +188,7 @@ namespace KHMB
             return queueJobs;
         }
 
-        public static void InsertJob(JobO jobToAdd)
+        public static bool InsertJob(JobO jobToAdd)
         {
             OpenConnection();
             SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime); ", myConnection);
