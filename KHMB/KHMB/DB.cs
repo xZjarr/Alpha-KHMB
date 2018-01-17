@@ -68,7 +68,7 @@ namespace KHMB
         public static void InsertESP(string ESP_Surplus, string ESP_StartClock, string ESP_EndClock, string ESP_StartDate, string ESP_EndDate)
         {
             OpenConnection();
-            SqlCommand insertRT = new SqlCommand("INSERT INTO ESP (name) VALUES (@name)", myConnection);
+            SqlCommand insertRT = new SqlCommand("INSERT INTO ESP (EnergySurplus, StartTime, EndTime, StartDate, EndDate) VALUES (@surplus, @startClock, @endClock, @startDate, @endDate)", myConnection);
             insertRT.Parameters.Add("@surplus", SqlDbType.Float);
             insertRT.Parameters["@surplus"].Value = float.Parse(ESP_Surplus);
             insertRT.Parameters.Add("@startClock", SqlDbType.Time);
@@ -79,6 +79,20 @@ namespace KHMB
             insertRT.Parameters["@startDate"].Value = DateTime.Parse(ESP_StartDate);
             insertRT.Parameters.Add("@endDate", SqlDbType.Timestamp);
             insertRT.Parameters["@endDate"].Value = DateTime.Parse(ESP_EndDate);
+            insertRT.ExecuteNonQuery();
+            CloseConnection();
+        }
+
+        public static void InsertTariff(string Tariff_Value, string Tariff_StartClock, string Tariff_EndClock)
+        {
+            OpenConnection();
+            SqlCommand insertRT = new SqlCommand("INSERT INTO Tarif (Price, StartTime, EndTime) VALUES (@cost, @startClock, @endClock)", myConnection);
+            insertRT.Parameters.Add("@cost", SqlDbType.Float);
+            insertRT.Parameters["@cost"].Value = float.Parse(Tariff_Value);
+            insertRT.Parameters.Add("@startClock", SqlDbType.Time);
+            insertRT.Parameters["@startClock"].Value = DateTime.ParseExact(Tariff_StartClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.Parameters.Add("@endClock", SqlDbType.Time);
+            insertRT.Parameters["@endClock"].Value = DateTime.ParseExact(Tariff_EndClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
             insertRT.ExecuteNonQuery();
             CloseConnection();
         }

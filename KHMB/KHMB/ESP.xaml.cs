@@ -86,7 +86,7 @@ namespace KHMB
         private void btn_ESPCreate_Click(object sender, RoutedEventArgs e)
         {
             DB.InsertESP(txtBox_ESPValue.Text, drpBox_ESPStartClock.Text, drpBox_ESPEndClock.Text, datePicker_ESPStartDate.Text, datePicker_ESPEndDate.Text);
-
+            this.Close();
         }
 
         private void drpBox_ESPEndClock_SelectionChanged(object sender, SelectionChangedEventArgs e)
