@@ -43,6 +43,46 @@ namespace KHMB
             insertRName.ExecuteNonQuery();
             CloseConnection();
         }
+
+        internal static RO GetResource(int resourceID)
+        {
+            RO r = new RO();
+            OpenConnection();
+            SqlCommand getR = new SqlCommand("SELECT * FROM Resource WHERE ResourceID=@ResourceID", myConnection);
+            getR.Parameters.Add("@ResourceID", SqlDbType.Int);
+            getR.Parameters["@ResourceID"].Value = resourceID;
+            SqlDataReader reader = getR.ExecuteReader();
+            if (reader.Read())
+            {
+                r.Name = reader.GetString(1);
+                r.ResourceID = reader.GetInt32(2);
+            }
+            CloseConnection();
+            return r;
+        }
+
+        internal static UserO GetUser(int createdUserID)
+        {
+            UserO u = new UserO();
+            OpenConnection();
+            SqlCommand getU = new SqlCommand("SELECT * FROM [User] WHERE UserID=@UserId", myConnection);
+            getU.Parameters.Add("@UserID", SqlDbType.Int);
+            getU.Parameters["@UserID"].Value = createdUserID;
+            SqlDataReader reader = getU.ExecuteReader();
+            if (reader.Read())
+            {
+                
+                u.FirstName = reader.GetString(3);
+                u.SurName = reader.GetString(4);
+                u.UserName = reader.GetString(1);
+                u.IsAdmin = reader.GetBoolean(5);
+                u.Password = reader.GetString(2);
+                u.UserID = reader.GetInt32(0);
+            }
+            CloseConnection();
+            return u;
+        }
+
         public static void InsertR(string R, int RTID)
         {
             OpenConnection();
