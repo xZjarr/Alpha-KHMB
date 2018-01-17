@@ -42,6 +42,27 @@ namespace KHMB
                 ShowUsers();
             }
         }
+
+        private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbl_Title.Content == "Jobs")
+            {
+                JobO chosenJob = (JobO)listbox_Show.SelectedItem;
+                SelectedTempJob.ChosenJob = chosenJob;
+                ShowDetails sdJ = new ShowDetails();
+                sdJ.Show();
+                this.Close();
+            }
+            else if (lbl_Title.Content == "Users")
+            {
+                UserO chosenUser = (UserO)listbox_Show.SelectedItem;
+                SelectedTempUser.ChosenUser = chosenUser;
+                ShowDetails sdU = new ShowDetails();
+                sdU.Show();
+                this.Close();
+            }
+        }
+
         private void btn_Close_Click(object sender, RoutedEventArgs e)
         {
             MainWindow returnWindow = new MainWindow();
@@ -69,22 +90,20 @@ namespace KHMB
             listbox_Show.ItemsSource = users;
         }
 
-        private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (listbox_Show.GetType == )
-            { 
-            JobO chosenJob = (JobO)listbox_Show.SelectedItem;
-            SelectedTempJob.ChosenJob = chosenJob;
-            ShowDetails sdJ = new ShowDetails();
-            sdJ.Show();
-            this.Close();
-            }
-            //UserO chosenUser = (UserO)listbox_Show.SelectedItem;
-            //SelectedTempUser.ChosenUser = chosenUser;
-            //ShowDetails sdU = new ShowDetails();
-            //sdU.Show();
-            //this.Close();
-        }
+        //private void listbox_Show_SelectionChanged(string ChosenO, object sender, SelectionChangedEventArgs e)
+        //{
+        //    JobO chosenJob = (JobO)listbox_Show.SelectedItem;
+        //    SelectedTempJob.ChosenJob = chosenJob;
+        //    ShowDetails sdJ = new ShowDetails();
+        //    sdJ.Show();
+        //    this.Close();
+
+        //    UserO chosenUser = (UserO)listbox_Show.SelectedItem;
+        //    SelectedTempUser.ChosenUser = chosenUser;
+        //    ShowDetails sdU = new ShowDetails();
+        //    sdU.Show();
+        //    this.Close();
+        //}
 
         //private void ShowTarif()
         //{
