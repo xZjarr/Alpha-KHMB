@@ -9,14 +9,14 @@ namespace KHMB
     static class Scheduler
     {
         //By Klaus
-        public static void FindPlaceInQueue(JobO JobToBeScheduled)
+        public static bool FindPlaceInQueue(JobO JobToBeScheduled)
         {
             Queue queue = GetJobs(JobToBeScheduled.ResourceID);
             JobToBeScheduled.ExeTime = CalculateBestSpot(queue);
             //Generate name. HardCoded for now
             JobToBeScheduled.JobName = "TestName";
-            DB.InsertJob(JobToBeScheduled);
-            //queue.jobsInQueue.Add(JobToBeScheduled);
+            bool isSucces = DB.InsertJob(JobToBeScheduled);
+            return isSucces;
         }
 
         //By Klaus
