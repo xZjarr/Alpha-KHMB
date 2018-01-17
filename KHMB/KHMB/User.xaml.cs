@@ -18,7 +18,7 @@ namespace KHMB
     {
         Random rnd = new Random();
         string UserName, Password, FirstName, SurName;
-        int UserID;
+        public int UserID;
         bool IsAdmin, LogInSucces;
         public User()
         {
@@ -50,9 +50,9 @@ namespace KHMB
             this.Close();
         }
 
-        public void DeleteUser()
+        public void DeleteUser(int IDToDelete)
         {
-
+            DB.Delete("User",IDToDelete);
         }
         public bool CheckJob()
         {
