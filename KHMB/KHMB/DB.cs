@@ -98,6 +98,23 @@ namespace KHMB
             CloseConnection();
         }
 
+        public static List<RO> SelectAllTarifs()
+        {
+            List<RO> rList = new List<RO>();
+            OpenConnection();
+            SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
+            SqlDataReader reader = getR.ExecuteReader();
+            while (reader.Read())
+            {
+                RO r = new RO();
+                r.Name = reader.GetString(1);
+                r.ResourceID = reader.GetInt32(2);
+                rList.Add(r);
+            }
+            CloseConnection();
+            return rList;
+        }
+
         public static List<RTO> SelectAllResourceTypes()
         {
             List<RTO> rtList = new List<RTO>();
@@ -218,9 +235,11 @@ namespace KHMB
                 //Comment
             }
         }
-        public static DataSet LogIn()
+        public static DataSet LogIn(string UserName, string password)
         {
             SqlCommand cmd = new SqlCommand("SELECT * WHERE UserName=@UserName AND Password=@Password", myConnection);
+            cmd.Parameters.AddWithValue("@Username", UserName);
+            cmd.Parameters.AddWithValue("@Password", password);
             myConnection.Open();
             SqlDataAdapter adapt = new SqlDataAdapter();
             DataSet ds = new DataSet();
