@@ -32,12 +32,13 @@ namespace KHMB
 
         private void LogIn1_Click(object sender, RoutedEventArgs e)
         {
-            if (Txt_UserName.Text == ""||Txt_PassWord.Password.ToString() == "")
+            if (Txt_UserName.Text == "" || Txt_PassWord.Password.ToString() == "")
             {
                 MessageBox.Show("Please write username and password");
             }
             try
             {
+                string password = Txt_PassWord.Password;
                 DataSet ds = DB.LogIn(Txt_UserName.Text, Txt_PassWord.ToString());
                 int count = ds.Tables[0].Rows.Count;
                 if (count == 1)
@@ -47,9 +48,11 @@ namespace KHMB
                     MainWindow nm = new MainWindow();
                     nm.Show();
                 }
+
                 else
-                    MessageBox.Show("Login Failed!");
-                catch (Exception ex)
+                { MessageBox.Show("Login Failed!"); }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
