@@ -240,7 +240,7 @@ namespace KHMB
             cmd.Parameters.AddWithValue("@Username", UserName);
             cmd.Parameters.AddWithValue("@Password", password);
             myConnection.Open();
-            SqlDataAdapter adapt = new SqlDataAdapter();
+            SqlDataAdapter adapt = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             adapt.Fill(ds);
             myConnection.Close();

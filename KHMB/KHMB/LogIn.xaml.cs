@@ -38,6 +38,7 @@ namespace KHMB
             }
             try
             {
+                string password = Txt_PassWord.Password;
                 DataSet ds = DB.LogIn(Txt_UserName.Text, Txt_PassWord.ToString());
                 int count = ds.Tables[0].Rows.Count;
                 if (count == 1)
