@@ -35,6 +35,11 @@ namespace KHMB
             {
                 MessageBox.Show("Please write username and password");
             }
+            try
+            {
+                DB.LogIn();
+                
+            }
         }
     }
 }

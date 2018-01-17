@@ -209,7 +209,12 @@ namespace KHMB
         }
         public static void LogIn()
         {
-
+            SqlCommand cmd = new SqlCommand("SELECT * WHERE UserName=@UserName AND Password=@Password", myConnection);
+            myConnection.Open();
+            SqlDataAdapter adapt = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+            adapt.Fill(ds);
+            myConnection.Close();
         }
     }
 }
