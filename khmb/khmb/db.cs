@@ -41,6 +41,7 @@ namespace KHMB
             insertRName.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
             insertRName.Parameters["@IsAdmin"].Value = IsDmn;
             insertRName.ExecuteNonQuery();
+            CloseConnection();
         }
         public static void InsertR(string R, int RTID)
         {
@@ -64,6 +65,39 @@ namespace KHMB
             insertRT.ExecuteNonQuery();
             CloseConnection();
         }
+
+        public static void InsertESP(string ESP_Surplus, string ESP_StartClock, string ESP_EndClock, string ESP_StartDate, string ESP_EndDate)
+        {
+            OpenConnection();
+            SqlCommand insertRT = new SqlCommand("INSERT INTO ESP (EnergySurplus, StartTime, EndTime, StartDate, EndDate) VALUES (@surplus, @startClock, @endClock, @startDate, @endDate)", myConnection);
+            insertRT.Parameters.Add("@surplus", SqlDbType.Float);
+            insertRT.Parameters["@surplus"].Value = float.Parse(ESP_Surplus);
+            insertRT.Parameters.Add("@startClock", SqlDbType.Time);
+            insertRT.Parameters["@startClock"].Value = DateTime.ParseExact(ESP_StartClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.Parameters.Add("@endClock", SqlDbType.Time);
+            insertRT.Parameters["@endClock"].Value = DateTime.ParseExact(ESP_EndClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.Parameters.Add("@startDate", SqlDbType.Timestamp);
+            insertRT.Parameters["@startDate"].Value = DateTime.Parse(ESP_StartDate);
+            insertRT.Parameters.Add("@endDate", SqlDbType.Timestamp);
+            insertRT.Parameters["@endDate"].Value = DateTime.Parse(ESP_EndDate);
+            insertRT.ExecuteNonQuery();
+            CloseConnection();
+        }
+
+        public static void InsertTariff(string Tariff_Value, string Tariff_StartClock, string Tariff_EndClock)
+        {
+            OpenConnection();
+            SqlCommand insertRT = new SqlCommand("INSERT INTO Tarif (Price, StartTime, EndTime) VALUES (@cost, @startClock, @endClock)", myConnection);
+            insertRT.Parameters.Add("@cost", SqlDbType.Float);
+            insertRT.Parameters["@cost"].Value = float.Parse(Tariff_Value);
+            insertRT.Parameters.Add("@startClock", SqlDbType.Time);
+            insertRT.Parameters["@startClock"].Value = DateTime.ParseExact(Tariff_StartClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.Parameters.Add("@endClock", SqlDbType.Time);
+            insertRT.Parameters["@endClock"].Value = DateTime.ParseExact(Tariff_EndClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.ExecuteNonQuery();
+            CloseConnection();
+        }
+
         public static List<RTO> SelectAllResourceTypes()
         {
             List<RTO> rtList = new List<RTO>();
@@ -89,6 +123,7 @@ namespace KHMB
             {
                 RO r = new RO();
                 r.Name = reader.GetString(1);
+                r.ResourceID = reader.GetInt32(2);
                 rList.Add(r);
             }
             CloseConnection();
@@ -145,27 +180,45 @@ namespace KHMB
             while (reader.Read())
             {
                 JobO j = new JobO();
-                //j.ExeTime = reader.GetDateTime(2);
+                j.ExeTime = reader.GetDateTime(7);
                 queueJobs.Add(j);
             }
             CloseConnection();
             return queueJobs;
         }
 
-        public static void InsertJob(JobO jobToAdd)
+        public static bool InsertJob(JobO jobToAdd)
         {
             OpenConnection();
-            SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@exeTime,'2017-01-01 00:00:00',1,'2018-01-01 00:00:00'); ", myConnection);
-            insertJob.Parameters.Add("@name", SqlDbType.VarChar);
-            insertJob.Parameters["@name"].Value = jobToAdd.JobName;
-            insertJob.Parameters.Add("@resource", SqlDbType.Int);
-            insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
-            insertJob.Parameters.Add("@userID", SqlDbType.Int);
-            insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
-            insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
-            insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
-            insertJob.ExecuteNonQuery();
-            CloseConnection();
+            try
+            {
+                SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime); ", myConnection);
+                insertJob.Parameters.Add("@name", SqlDbType.VarChar);
+                insertJob.Parameters["@name"].Value = jobToAdd.JobName;
+                insertJob.Parameters.Add("@resource", SqlDbType.Int);
+                insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
+                insertJob.Parameters.Add("@userID", SqlDbType.Int);
+                insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
+                insertJob.Parameters.Add("@deadline", SqlDbType.DateTime);
+                insertJob.Parameters["@deadline"].Value = jobToAdd.Deadline;
+                insertJob.Parameters.Add("@creation", SqlDbType.DateTime);
+                insertJob.Parameters["@creation"].Value = jobToAdd.Created;
+                insertJob.Parameters.Add("@priority", SqlDbType.TinyInt);
+                insertJob.Parameters["@priority"].Value = jobToAdd.Priority;
+                insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
+                insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
+                insertJob.ExecuteNonQuery();
+                CloseConnection();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public static void LogIn()
+        {
+
         }
     }
 }

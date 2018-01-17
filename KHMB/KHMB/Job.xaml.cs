@@ -45,6 +45,7 @@ namespace KHMB
             Deadline = Deadline.Date + DeadlineTimeConverter(cbx_Deadline).TimeOfDay;
             Priority = Convert.ToInt32(cbx_Priority.Text);
             CreateJob(ResourceID.ResourceID, CreatedUserID, Priority, Deadline);
+            this.Close();
         }
 
         private DateTime DeadlineTimeConverter(ComboBox cbx_time)
@@ -74,10 +75,18 @@ namespace KHMB
             jobToBeScheduled.CreatedUserID = User;
             jobToBeScheduled.Priority = Priority;
             jobToBeScheduled.Deadline = Deadline;
-            //Hardcoded user ID fix when user is created
+            //Hardcoded user ID fix when UserLogin is created
             jobToBeScheduled.CreatedUserID = 3;
             jobToBeScheduled.Created = DateTime.Now;
-            Scheduler.FindPlaceInQueue(jobToBeScheduled);
+            bool isSucces = Scheduler.FindPlaceInQueue(jobToBeScheduled);
+            if (isSucces)
+            {
+                MessageBox.Show("Job succesfully added to Queue");
+            }
+            else
+            {
+                MessageBox.Show("Job could not be added to queue");
+            }
         }
 
         public void EditJob(int JobID, string User)
