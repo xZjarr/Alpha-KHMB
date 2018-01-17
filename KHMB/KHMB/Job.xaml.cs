@@ -34,8 +34,7 @@ namespace KHMB
         private void FillResourceList()
         {
             List<RO> resources = new List<RO>();
-            //Get a list from the database. For now, manually add an item.
-            //Resource temp = new Resource();
+            //Get a list from the database.
             resources = DB.SelectAllResource();
             lbx_Resources.ItemsSource = resources;
         }
@@ -75,8 +74,7 @@ namespace KHMB
             jobToBeScheduled.CreatedUserID = User;
             jobToBeScheduled.Priority = Priority;
             jobToBeScheduled.Deadline = Deadline;
-            //Hardcoded user ID fix when UserLogin is created
-            jobToBeScheduled.CreatedUserID = 3;
+            jobToBeScheduled.CreatedUserID = CurrentUser.ID;
             jobToBeScheduled.Created = DateTime.Now;
             bool isSucces = Scheduler.FindPlaceInQueue(jobToBeScheduled);
             if (isSucces)
