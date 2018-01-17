@@ -235,7 +235,7 @@ namespace KHMB
                 return false;
             }
         }
-        public static DataSet LogIn()
+        public static DataSet LogIn(string UserName, string password)
         {
             OpenConnection();
             SqlCommand cmd = new SqlCommand("SELECT * FROM User WHERE UserName=@UserName AND Password=@Password", myConnection);
