@@ -19,8 +19,5 @@ namespace KHMB
             return string.Format("Username: {0}", UserName);
             //\tFirst name: {1}\tSurname: {2}\nIs Admin: {3}, FirstName, SurName, IsAdmin
         }
-
     }
-
-
 }
