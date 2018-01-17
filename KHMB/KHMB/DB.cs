@@ -344,11 +344,9 @@ namespace KHMB
             OpenConnection();
             try
             {
-                SqlCommand delete = new SqlCommand("DELETE FROM @table WHERE @IDcolumn = @ID;", myConnection);
-                delete.Parameters.Add("@table", SqlDbType.VarChar);
-                delete.Parameters["@table"].Value = callerClass;
-                delete.Parameters.Add("@IDcolumn", SqlDbType.VarChar);
-                delete.Parameters["@IDcolumn"].Value = (callerClass+"ID");
+                string tablestring = "[" + callerClass + "]";
+                string iDColumn = callerClass + "ID";
+                SqlCommand delete = new SqlCommand("DELETE FROM " + tablestring + " WHERE " + iDColumn + " = @ID;", myConnection);
                 delete.Parameters.Add("@ID", SqlDbType.Int);
                 delete.Parameters["@ID"].Value = SelectedTemp.ChosenUser.UserID;
                 delete.ExecuteNonQuery();
@@ -357,6 +355,7 @@ namespace KHMB
             }
             catch (Exception)
             {
+                CloseConnection();
                 return false;
             }
         }
