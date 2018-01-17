@@ -20,6 +20,22 @@ namespace KHMB
         public Creator()
         {
             InitializeComponent();
+            if (CurrentUser.IsAdmin == true)
+            {
+                btn_CreateESP.IsEnabled = true;
+                btn_CreateResource.IsEnabled = true;
+                btn_CreateResourceType.IsEnabled = true;
+                btn_CreateTarif.IsEnabled = true;
+                btn_CreateUser.IsEnabled = true;
+            }
+            else
+            {
+                btn_CreateESP.IsEnabled = false;
+                btn_CreateResource.IsEnabled = false;
+                btn_CreateResourceType.IsEnabled = false;
+                btn_CreateTarif.IsEnabled = false;
+                btn_CreateUser.IsEnabled = false;
+            }
         }
 
         private void NewJob_Click(object sender, RoutedEventArgs e)
