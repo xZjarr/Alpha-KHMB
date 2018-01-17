@@ -157,13 +157,15 @@ namespace KHMB
                 case "Tarif":
                     {
                         Tarif chosenTarif = new Tarif();
-                        chosenTarif.Delete();
+                        //Hardcoded ID because they don't have IDs yet
+                        chosenTarif.Delete(2);
                     }
                     break;
                 case "ESP":
                     {
                         ESP chosenESP = new ESP();
-                        chosenESP.Delete();
+                        //Hardcoded ID because they don't have IDs yet
+                        chosenESP.Delete(2);
                     }
                     break;
                 case "Resource":
@@ -175,7 +177,7 @@ namespace KHMB
                 case "Resource type":
                     {
                         ResourceType chosenType = new ResourceType();
-                        //Hardcoded resource type ID because the resource types doesn't have IDs yet
+                        //Hardcoded ID because they don't have IDs yet
                         chosenType.Delete(2);
                     }
                     break;

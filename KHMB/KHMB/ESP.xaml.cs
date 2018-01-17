@@ -61,9 +61,9 @@ namespace KHMB
         {
 
         }
-        public static void Edit()
+        public static void Edit(int IDToDelete)
         {
-
+            DB.DeleteTarifESP("ESP", IDToDelete);
         }
 
         //By Klaus Kristensen
