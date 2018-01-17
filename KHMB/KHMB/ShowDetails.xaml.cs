@@ -19,33 +19,38 @@ namespace KHMB
     /// </summary>
     public partial class ShowDetails : Window
     {
-        public ShowDetails()
+        public ShowDetails(string subject)
         {
-                InitializeComponent();
+            InitializeComponent();
 
-            JobO chosenJob = SelectedTempJob.ChosenJob;
-            lbl_CreatedFill.Content = chosenJob.Created;
-            lbl_DeadlineFill.Content = chosenJob.Deadline;
-            lbl_CreatedByFill.Content = chosenJob.Created;
-            lbl_NameFill.Content = chosenJob.JobName;
-            lbl_PriorityFill.Content = chosenJob.Priority;
-
-            //UserO chosenUser = SelectedTempUser.ChosenUser;
-            //lbl_NameTitle.Content = ("Username: ");
-            //lbl_CreatedByTitle.Content = ("Fornavn: ");
-            //lbl_CreatedTitle.Content = ("Efternavn: ");
-            //lbl_DeadlineTitle.Content = ("Password: ");
-            //lbl_PriorityTitle.Content = ("Is User admin:");
-            //lbl_NameFill.Content = chosenUser.UserName;
-            //lbl_CreatedByFill.Content = chosenUser.FirstName;
-            //lbl_CreatedFill.Content = chosenUser.SurName;
-            //lbl_DeadlineFill.Content = chosenUser.Password;
-            //lbl_PriorityFill.Content = chosenUser.IsAdmin;
+            if (subject == "Jobs")
+            { 
+                JobO chosenJob = SelectedTempJob.ChosenJob;
+                lbl_CreatedFill.Content = chosenJob.Created;
+                lbl_DeadlineFill.Content = chosenJob.Deadline;
+                lbl_CreatedByFill.Content = chosenJob.Created;
+                lbl_NameFill.Content = chosenJob.JobName;
+                lbl_PriorityFill.Content = chosenJob.Priority;
+            }
+            else if (subject == "Users")
+            {
+                UserO chosenUser = SelectedTempUser.ChosenUser;
+                lbl_NameTitle.Content = ("Username: ");
+                lbl_CreatedByTitle.Content = ("Fornavn: ");
+                lbl_CreatedTitle.Content = ("Efternavn: ");
+                lbl_DeadlineTitle.Content = ("Password: ");
+                lbl_PriorityTitle.Content = ("Is User admin:");
+                lbl_NameFill.Content = chosenUser.UserName;
+                lbl_CreatedByFill.Content = chosenUser.FirstName;
+                lbl_CreatedFill.Content = chosenUser.SurName;
+                lbl_DeadlineFill.Content = chosenUser.Password;
+                lbl_PriorityFill.Content = chosenUser.IsAdmin;
+            }
         }
 
         private void Btn_Close_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow returnWindow = new MainWindow();
+            Show returnWindow = new Show();
             returnWindow.Show();
             this.Close();
         }
