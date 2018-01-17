@@ -191,31 +191,23 @@ namespace KHMB
         public static bool InsertJob(JobO jobToAdd)
         {
             OpenConnection();
-            try
-            {
-                SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime); ", myConnection);
-                insertJob.Parameters.Add("@name", SqlDbType.VarChar);
-                insertJob.Parameters["@name"].Value = jobToAdd.JobName;
-                insertJob.Parameters.Add("@resource", SqlDbType.Int);
-                insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
-                insertJob.Parameters.Add("@userID", SqlDbType.Int);
-                insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
-                insertJob.Parameters.Add("@deadline", SqlDbType.DateTime);
-                insertJob.Parameters["@deadline"].Value = jobToAdd.Deadline;
-                insertJob.Parameters.Add("@creation", SqlDbType.DateTime);
-                insertJob.Parameters["@creation"].Value = jobToAdd.Created;
-                insertJob.Parameters.Add("@priority", SqlDbType.TinyInt);
-                insertJob.Parameters["@priority"].Value = jobToAdd.Priority;
-                insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
-                insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
-                insertJob.ExecuteNonQuery();
-                CloseConnection();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime); ", myConnection);
+            insertJob.Parameters.Add("@name", SqlDbType.VarChar);
+            insertJob.Parameters["@name"].Value = jobToAdd.JobName;
+            insertJob.Parameters.Add("@resource", SqlDbType.Int);
+            insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
+            insertJob.Parameters.Add("@userID", SqlDbType.Int);
+            insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
+            insertJob.Parameters.Add("@deadline", SqlDbType.DateTime);
+            insertJob.Parameters["@deadline"].Value = jobToAdd.Deadline;
+            insertJob.Parameters.Add("@creation", SqlDbType.DateTime);
+            insertJob.Parameters["@creation"].Value = jobToAdd.Created;
+            insertJob.Parameters.Add("@priority", SqlDbType.TinyInt);
+            insertJob.Parameters["@priority"].Value = jobToAdd.Priority;
+            insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
+            insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
+            insertJob.ExecuteNonQuery();
+            CloseConnection();
         }
         public static DataSet LogIn()
         {
