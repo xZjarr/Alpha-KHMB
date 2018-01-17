@@ -98,21 +98,21 @@ namespace KHMB
             CloseConnection();
         }
 
-        public static List<RO> SelectAllTarifs()
+        public static List<TO> SelectAllTarifs()
         {
-            List<RO> rList = new List<RO>();
+            List<TO> tList = new List<TO>();
             OpenConnection();
-            SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
+            SqlCommand getR = new SqlCommand("SELECT StartTime, EndTime FROM Tarifs", myConnection);
             SqlDataReader reader = getR.ExecuteReader();
             while (reader.Read())
             {
-                RO r = new RO();
-                r.Name = reader.GetString(1);
-                r.ResourceID = reader.GetInt32(2);
-                rList.Add(r);
+                TO t = new TO();
+                t.StartTime = reader.GetTimeSpan(0);
+                t.EndTime = reader.GetTimeSpan(1);
+                tList.Add(t);
             }
             CloseConnection();
-            return rList;
+            return tList;
         }
 
         public static List<RTO> SelectAllResourceTypes()
@@ -232,12 +232,11 @@ namespace KHMB
             catch (Exception)
             {
                 return false;
-                //Comment
             }
         }
         public static DataSet LogIn()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * WHERE UserName=@UserName AND Password=@Password", myConnection);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM User WHERE UserName=@UserName AND Password=@Password", myConnection);
             myConnection.Open();
             SqlDataAdapter adapt = new SqlDataAdapter();
             DataSet ds = new DataSet();
