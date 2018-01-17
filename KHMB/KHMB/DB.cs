@@ -214,8 +214,7 @@ namespace KHMB
             }
             catch (Exception)
             {
-                return false;
-                //Comment
+                return false; 
             }
         }
         public static DataSet LogIn()
