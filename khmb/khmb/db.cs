@@ -73,12 +73,12 @@ namespace KHMB
             insertRT.Parameters.Add("@surplus", SqlDbType.Float);
             insertRT.Parameters["@surplus"].Value = float.Parse(ESP_Surplus);
             insertRT.Parameters.Add("@startClock", SqlDbType.Time);
-            insertRT.Parameters["@startClock"].Value = DateTime.ParseExact(ESP_StartClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.Parameters["@startClock"].Value = TimeSpan.Parse(ESP_StartClock);
             insertRT.Parameters.Add("@endClock", SqlDbType.Time);
-            insertRT.Parameters["@endClock"].Value = DateTime.ParseExact(ESP_EndClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
-            insertRT.Parameters.Add("@startDate", SqlDbType.Timestamp);
+            insertRT.Parameters["@endClock"].Value = TimeSpan.Parse(ESP_EndClock);
+            insertRT.Parameters.Add("@startDate", SqlDbType.DateTime);
             insertRT.Parameters["@startDate"].Value = DateTime.Parse(ESP_StartDate);
-            insertRT.Parameters.Add("@endDate", SqlDbType.Timestamp);
+            insertRT.Parameters.Add("@endDate", SqlDbType.DateTime);
             insertRT.Parameters["@endDate"].Value = DateTime.Parse(ESP_EndDate);
             insertRT.ExecuteNonQuery();
             CloseConnection();
@@ -91,9 +91,9 @@ namespace KHMB
             insertRT.Parameters.Add("@cost", SqlDbType.Float);
             insertRT.Parameters["@cost"].Value = float.Parse(Tariff_Value);
             insertRT.Parameters.Add("@startClock", SqlDbType.Time);
-            insertRT.Parameters["@startClock"].Value = DateTime.ParseExact(Tariff_StartClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.Parameters["@startClock"].Value = TimeSpan.Parse(Tariff_StartClock);
             insertRT.Parameters.Add("@endClock", SqlDbType.Time);
-            insertRT.Parameters["@endClock"].Value = DateTime.ParseExact(Tariff_EndClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.Parameters["@endClock"].Value = TimeSpan.Parse(Tariff_EndClock);
             insertRT.ExecuteNonQuery();
             CloseConnection();
         }
@@ -219,7 +219,12 @@ namespace KHMB
         }
         public static void LogIn()
         {
-
+            SqlCommand cmd = new SqlCommand("SELECT * WHERE UserName=@UserName AND Password=@Password", myConnection);
+            myConnection.Open();
+            SqlDataAdapter adapt = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+            adapt.Fill(ds);
+            myConnection.Close();
         }
     }
 }
