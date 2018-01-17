@@ -16,6 +16,7 @@ namespace KHMB
 {
     public partial class User : Window
     {
+        Random rnd = new Random();
         string UserName, Password, FirstName, SurName;
         int UserID;
         bool IsAdmin, LogInSucces;
@@ -23,17 +24,35 @@ namespace KHMB
         {
             InitializeComponent();
         }
-        public void CreateUser()
+        public void CreateUser(string FrstName, string SrNm, string Psswrd, bool IsDmn)
         {
-
+            string UserName = CreateUserName(FrstName);
+            DB.InsertUser(FrstName, SrNm, Psswrd, IsDmn, UserName);
         }
         public void EditUser()
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Btn_Is_Admin.IsChecked == true)
+            {
+                IsAdmin = true;
+                Convert.ToInt32(IsAdmin);
+            }
+            if (Btn_Is_Admin.IsChecked == false)
+            {
+                IsAdmin = false;
+                Convert.ToInt32(IsAdmin);
+            }
+            CreateUser(Bx_FrstNm.Text, Bx_SrNm.Text, Bx_PssWrd.Text, IsAdmin);
+            this.Close();
+        }
+
         public void DeleteUser()
         {
-            
+
         }
         public bool CheckJob()
         {
@@ -47,5 +66,12 @@ namespace KHMB
         {
             return LogInSucces;
         }
+        private string CreateUserName(string firstName)
+            {
+            string UserName;
+            int UserID = rnd.Next(100, 999);
+            UserName = firstName.Substring(0,4) + UserID.ToString();
+            return UserName;
+            }
     }
 }

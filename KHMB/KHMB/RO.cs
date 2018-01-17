@@ -15,7 +15,7 @@ namespace KHMB
 
         public override string ToString()
         {
-            return string.Format("Name: {0}\tResourceType: {1}", Name);
+            return string.Format("Name: {0}", Name);
         }
     }
 }

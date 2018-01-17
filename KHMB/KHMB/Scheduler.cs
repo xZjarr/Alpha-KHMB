@@ -8,18 +8,46 @@ namespace KHMB
 {
     static class Scheduler
     {
-        public static void FindPlaceInQueue(Job JobToBeScheduled)
+        //By Klaus
+        public static void FindPlaceInQueue(JobO JobToBeScheduled)
         {
             Queue queue = GetJobs(JobToBeScheduled.ResourceID);
-            queue.jobsInQueue.Add(JobToBeScheduled);
+            JobToBeScheduled.ExeTime = CalculateBestSpot(queue);
+            //Generate name. HardCoded for now
+            JobToBeScheduled.JobName = "TestName";
+            DB.InsertJob(JobToBeScheduled);
+            //queue.jobsInQueue.Add(JobToBeScheduled);
         }
+
+        //By Klaus
+        private static DateTime CalculateBestSpot(Queue queue)
+        {
+            //Is supposed to calculate the best spot in queue. For now, just give it any spot available
+            DateTime tempTime = new DateTime();
+            int hour = 00;
+            tempTime = Convert.ToDateTime($"{hour}:00:00");
+            int index = queue.jobsInQueue.FindIndex(item => item.ExeTime == tempTime);
+            if (index < 0)
+            {
+                return tempTime;    
+            }
+            else
+            {
+                hour++;
+                tempTime = Convert.ToDateTime($"{hour}:00:00");
+                return tempTime;
+            }
+        }
+
         public static void GetResources()
         {
 
         }
+
+        //Klaus
         public static Queue GetJobs(int  resource)
         {
-            //Make a queue and fill it with jobs from database with the corresponding resource(Replace new Queue() with a databse command)
+            //Make a queue and fill it with jobs from database with the corresponding resource
             Queue queue = new Queue(resource);
             return queue;
         }

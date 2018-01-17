@@ -87,6 +87,7 @@
     <Compile Include="User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserO.cs" />
     <Page Include="Creator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

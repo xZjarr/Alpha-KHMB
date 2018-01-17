@@ -32,10 +32,10 @@ namespace KHMB
 
         private void FillResourceList()
         {
-            List<int> resources = new List<int>();
+            List<RO> resources = new List<RO>();
             //Get a list from the database. For now, manually add an item.
             //Resource temp = new Resource();
-            resources.Add(48);
+            resources = DB.SelectAllResource();
             lbx_Resources.ItemsSource = resources;
         }
 
@@ -68,11 +68,13 @@ namespace KHMB
 
         public static void CreateJob(int Resource, int User, int Priority, DateTime Deadline)
         {
-            Job jobToBeScheduled = new Job();
+            JobO jobToBeScheduled = new JobO();
             jobToBeScheduled.ResourceID = Resource;
             jobToBeScheduled.CreatedUserID = User;
             jobToBeScheduled.Priority = Priority;
             jobToBeScheduled.Deadline = Deadline;
+            //Hardcoded user ID fix when user is created
+            jobToBeScheduled.CreatedUserID = 3;
             Scheduler.FindPlaceInQueue(jobToBeScheduled);
         }
 

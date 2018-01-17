@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="User" Height="300" Width="300">
     <Grid>
-        
+        <Button Content="Create User" HorizontalAlignment="Left" Margin="207,239,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TextBox x:Name="Bx_FrstNm" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="0,45,0,0"/>
+        <TextBox x:Name="Bx_SrNm" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="143,45,0,0"/>
+        <TextBox x:Name="Bx_PssWrd" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="0,104,0,0"/>
+        <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,18,0,0" Height="22" Width="75"/>
+        <Label Content="Sur Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="143,18,0,0" Height="30"/>
+        <CheckBox x:Name="Btn_Is_Admin" Content="CheckBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,155,0,0"/>
+
     </Grid>
 </Window>
