@@ -167,5 +167,9 @@ namespace KHMB
             insertJob.ExecuteNonQuery();
             CloseConnection();
         }
+        public static void LogIn()
+        {
+
+        }
     }
 }
