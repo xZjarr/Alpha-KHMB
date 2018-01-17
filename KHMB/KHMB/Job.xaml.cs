@@ -92,10 +92,9 @@ namespace KHMB
 
         }
 
-        public bool DeleteJob(int JobID, string User)
+        public void DeleteJob(int JobID)
         {
-            
-            return Succes;
+            DB.Delete("Job",SelectedTemp.ChosenJob.JobID);
         }
     }
 }

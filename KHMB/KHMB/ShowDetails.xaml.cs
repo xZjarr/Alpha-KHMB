@@ -145,7 +145,7 @@ namespace KHMB
                 case "Job":
                     {
                         Job chosenJob = new Job();
-                        chosenJob.DeleteJob(SelectedTemp.ChosenJob.JobID, CurrentUser.UserName);
+                        chosenJob.DeleteJob(SelectedTemp.ChosenJob.JobID);
                     }
                     break;
                 case "User":
