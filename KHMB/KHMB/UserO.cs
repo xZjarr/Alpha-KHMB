@@ -12,9 +12,12 @@ namespace KHMB
         public string FirstName { get; set; }
         public string SurName { get; set; }
         public bool IsAdmin { get; set; }
+        public string Password { get; set; }
+
         public override string ToString()
         {
-            return string.Format("Username: {0}\tFirst name: {1}\tSurname: {2}\nIs Admin: {3}", UserName, FirstName, SurName, IsAdmin);
+            return string.Format("Username: {0}", UserName);
+            //\tFirst name: {1}\tSurname: {2}\nIs Admin: {3}, FirstName, SurName, IsAdmin
         }
 
     }

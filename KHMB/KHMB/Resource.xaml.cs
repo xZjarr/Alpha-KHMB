@@ -38,6 +38,7 @@ namespace KHMB
         }
         void FillCombo()
         {
+            // MEMO TO SELF: RETURN LATER TO FIX
             //FJERN IKKE DET HER, IT WORKS, DON'T FIX IT
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=Alpha-KHMB;Integrated Security=True");
             string sql = "SELECT* FROM ResourceType";
@@ -76,7 +77,7 @@ namespace KHMB
         private void Btn_Sv_Click(object sender, RoutedEventArgs e)
         {
             string RTID = (string)Bx_RT.SelectedValue;
-            int ID = Convert.ToInt32(RTID.Substring(0, 2));
+            int ID = Convert.ToInt32(RTID.Substring(0, 2)); // WE'LL FIX LATER, WE HAVE ISSUES AFTER 99 RESOURCES
             CreateResource(ID);
         }
 

@@ -21,6 +21,7 @@ namespace KHMB
     {
         public ShowList(string chosenObject)
         {
+            string chosenO = chosenObject;
             InitializeComponent();
             lbl_Title.Content = chosenObject;
             if (chosenObject == "ResourceTypes")
@@ -62,18 +63,29 @@ namespace KHMB
             List<JobO> job = DB.SelectAllJobs();
             listbox_Show.ItemsSource = job;
         }
-
-        private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ShowDetails sd = new ShowDetails();
-            sd.Show();
-            this.Close();
-        }
         private void ShowUsers()
         {
             List<UserO> users = DB.SelectAllUsers();
             listbox_Show.ItemsSource = users;
         }
+
+        private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //if (listbox_Show.SelectedItem == JobO)
+            //{ }
+            JobO chosenJob = (JobO)listbox_Show.SelectedItem;
+            SelectedTempJob.ChosenJob = chosenJob;
+            ShowDetails sdJ = new ShowDetails();
+            sdJ.Show();
+            this.Close();
+
+            //UserO chosenUser = (UserO)listbox_Show.SelectedItem;
+            //SelectedTempUser.ChosenUser = chosenUser;
+            //ShowDetails sdU = new ShowDetails();
+            //sdU.Show();
+            //this.Close();
+        }
+
         //private void ShowTarif()
         //{
         //    List<__> tarif = DB.SelectAllTarifs();
