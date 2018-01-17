@@ -39,10 +39,13 @@ namespace KHMB
             }
         }
 
-        public static void GetResources()
+        // This will only be relevant in the case of us being able to select a resource-type instead of a specific resource when creating a job
+        /*public static void GetResources(int resourceTypeId)
         {
+            List<RO> resources = DB.SelectAllResource(resourceTypeId);
 
-        }
+
+        }*/
 
         //Klaus
         public static Queue GetJobs(int  resource)
