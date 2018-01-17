@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
 
 namespace KHMB
 {
@@ -31,15 +32,30 @@ namespace KHMB
 
         private void LogIn1_Click(object sender, RoutedEventArgs e)
         {
-            if (Txt_UserName.Text == ""||Txt_PassWord.Password.ToString() == "")
+            if (Txt_UserName.Text == "" || Txt_PassWord.Password.ToString() == "")
             {
                 MessageBox.Show("Please write username and password");
             }
-            //try
-            //{
-            //    DataSet ds = DB.LogIn();
-                
-            //}
+            try
+            {
+                DataSet ds = DB.LogIn(Txt_UserName.Text, Txt_PassWord.ToString());
+                int count = ds.Tables[0].Rows.Count;
+                if (count == 1)
+                {
+                    MessageBox.Show("Login Succesful");
+                    this.Hide();
+                    MainWindow nm = new MainWindow();
+                    nm.Show();
+                }
+
+                else
+                { MessageBox.Show("Login Failed!"); }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
+}
 }

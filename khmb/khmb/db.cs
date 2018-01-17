@@ -232,6 +232,7 @@ namespace KHMB
             catch (Exception)
             {
                 return false;
+                //Comment
             }
         }
         public static DataSet LogIn()
