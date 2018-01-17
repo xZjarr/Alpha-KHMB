@@ -65,9 +65,9 @@ namespace KHMB
         }
 
         //By Klaus
-        public void Delete()
+        public void Delete(int IDToDelete)
         {
-
+            DB.DeleteTarifESP("Tarif", IDToDelete);
         }
         // (StartDate, EndDate)
         static void CheckAvailable()

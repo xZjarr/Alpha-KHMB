@@ -361,6 +361,7 @@ namespace KHMB
             }
         }
 
+        //Klaus
         public static bool Delete(string callerClass, int callerID)
         {
             OpenConnection();
@@ -395,6 +396,28 @@ namespace KHMB
             insertRName.Parameters["@IsAdmin"].Value = IsDmn;
             insertRName.ExecuteNonQuery();
             CloseConnection();
+        }
+
+        //Klaus
+        public static bool DeleteTarifESP(string callerClass, int callerID)
+        {
+            //Var nødt til at have egen metode, da deres ID kolonne var navngivet anderledes
+            OpenConnection();
+            try
+            {
+                string tablestring = "[" + callerClass + "]";
+                SqlCommand delete = new SqlCommand("DELETE FROM " + tablestring + " WHERE ID = @ID;", myConnection);
+                delete.Parameters.Add("@ID", SqlDbType.Int);
+                delete.Parameters["@ID"].Value = callerID;
+                delete.ExecuteNonQuery();
+                CloseConnection();
+                return true;
+            }
+            catch (Exception)
+            {
+                CloseConnection();
+                return false;
+            }
         }
     }
 }

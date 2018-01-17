@@ -69,9 +69,9 @@ namespace KHMB
         {
 
         }
-        public void DeleteResource()
+        public void DeleteResource(int IDToDelete)
         {
-
+            DB.Delete("Resource", IDToDelete);
         }
 
         private void Btn_Sv_Click(object sender, RoutedEventArgs e)
