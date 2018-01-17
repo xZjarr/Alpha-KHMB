@@ -23,11 +23,20 @@ namespace KHMB
         public MainWindow()
         {
             InitializeComponent();
+            if (CurrentUser.ID <= 0)
+            {
+                btn_Create.IsEnabled = false;
+            }
+            else
+            {
+                btn_Create.IsEnabled = true;
+            }
         }
 
         //Made by Klaus
         private void btn_Show_Click(object sender, RoutedEventArgs e)
         {
+            int test = CurrentUser.ID;
             Show showWindow = new Show();
             showWindow.Show();
             this.Close();
