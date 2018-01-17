@@ -56,7 +56,7 @@ namespace KHMB
             if ((string)lbl_Title.Content == "Jobs")
             {
                 JobO chosenJob = (JobO)listbox_Show.SelectedItem;
-                SelectedTempJob.ChosenJob = chosenJob;
+                SelectedTemp.ChosenJob = chosenJob;
                 ShowDetails sdJ = new ShowDetails((string)lbl_Title.Content);
                 sdJ.Show();
                 this.Close();
@@ -64,7 +64,7 @@ namespace KHMB
             else if ((string)lbl_Title.Content == "Users")
             {
                 UserO chosenUser = (UserO)listbox_Show.SelectedItem;
-                SelectedTempUser.ChosenUser = chosenUser;
+                SelectedTemp.ChosenUser = chosenUser;
                 ShowDetails sdU = new ShowDetails((string)lbl_Title.Content);
                 sdU.Show();
                 this.Close();
@@ -72,7 +72,7 @@ namespace KHMB
             else if ((string)lbl_Title.Content == "Tarif")
             {
                 TO chosenTarif = (TO)listbox_Show.SelectedItem;
-                SelectedTempTarif.ChosenTarif = chosenTarif;
+                SelectedTemp.ChosenTarif = chosenTarif;
                 ShowDetails sdT = new ShowDetails((string)lbl_Title.Content);
                 sdT.Show();
                 this.Close();
@@ -80,9 +80,25 @@ namespace KHMB
             else if ((string)lbl_Title.Content == "ESPs")
             {
                 ESPO chosenESP = (ESPO)listbox_Show.SelectedItem;
-                SelectedTempESP.ChosenESP = chosenESP;
+                SelectedTemp.ChosenESP = chosenESP;
                 ShowDetails sdESP = new ShowDetails((string)lbl_Title.Content);
                 sdESP.Show();
+                this.Close();
+            }
+            else if ((string)lbl_Title.Content == "Resources")
+            {
+                RO chosenR = (RO)listbox_Show.SelectedItem;
+                SelectedTemp.ChosenR = chosenR;
+                ShowDetails sdR = new ShowDetails((string)lbl_Title.Content);
+                sdR.Show();
+                this.Close();
+            }
+            else if ((string)lbl_Title.Content == "ResourceTypes")
+            {
+                RTO chosenRT = (RTO)listbox_Show.SelectedItem;
+                SelectedTemp.ChosenRT = chosenRT;
+                ShowDetails sdRT = new ShowDetails((string)lbl_Title.Content);
+                sdRT.Show();
                 this.Close();
             }
         }
