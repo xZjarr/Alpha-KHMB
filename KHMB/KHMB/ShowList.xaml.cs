@@ -31,7 +31,7 @@ namespace KHMB
             else if (chosenObject == "Resources")
             {
                 ShowResource();
-                ShowResourceType();
+                //ShowResourceType();
             }
             else if (chosenObject == "Jobs")
             {
@@ -49,7 +49,7 @@ namespace KHMB
             {
                 JobO chosenJob = (JobO)listbox_Show.SelectedItem;
                 SelectedTempJob.ChosenJob = chosenJob;
-                ShowDetails sdJ = new ShowDetails();
+                ShowDetails sdJ = new ShowDetails((string)lbl_Title.Content);
                 sdJ.Show();
                 this.Close();
             }
@@ -57,7 +57,7 @@ namespace KHMB
             {
                 UserO chosenUser = (UserO)listbox_Show.SelectedItem;
                 SelectedTempUser.ChosenUser = chosenUser;
-                ShowDetails sdU = new ShowDetails();
+                ShowDetails sdU = new ShowDetails((string)lbl_Title.Content);
                 sdU.Show();
                 this.Close();
             }
@@ -89,21 +89,6 @@ namespace KHMB
             List<UserO> users = DB.SelectAllUsers();
             listbox_Show.ItemsSource = users;
         }
-
-        //private void listbox_Show_SelectionChanged(string ChosenO, object sender, SelectionChangedEventArgs e)
-        //{
-        //    JobO chosenJob = (JobO)listbox_Show.SelectedItem;
-        //    SelectedTempJob.ChosenJob = chosenJob;
-        //    ShowDetails sdJ = new ShowDetails();
-        //    sdJ.Show();
-        //    this.Close();
-
-        //    UserO chosenUser = (UserO)listbox_Show.SelectedItem;
-        //    SelectedTempUser.ChosenUser = chosenUser;
-        //    ShowDetails sdU = new ShowDetails();
-        //    sdU.Show();
-        //    this.Close();
-        //}
 
         //private void ShowTarif()
         //{
