@@ -22,7 +22,20 @@ namespace KHMB
         public Show()
         {
             InitializeComponent();
+            if (CurrentUser.IsAdmin == true)
+            {
+                EnableItems();
+            }
         }
+
+        private void EnableItems()
+        {
+            cbxi_ResourceTypes.IsEnabled = true;
+            cbxi_Users.IsEnabled = true;
+            cbxi_Tarif.IsEnabled = true;
+            cbxi_ESP.IsEnabled = true;
+        }
+
         private void btn_Show_Click(object sender, RoutedEventArgs e)
         {
             string chosen = cmbBox_Chose.Text;
