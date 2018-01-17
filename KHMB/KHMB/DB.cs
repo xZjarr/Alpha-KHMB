@@ -44,6 +44,25 @@ namespace KHMB
             insertRT.ExecuteNonQuery();
             CloseConnection();
         }
+
+        public static void InsertESP(string ESP_Surplus, string ESP_StartClock, string ESP_EndClock, string ESP_StartDate, string ESP_EndDate)
+        {
+            OpenConnection();
+            SqlCommand insertRT = new SqlCommand("INSERT INTO ESP (name) VALUES (@name)", myConnection);
+            insertRT.Parameters.Add("@surplus", SqlDbType.Float);
+            insertRT.Parameters["@surplus"].Value = float.Parse(ESP_Surplus);
+            insertRT.Parameters.Add("@startClock", SqlDbType.Time);
+            insertRT.Parameters["@startClock"].Value = DateTime.ParseExact(ESP_StartClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.Parameters.Add("@endClock", SqlDbType.Time);
+            insertRT.Parameters["@endClock"].Value = DateTime.ParseExact(ESP_EndClock, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            insertRT.Parameters.Add("@startDate", SqlDbType.Timestamp);
+            insertRT.Parameters["@startDate"].Value = DateTime.Parse(ESP_StartDate);
+            insertRT.Parameters.Add("@endDate", SqlDbType.Timestamp);
+            insertRT.Parameters["@endDate"].Value = DateTime.Parse(ESP_EndDate);
+            insertRT.ExecuteNonQuery();
+            CloseConnection();
+        }
+
         public static List<RTO> SelectAllResourceTypes()
         {
             List<RTO> rtList = new List<RTO>();
