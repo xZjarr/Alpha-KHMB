@@ -23,6 +23,8 @@ namespace KHMB
         public MainWindow()
         {
             InitializeComponent();
+            CurrentUser.ID = 3;
+            CurrentUser.IsAdmin = true;
             if (CurrentUser.ID <= 0)
             {
                 btn_Create.IsEnabled = false;

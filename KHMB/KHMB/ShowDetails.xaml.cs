@@ -115,9 +115,10 @@ namespace KHMB
             }
             else if ((string)lbl_Title.Content == "User")
             {
+                User.Editing = true;
                 User chosenUser = new User();
                 UserO selectedUser = SelectedTemp.ChosenUser;
-                chosenUser.EditUser(selectedUser.UserID);
+                chosenUser.EditUserShow(selectedUser.UserID);
             }
             else if ((string)lbl_Title.Content == "Tarif")
             {
