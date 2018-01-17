@@ -18,6 +18,7 @@
         <ComboBox HorizontalAlignment="Left" Name="drpBox_ESPEndClock" Height="28" Margin="110,120,0,0" VerticalAlignment="Top" Width="90"/>
         <DatePicker HorizontalAlignment="Left" Name="datePicker_ESPStartDate"  Margin="110,150,0,0" VerticalAlignment="Top" FirstDayOfWeek="Monday"/>
         <DatePicker HorizontalAlignment="Left" Name="datePicker_ESPEndDate"  Margin="110,180,0,0" VerticalAlignment="Top" FirstDayOfWeek="Monday"/>
+        <Button x:Name="btn_ESPCreate" Content="Opret" HorizontalAlignment="Left" Height="19" Margin="212,228,0,0" VerticalAlignment="Top" Width="55" Click="btn_ESPCreate_Click"/>
 
     </Grid>
 </Window>

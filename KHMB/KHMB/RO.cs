@@ -9,6 +9,7 @@ namespace KHMB
     class RO
     {
         public string Name { get; set; }
+        public int ResourceID { get; set; }
 
         //List<RTO> rtlist = DB.SelectAllResourceTypes();
 
