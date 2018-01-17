@@ -12,8 +12,6 @@ namespace KHMB
         public int ResourceID { get; set; }
 
         //List<RTO> rtlist = DB.SelectAllResourceTypes();
-
-
         public override string ToString()
         {
             return string.Format("Name: {0}", Name);

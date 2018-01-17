@@ -20,7 +20,6 @@ namespace KHMB
         public override string ToString()
         {
             return string.Format("Name: {0}", JobName);
-            //\tPriority: {1}\tResource used: {2}\nDeadline: {3}\tCreated {4} by: {5} , Priority, ResourceID, Deadline, Created, CreatedUserID
         }
     }
 

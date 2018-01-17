@@ -65,7 +65,7 @@ namespace KHMB
         {
         DB.InsertR(Bx_N.Text, typeID);
         }
-        static void EditResource()
+        public static void EditResource(int ResourceID)
         {
 
         }

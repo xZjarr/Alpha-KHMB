@@ -61,7 +61,7 @@ namespace KHMB
         {
 
         }
-        static void Edit()
+        public static void Edit()
         {
 
         }

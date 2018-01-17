@@ -61,6 +61,43 @@ namespace KHMB
                 lbl_CreatedByFill.Content = chosenTarif.StartTime;
                 lbl_CreatedFill.Content = chosenTarif.EndTime;
             }
+            else if (subject == "ESPs")
+            {
+                lbl_Title.Content = "ESP";
+                ESPO chosenESP = SelectedTempESP.ChosenESP;
+                lbl_NameTitle.Content = ("Energy Surplus: ");
+                lbl_CreatedByTitle.Content = ("Start date: ");
+                lbl_CreatedTitle.Content = ("End date: ");
+                lbl_DeadlineTitle.Content = ("start time: ");
+                lbl_PriorityTitle.Content = ("End time: ");
+                lbl_NameFill.Content = chosenESP.EnergySurplus;
+                lbl_CreatedByFill.Content = chosenESP.StartDate;
+                lbl_CreatedFill.Content = chosenESP.EndDate;
+                lbl_DeadlineFill.Content = chosenESP.StartTime;
+                lbl_PriorityFill.Content = chosenESP.EndTime;
+            }
+            else if (subject == "Resources")
+            {
+                RO chosenR = SelectedTempR.ChosenR;
+                lbl_Title.Content = "Resource";
+                lbl_NameTitle.Content = ("Name: ");
+                lbl_CreatedByTitle.Content = ("");
+                lbl_CreatedTitle.Content = ("");
+                lbl_DeadlineTitle.Content = ("");
+                lbl_PriorityTitle.Content = ("");
+                lbl_NameFill.Content = chosenR.Name;
+            }
+            //else if (subject == "ResourceTypes")
+            //{
+            //    RTO chosenRT = SelectedTempRT.ChosenRT;
+            //    lbl_Title.Content = "Resource type";
+            //    lbl_NameTitle.Content = ("Name: ");
+            //    lbl_CreatedByTitle.Content = ("");
+            //    lbl_CreatedTitle.Content = ("");
+            //    lbl_DeadlineTitle.Content = ("");
+            //    lbl_PriorityTitle.Content = ("");
+            //    lbl_NameFill.Content = ;
+            //}
         }
 
         private void Btn_Close_Click(object sender, RoutedEventArgs e)
@@ -86,6 +123,18 @@ namespace KHMB
             else if ((string)lbl_Title.Content == "Tarif")
             {
                 Tarif.Edit(SelectedTempTarif.ChosenTarif.Cost, SelectedTempTarif.ChosenTarif.StartTime, SelectedTempTarif.ChosenTarif.EndTime);
+            }
+            else if ((string)lbl_Title.Content == "ESP")
+            {
+                ESP.Edit();
+            }
+            else if ((string)lbl_Title.Content == "Resource")
+            {
+                Resource.EditResource(SelectedTempR.ChosenR.ResourceID);
+            }
+            else if ((string)lbl_Title.Content == "Resource type")
+            {
+                //ResourceType.Edit(SelectedTempRT);
             }
         }
     }
