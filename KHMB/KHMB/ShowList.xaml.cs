@@ -71,7 +71,7 @@ namespace KHMB
 
         private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listbox_Show.GetType == JobO)
+            if (listbox_Show.GetType == )
             { 
             JobO chosenJob = (JobO)listbox_Show.SelectedItem;
             SelectedTempJob.ChosenJob = chosenJob;
