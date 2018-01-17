@@ -115,6 +115,25 @@ namespace KHMB
             CloseConnection();
             return tList;
         }
+        public static List<ESPO> SelectAllESP()
+        {
+            List<ESPO> eList = new List<ESPO>();
+            OpenConnection();
+            SqlCommand getESP = new SqlCommand("SELECT * FROM ESP", myConnection);
+            SqlDataReader reader = getESP.ExecuteReader();
+            while (reader.Read())
+            {
+                ESPO e = new ESPO();
+                e.StartDate = reader.GetDateTime(1);
+                e.EndDate = reader.GetDateTime(2);
+                e.StartTime = reader.GetTimeSpan(3);
+                e.EndTime = reader.GetTimeSpan(4);
+                e.EnergySurplus = reader.GetDouble(5);
+                eList.Add(e);
+            }
+            CloseConnection();
+            return eList;
+        }
         public static List<RTO> SelectAllResourceTypes()
         {
             List<RTO> rtList = new List<RTO>();
