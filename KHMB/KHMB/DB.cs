@@ -204,6 +204,7 @@ namespace KHMB
             CloseConnection();
             return queueJobs;
         }
+        //random comment
 
         public static bool InsertJob(JobO jobToAdd)
         {
@@ -234,7 +235,7 @@ namespace KHMB
                 return false;
             }
         }
-        public static DataSet LogIn(string UserName, string password)
+        public static DataSet LogIn()
         {
             OpenConnection();
             SqlCommand cmd = new SqlCommand("SELECT * FROM User WHERE UserName=@UserName AND Password=@Password", myConnection);
