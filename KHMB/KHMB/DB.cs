@@ -155,6 +155,7 @@ namespace KHMB
             while (reader.Read())
             {
                 JobO j = new JobO();
+                j.JobID = reader.GetInt32(0);
                 j.JobName = reader.GetString(6);
                 j.Priority = reader.GetByte(5);
                 j.ResourceID = reader.GetInt32(1);
@@ -180,6 +181,7 @@ namespace KHMB
                 u.UserName = reader.GetString(1);
                 u.IsAdmin = reader.GetBoolean(5);
                 u.Password = reader.GetString(2);
+                u.UserID = reader.GetInt32(0);
                 uList.Add(u);
             }
             CloseConnection();

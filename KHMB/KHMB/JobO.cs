@@ -8,6 +8,7 @@ namespace KHMB
 {
     class JobO
     {
+        public int JobID { get; set; }
         public int ResourceID { get; set; }
         public int CreatedUserID { get; set; }
         public int Priority { get; set; }

@@ -89,7 +89,7 @@ namespace KHMB
             }
         }
 
-        public void EditJob(int JobID, string User)
+        public void EditJob(int JobID, int UserID)
         {
 
         }
