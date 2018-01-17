@@ -234,7 +234,7 @@ namespace KHMB
                 return false;
             }
         }
-        public static void LogIn()
+        public static DataSet LogIn()
         {
             SqlCommand cmd = new SqlCommand("SELECT * WHERE UserName=@UserName AND Password=@Password", myConnection);
             myConnection.Open();
@@ -242,6 +242,7 @@ namespace KHMB
             DataSet ds = new DataSet();
             adapt.Fill(ds);
             myConnection.Close();
+            return ds;
         }
     }
 }

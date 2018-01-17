@@ -45,7 +45,7 @@ namespace KHMB
 
         private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lbl_Title.Content == "Jobs")
+            if ((string)lbl_Title.Content == "Jobs")
             {
                 JobO chosenJob = (JobO)listbox_Show.SelectedItem;
                 SelectedTempJob.ChosenJob = chosenJob;
@@ -53,7 +53,7 @@ namespace KHMB
                 sdJ.Show();
                 this.Close();
             }
-            else if (lbl_Title.Content == "Users")
+            else if ((string)lbl_Title.Content == "Users")
             {
                 UserO chosenUser = (UserO)listbox_Show.SelectedItem;
                 SelectedTempUser.ChosenUser = chosenUser;
