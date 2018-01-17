@@ -62,6 +62,7 @@ namespace KHMB
             {
                 CurrentUser.ID = 0;
                 Btn_SignInOut.Content = "Sign In";
+                btn_Create.IsEnabled = false;
             }
             
         }

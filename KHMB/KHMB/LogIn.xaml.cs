@@ -56,5 +56,10 @@ namespace KHMB
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Btn_Return_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
