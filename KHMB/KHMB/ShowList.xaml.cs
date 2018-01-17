@@ -71,14 +71,14 @@ namespace KHMB
 
         private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (listbox_Show.SelectedItem == JobO)
-            //{ }
+            if (listbox_Show.GetType == JobO)
+            { 
             JobO chosenJob = (JobO)listbox_Show.SelectedItem;
             SelectedTempJob.ChosenJob = chosenJob;
             ShowDetails sdJ = new ShowDetails();
             sdJ.Show();
             this.Close();
-
+            }
             //UserO chosenUser = (UserO)listbox_Show.SelectedItem;
             //SelectedTempUser.ChosenUser = chosenUser;
             //ShowDetails sdU = new ShowDetails();
