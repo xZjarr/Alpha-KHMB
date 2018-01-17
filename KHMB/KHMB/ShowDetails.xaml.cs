@@ -24,7 +24,8 @@ namespace KHMB
             InitializeComponent();
 
             if (subject == "Jobs")
-            { 
+            {
+                lbl_Title.Content = "Job";
                 JobO chosenJob = SelectedTempJob.ChosenJob;
                 lbl_CreatedFill.Content = chosenJob.Created;
                 lbl_DeadlineFill.Content = chosenJob.Deadline;
@@ -34,6 +35,7 @@ namespace KHMB
             }
             else if (subject == "Users")
             {
+                lbl_Title.Content = "User";
                 UserO chosenUser = SelectedTempUser.ChosenUser;
                 lbl_NameTitle.Content = ("Username: ");
                 lbl_CreatedByTitle.Content = ("Fornavn: ");
@@ -57,7 +59,18 @@ namespace KHMB
 
         private void Btn_Edit_Click(object sender, RoutedEventArgs e)
         {
-
+            if ((string)lbl_Title.Content == "Job")
+            {
+                Job chosenJob = new Job();
+                JobO selectedJob = SelectedTempJob.ChosenJob;
+                chosenJob.EditJob(selectedJob.JobID, selectedJob.CreatedUserID);
+            }
+            else if ((string)lbl_Title.Content == "User")
+            {
+                User chosenUser = new User();
+                UserO selectedUser = SelectedTempUser.ChosenUser;
+                chosenUser.EditUser(selectedUser.UserID);
+            }
         }
     }
 }

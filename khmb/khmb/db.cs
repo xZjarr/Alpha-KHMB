@@ -102,19 +102,19 @@ namespace KHMB
         {
             List<TO> tList = new List<TO>();
             OpenConnection();
-            SqlCommand getR = new SqlCommand("SELECT StartTime, EndTime FROM Tarifs", myConnection);
-            SqlDataReader reader = getR.ExecuteReader();
+            SqlCommand getT = new SqlCommand("SELECT * FROM Tarif", myConnection);
+            SqlDataReader reader = getT.ExecuteReader();
             while (reader.Read())
             {
                 TO t = new TO();
-                t.StartTime = reader.GetTimeSpan(0);
-                t.EndTime = reader.GetTimeSpan(1);
+                t.StartTime = reader.GetTimeSpan(1);
+                t.EndTime = reader.GetTimeSpan(2);
+                t.Cost = reader.GetDouble(3);
                 tList.Add(t);
             }
             CloseConnection();
             return tList;
         }
-
         public static List<RTO> SelectAllResourceTypes()
         {
             List<RTO> rtList = new List<RTO>();
@@ -155,6 +155,7 @@ namespace KHMB
             while (reader.Read())
             {
                 JobO j = new JobO();
+                j.JobID = reader.GetInt32(0);
                 j.JobName = reader.GetString(6);
                 j.Priority = reader.GetByte(5);
                 j.ResourceID = reader.GetInt32(1);
@@ -180,6 +181,7 @@ namespace KHMB
                 u.UserName = reader.GetString(1);
                 u.IsAdmin = reader.GetBoolean(5);
                 u.Password = reader.GetString(2);
+                u.UserID = reader.GetInt32(0);
                 uList.Add(u);
             }
             CloseConnection();

@@ -41,6 +41,10 @@ namespace KHMB
             {
                 ShowUsers();
             }
+            else if (chosenObject == "Tarif")
+            {
+                ShowTarif();
+            }
         }
 
         private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,7 +69,7 @@ namespace KHMB
 
         private void btn_Close_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow returnWindow = new MainWindow();
+            Show returnWindow = new Show();
             returnWindow.Show();
             this.Close();
         }
@@ -90,11 +94,12 @@ namespace KHMB
             listbox_Show.ItemsSource = users;
         }
 
-        //private void ShowTarif()
-        //{
-        //    List<__> tarif = DB.SelectAllTarifs();
-        //    listbox_Show.ItemsSource = tarif;
-        //}
+        private void ShowTarif()
+        {
+            List<TO> tarif = DB.SelectAllTarifs();
+            listbox_Show.ItemsSource = tarif;
+        }
+
         //private void ShowESPs()
         //{
         //    List<__> esps = DB.SelectAllEsps();

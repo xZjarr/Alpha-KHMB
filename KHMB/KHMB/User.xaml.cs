@@ -29,7 +29,7 @@ namespace KHMB
             string UserName = CreateUserName(FrstName);
             DB.InsertUser(FrstName, SrNm, Psswrd, IsDmn, UserName);
         }
-        public void EditUser()
+        public void EditUser(int UserID)
         {
 
         }
