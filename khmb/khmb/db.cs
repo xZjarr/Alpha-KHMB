@@ -98,6 +98,23 @@ namespace KHMB
             CloseConnection();
         }
 
+        public static List<RO> SelectAllTarifs()
+        {
+            List<RO> rList = new List<RO>();
+            OpenConnection();
+            SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
+            SqlDataReader reader = getR.ExecuteReader();
+            while (reader.Read())
+            {
+                RO r = new RO();
+                r.Name = reader.GetString(1);
+                r.ResourceID = reader.GetInt32(2);
+                rList.Add(r);
+            }
+            CloseConnection();
+            return rList;
+        }
+
         public static List<RTO> SelectAllResourceTypes()
         {
             List<RTO> rtList = new List<RTO>();
@@ -191,27 +208,40 @@ namespace KHMB
         public static bool InsertJob(JobO jobToAdd)
         {
             OpenConnection();
-            SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime); ", myConnection);
-            insertJob.Parameters.Add("@name", SqlDbType.VarChar);
-            insertJob.Parameters["@name"].Value = jobToAdd.JobName;
-            insertJob.Parameters.Add("@resource", SqlDbType.Int);
-            insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
-            insertJob.Parameters.Add("@userID", SqlDbType.Int);
-            insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
-            insertJob.Parameters.Add("@deadline", SqlDbType.DateTime);
-            insertJob.Parameters["@deadline"].Value = jobToAdd.Deadline;
-            insertJob.Parameters.Add("@creation", SqlDbType.DateTime);
-            insertJob.Parameters["@creation"].Value = jobToAdd.Created;
-            insertJob.Parameters.Add("@priority", SqlDbType.TinyInt);
-            insertJob.Parameters["@priority"].Value = jobToAdd.Priority;
-            insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
-            insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
-            insertJob.ExecuteNonQuery();
-            CloseConnection();
+            try
+            {
+                SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime); ", myConnection);
+                insertJob.Parameters.Add("@name", SqlDbType.VarChar);
+                insertJob.Parameters["@name"].Value = jobToAdd.JobName;
+                insertJob.Parameters.Add("@resource", SqlDbType.Int);
+                insertJob.Parameters["@resource"].Value = jobToAdd.ResourceID;
+                insertJob.Parameters.Add("@userID", SqlDbType.Int);
+                insertJob.Parameters["@userID"].Value = jobToAdd.CreatedUserID;
+                insertJob.Parameters.Add("@deadline", SqlDbType.DateTime);
+                insertJob.Parameters["@deadline"].Value = jobToAdd.Deadline;
+                insertJob.Parameters.Add("@creation", SqlDbType.DateTime);
+                insertJob.Parameters["@creation"].Value = jobToAdd.Created;
+                insertJob.Parameters.Add("@priority", SqlDbType.TinyInt);
+                insertJob.Parameters["@priority"].Value = jobToAdd.Priority;
+                insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
+                insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
+                insertJob.ExecuteNonQuery();
+                CloseConnection();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public static void LogIn()
         {
-
+            SqlCommand cmd = new SqlCommand("SELECT * WHERE UserName=@UserName AND Password=@Password", myConnection);
+            myConnection.Open();
+            SqlDataAdapter adapt = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+            adapt.Fill(ds);
+            myConnection.Close();
         }
     }
 }
