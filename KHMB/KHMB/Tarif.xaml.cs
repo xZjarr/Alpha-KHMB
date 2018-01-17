@@ -19,12 +19,12 @@ namespace KHMB
     /// </summary>
     public partial class Tarif : Window
     {
+        public double cost;
+        public TimeSpan startTime;
+        public TimeSpan endTime;
         public Tarif()
         {
             InitializeComponent();
-            DateTime StartDate; //including StartTime
-            DateTime EndDate; //Including EndTime
-            Double EnergyCost;
             fillStartDropDown();
             fillEndDropDown();
         }
@@ -59,7 +59,7 @@ namespace KHMB
             }
 
         }
-        static void Edit()
+        public static void Edit(double cost, TimeSpan start, TimeSpan End)
         {
 
         }

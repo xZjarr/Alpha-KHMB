@@ -48,6 +48,19 @@ namespace KHMB
                 lbl_DeadlineFill.Content = chosenUser.Password;
                 lbl_PriorityFill.Content = chosenUser.IsAdmin;
             }
+            else if (subject == "Tarif")
+            {
+                lbl_Title.Content = "Tarif";
+                TO chosenTarif = SelectedTempTarif.ChosenTarif;
+                lbl_NameTitle.Content = ("Price: ");
+                lbl_CreatedByTitle.Content = ("Start: ");
+                lbl_CreatedTitle.Content = ("End: ");
+                lbl_DeadlineTitle.Content = ("");
+                lbl_PriorityTitle.Content = ("");
+                lbl_NameFill.Content = chosenTarif.Cost;
+                lbl_CreatedByFill.Content = chosenTarif.StartTime;
+                lbl_CreatedFill.Content = chosenTarif.EndTime;
+            }
         }
 
         private void Btn_Close_Click(object sender, RoutedEventArgs e)
@@ -62,14 +75,17 @@ namespace KHMB
             if ((string)lbl_Title.Content == "Job")
             {
                 Job chosenJob = new Job();
-                JobO selectedJob = SelectedTempJob.ChosenJob;
-                chosenJob.EditJob(selectedJob.JobID, selectedJob.CreatedUserID);
+                chosenJob.EditJob(SelectedTempJob.ChosenJob.JobID, SelectedTempJob.ChosenJob.CreatedUserID);
             }
             else if ((string)lbl_Title.Content == "User")
             {
                 User chosenUser = new User();
                 UserO selectedUser = SelectedTempUser.ChosenUser;
                 chosenUser.EditUser(selectedUser.UserID);
+            }
+            else if ((string)lbl_Title.Content == "Tarif")
+            {
+                Tarif.Edit(SelectedTempTarif.ChosenTarif.Cost, SelectedTempTarif.ChosenTarif.StartTime, SelectedTempTarif.ChosenTarif.EndTime);
             }
         }
     }

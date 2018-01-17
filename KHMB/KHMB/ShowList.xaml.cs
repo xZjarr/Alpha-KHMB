@@ -65,6 +65,14 @@ namespace KHMB
                 sdU.Show();
                 this.Close();
             }
+            else if ((string)lbl_Title.Content == "Tarif")
+            {
+                TO chosenTarif = (TO)listbox_Show.SelectedItem;
+                SelectedTempTarif.ChosenTarif = chosenTarif;
+                ShowDetails sdT = new ShowDetails((string)lbl_Title.Content);
+                sdT.Show();
+                this.Close();
+            }
         }
 
         private void btn_Close_Click(object sender, RoutedEventArgs e)
