@@ -57,6 +57,7 @@
     <Compile Include="Creator.xaml.cs">
       <DependentUpon>Creator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CurrentUser.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="ESP.xaml.cs">
       <DependentUpon>ESP.xaml</DependentUpon>

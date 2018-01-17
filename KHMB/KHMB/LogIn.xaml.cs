@@ -38,10 +38,9 @@ namespace KHMB
             }
             try
             {
-                string password = Txt_PassWord.Password;
-                DataSet ds = DB.LogIn(Txt_UserName.Text, Txt_PassWord.ToString());
-                int count = ds.Tables[0].Rows.Count;
-                if (count == 1)
+                string password = Txt_PassWord.Password.ToString();
+                bool succes = DB.LogIn(Txt_UserName.Text, password);
+                if (succes == true)
                 {
                     MessageBox.Show("Login Succesful");
                     this.Hide();

@@ -25,7 +25,7 @@ namespace KHMB
         {
             myConnection.Close();
         }
-        
+
         public static void InsertUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, string UserName)
         {
             OpenConnection();
@@ -235,18 +235,31 @@ namespace KHMB
                 return false;
             }
         }
-        public static DataSet LogIn(string UserName, string password)
+        public static bool LogIn(string UserName, string password)
         {
+            CurrentUser UserLogIn = new CurrentUser();
             OpenConnection();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM User WHERE UserName=@UserName AND Password=@Password", myConnection);
-            cmd.Parameters.AddWithValue("@Username", UserName);
-            cmd.Parameters.AddWithValue("@Password", password);
-            
-            SqlDataAdapter adapt = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            adapt.Fill(ds);
-            CloseConnection();
-            return ds;
+            SqlCommand cmd = new SqlCommand("SELECT UserID, IsAdmin FROM [User] WHERE UserName=@UserName AND Password=@Password", myConnection);
+            cmd.Parameters.Add("@UserName", SqlDbType.VarChar);
+            cmd.Parameters["@UserName"].Value = UserName;
+            cmd.Parameters.Add("@Password", SqlDbType.VarChar);
+            cmd.Parameters["@Password"].Value = password;
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                CurrentUser.ID = reader.GetInt32(0);
+                CurrentUser.IsAdmin = reader.GetBoolean(1);
+                CurrentUser.UserName = UserName;
+                CurrentUser.Password = password;
+                CloseConnection();
+
+                return true;
+            }
+            else
+            {
+                CloseConnection();
+                return false;
+            }
         }
     }
 }
