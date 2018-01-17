@@ -146,6 +146,22 @@ namespace KHMB
             CloseConnection();
             return rList;
         }
+        public static List<RO> SelectAllResource(int resourceTypeId)
+        {
+            List<RO> rList = new List<RO>();
+            OpenConnection();
+            SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
+            SqlDataReader reader = getR.ExecuteReader();
+            while (reader.Read())
+            {
+                RO r = new RO();
+                r.Name = reader.GetString(1);
+                r.ResourceID = reader.GetInt32(2);
+                rList.Add(r);
+            }
+            CloseConnection();
+            return rList;
+        }
         public static List<JobO> SelectAllJobs()
         {
             List<JobO> jList = new List<JobO>();
