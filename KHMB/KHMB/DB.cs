@@ -226,5 +226,9 @@ namespace KHMB
             adapt.Fill(ds);
             myConnection.Close();
         }
+        public static void LogIn()
+        {
+
+        }
     }
 }
