@@ -48,12 +48,12 @@ namespace KHMB
         {
             for (int hour = 0; hour <= 24; hour++)
             {
-                drpBox_TariffStartClock.Items.Add(hour + ":00");
+                drpBox_TariffEndClock.Items.Add(hour + ":00");
                 if (hour < 24)
                 {
-                    drpBox_TariffStartClock.Items.Add(hour + ":15");
-                    drpBox_TariffStartClock.Items.Add(hour + ":30");
-                    drpBox_TariffStartClock.Items.Add(hour + ":45");
+                    drpBox_TariffEndClock.Items.Add(hour + ":15");
+                    drpBox_TariffEndClock.Items.Add(hour + ":30");
+                    drpBox_TariffEndClock.Items.Add(hour + ":45");
                 }
             }
 
