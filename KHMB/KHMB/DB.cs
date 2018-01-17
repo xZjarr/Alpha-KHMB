@@ -127,6 +127,7 @@ namespace KHMB
                 u.SurName = reader.GetString(4);
                 u.UserName = reader.GetString(1);
                 u.IsAdmin = reader.GetBoolean(5);
+                u.Password = reader.GetString(2);
                 uList.Add(u);
             }
             CloseConnection();

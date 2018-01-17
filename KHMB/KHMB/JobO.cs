@@ -18,7 +18,8 @@ namespace KHMB
         public int DurationHours { get; set; }
         public override string ToString()
         {
-            return string.Format("Name: {0}\tPriority: {1}\tResource used: {2}\nDeadline: {3}\tCreated {4} by: {5}", JobName, Priority, ResourceID, Deadline, Created, CreatedUserID);
+            return string.Format("Name: {0}", JobName);
+            //\tPriority: {1}\tResource used: {2}\nDeadline: {3}\tCreated {4} by: {5} , Priority, ResourceID, Deadline, Created, CreatedUserID
         }
     }
 
