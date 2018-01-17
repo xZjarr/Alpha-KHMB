@@ -102,19 +102,19 @@ namespace KHMB
         {
             List<TO> tList = new List<TO>();
             OpenConnection();
-            SqlCommand getR = new SqlCommand("SELECT StartTime, EndTime FROM Tarifs", myConnection);
-            SqlDataReader reader = getR.ExecuteReader();
+            SqlCommand getT = new SqlCommand("SELECT * FROM Tarif", myConnection);
+            SqlDataReader reader = getT.ExecuteReader();
             while (reader.Read())
             {
                 TO t = new TO();
-                t.StartTime = reader.GetTimeSpan(0);
-                t.EndTime = reader.GetTimeSpan(1);
+                t.StartTime = reader.GetTimeSpan(1);
+                t.EndTime = reader.GetTimeSpan(2);
+                t.Cost = reader.GetDouble(3);
                 tList.Add(t);
             }
             CloseConnection();
             return tList;
         }
-
         public static List<RTO> SelectAllResourceTypes()
         {
             List<RTO> rtList = new List<RTO>();
