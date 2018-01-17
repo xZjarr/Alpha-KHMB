@@ -8,15 +8,33 @@ namespace KHMB
 {
     static class Scheduler
     {
+        static Random rnd = new Random();
         //By Klaus
         public static bool FindPlaceInQueue(JobO JobToBeScheduled)
         {
             Queue queue = GetJobs(JobToBeScheduled.ResourceID);
             JobToBeScheduled.ExeTime = CalculateBestSpot(queue);
-            //Generate name. HardCoded for now
-            JobToBeScheduled.JobName = "TestName";
+
+            JobToBeScheduled.JobName = GenerateJobName(JobToBeScheduled);
             bool isSucces = DB.InsertJob(JobToBeScheduled);
             return isSucces;
+        }
+
+        private static string GenerateJobName(JobO jobToBeScheduled)
+        {
+            UserO jobCreatedBy = DB.GetUser(jobToBeScheduled.CreatedUserID);
+            RO jobResource = DB.GetResource(jobToBeScheduled.ResourceID);
+            string resName;
+            if ( jobResource.Name.Length < 8)
+            {
+                resName = jobResource.Name;
+            }
+            else
+            {
+                resName = jobResource.Name.Substring(0,8);
+            }
+            string jobname = jobCreatedBy.FirstName + resName + jobToBeScheduled.ExeTime.ToShortDateString() + rnd.Next(1000,9999).ToString();
+            return jobname;
         }
 
         //By Klaus
