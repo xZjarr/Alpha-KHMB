@@ -31,6 +31,7 @@ namespace KHMB
 
         private void fillStartDropDown()
         {
+            CheckAvailable();
             for (int hour = 0; hour <= 24; hour++)
             {
                 drpBox_TariffStartClock.Items.Add(hour + ":00");
