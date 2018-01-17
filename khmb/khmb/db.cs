@@ -98,6 +98,23 @@ namespace KHMB
             CloseConnection();
         }
 
+        public static List<RO> SelectAllTarifs()
+        {
+            List<RO> rList = new List<RO>();
+            OpenConnection();
+            SqlCommand getR = new SqlCommand("SELECT * FROM Resource", myConnection);
+            SqlDataReader reader = getR.ExecuteReader();
+            while (reader.Read())
+            {
+                RO r = new RO();
+                r.Name = reader.GetString(1);
+                r.ResourceID = reader.GetInt32(2);
+                rList.Add(r);
+            }
+            CloseConnection();
+            return rList;
+        }
+
         public static List<RTO> SelectAllResourceTypes()
         {
             List<RTO> rtList = new List<RTO>();
