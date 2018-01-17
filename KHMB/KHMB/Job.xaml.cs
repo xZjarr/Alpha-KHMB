@@ -17,7 +17,8 @@ namespace KHMB
     //Class made by Klaus
     public partial class Job : Window
     {
-        public int ResourceID, CreatedUserID, JobID, Priority;
+        public int CreatedUserID, JobID, Priority;
+        RO ResourceID;
         string JobName;
         bool Succes;
         DateTime Deadline;
@@ -43,7 +44,7 @@ namespace KHMB
         {
             Deadline = Deadline.Date + DeadlineTimeConverter(cbx_Deadline).TimeOfDay;
             Priority = Convert.ToInt32(cbx_Priority.Text);
-            CreateJob(ResourceID, CreatedUserID, Priority, Deadline);
+            CreateJob(ResourceID.ResourceID, CreatedUserID, Priority, Deadline);
         }
 
         private DateTime DeadlineTimeConverter(ComboBox cbx_time)
@@ -62,7 +63,7 @@ namespace KHMB
 
         private void lbx_Resources_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ResourceID = (int)lbx_Resources.SelectedItem;
+            ResourceID = (RO)lbx_Resources.SelectedItem;
         }
 
 
@@ -75,6 +76,7 @@ namespace KHMB
             jobToBeScheduled.Deadline = Deadline;
             //Hardcoded user ID fix when user is created
             jobToBeScheduled.CreatedUserID = 3;
+            jobToBeScheduled.Created = DateTime.Now;
             Scheduler.FindPlaceInQueue(jobToBeScheduled);
         }
 
