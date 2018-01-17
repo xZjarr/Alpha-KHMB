@@ -62,6 +62,9 @@
       <DependentUpon>ESP.xaml</DependentUpon>
     </Compile>
     <Compile Include="JobO.cs" />
+    <Compile Include="LogIn.xaml.cs">
+      <DependentUpon>LogIn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Queue.cs" />
     <Compile Include="Resource.xaml.cs">
       <DependentUpon>Resource.xaml</DependentUpon>
@@ -99,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Job.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

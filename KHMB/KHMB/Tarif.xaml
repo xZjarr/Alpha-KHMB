@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="Tarif" Height="300" Width="300">
     <Grid>
-        
+        <Label Content="Create Time-specific Energy Cost" HorizontalAlignment="Left" Height="30" Margin="10,30,0,0" VerticalAlignment="Top" Width="184"/>
+        <Label Content="Cost of kW/h:" HorizontalAlignment="Left" Height="30" Margin="10,60,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label Content="Start clock:" HorizontalAlignment="Left" Height="30" Margin="10,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label Content="End clock:" HorizontalAlignment="Left" Height="30" Margin="10,120,0,0" VerticalAlignment="Top" Width="95"/>
+        <TextBox  HorizontalAlignment="Left" Name="txtBox_TariffValue" Height="25" Margin="110,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="90"/>
+        <ComboBox HorizontalAlignment="Left" Name="drpBox_TariffStartClock" Height="28" Margin="110,90,0,0" VerticalAlignment="Top" Width="90"/>
+        <ComboBox HorizontalAlignment="Left" Name="drpBox_TariffEndClock" Height="28" Margin="110,120,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="btn_TariffCreate" Content="Save" HorizontalAlignment="Left" Height="19" Margin="212,228,0,0" VerticalAlignment="Top" Width="55" Click="btn_TariffCreate_Click"/>
     </Grid>
 </Window>

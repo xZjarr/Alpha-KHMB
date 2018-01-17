@@ -39,5 +39,12 @@ namespace KHMB
             creatorWindow.Show();
             this.Close();
         }
+
+        private void LogInTest_Click(object sender, RoutedEventArgs e)
+        {
+            LogIn lgin = new LogIn();
+            lgin.Show();
+            this.Close();
+        }
     }
 }
