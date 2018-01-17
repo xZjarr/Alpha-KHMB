@@ -52,7 +52,7 @@ namespace KHMB
         {
 
         }
-        public static void Delete()
+        public void Delete()
         {
 
         }
