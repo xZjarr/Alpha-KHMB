@@ -151,7 +151,7 @@ namespace KHMB
                 case "User":
                     {
                         User chosenUser = new User();
-                        chosenUser.DeleteUser(chosenUser.UserID);
+                        chosenUser.DeleteUser(SelectedTemp.ChosenUser.UserID);
                     }
                     break;
                 case "Tarif":
@@ -169,18 +169,22 @@ namespace KHMB
                 case "Resource":
                     {
                         Resource chosenResource = new Resource();
-                        chosenResource.DeleteResource();
+                        chosenResource.DeleteResource(SelectedTemp.ChosenR.ResourceID);
                     }
                     break;
                 case "Resource type":
                     {
                         ResourceType chosenType = new ResourceType();
-                        chosenType.Delete();
+                        //Hardcoded resource type ID because the resource types doesn't have IDs yet
+                        chosenType.Delete(2);
                     }
                     break;
                 default:
                     break;
             }
+            Show returnWindow = new Show();
+            returnWindow.Show();
+            this.Close();
         }
     }
 }

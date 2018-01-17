@@ -52,9 +52,9 @@ namespace KHMB
         {
 
         }
-        public void Delete()
+        public void Delete(int IDToDelete)
         {
-
+            DB.Delete("ResourceType", IDToDelete);
         }
     }
 }
