@@ -8,5 +8,7 @@ namespace KHMB
 {
     class SelectedTempESP
     {
+        public static ESPO ChosenESP { get; set; }
+
     }
 }

@@ -45,6 +45,10 @@ namespace KHMB
             {
                 ShowTarif();
             }
+            else if (chosenObject == "ESPs")
+            {
+                ShowESPs();
+            }
         }
 
         private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,8 +77,15 @@ namespace KHMB
                 sdT.Show();
                 this.Close();
             }
+            else if ((string)lbl_Title.Content == "ESPs")
+            {
+                ESPO chosenESP = (ESPO)listbox_Show.SelectedItem;
+                SelectedTempESP.ChosenESP = chosenESP;
+                ShowDetails sdESP = new ShowDetails((string)lbl_Title.Content);
+                sdESP.Show();
+                this.Close();
+            }
         }
-
         private void btn_Close_Click(object sender, RoutedEventArgs e)
         {
             Show returnWindow = new Show();
@@ -101,18 +112,16 @@ namespace KHMB
             List<UserO> users = DB.SelectAllUsers();
             listbox_Show.ItemsSource = users;
         }
-
         private void ShowTarif()
         {
             List<TO> tarif = DB.SelectAllTarifs();
             listbox_Show.ItemsSource = tarif;
         }
-
-        //private void ShowESPs()
-        //{
-        //    List<__> esps = DB.SelectAllEsps();
-        //    listbox_Show.ItemsSource = esps;
-        //}
+        private void ShowESPs()
+        {
+            List<ESPO> esps = DB.SelectAllESP();
+            listbox_Show.ItemsSource = esps;
+        }
 
     }
 }
