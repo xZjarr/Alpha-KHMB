@@ -120,8 +120,8 @@ namespace KHMB
                 Job.Editing = true;
                 Job chosenJob = new Job();
                 chosenJob.EditJobShow(SelectedTemp.ChosenJob.JobID, SelectedTemp.ChosenJob.CreatedUserID);
-                Job.EditingJobID = chosenJob.JobID;
-                Job.EditingJobUserID = chosenJob.CreatedUserID;
+                Job.EditingJobID = SelectedTemp.ChosenJob.JobID;
+                Job.EditingJobUserID = SelectedTemp.ChosenJob.CreatedUserID;
             }
             // done
             else if ((string)lbl_Title.Content == "User")
