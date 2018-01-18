@@ -21,10 +21,31 @@ namespace KHMB
                 );
             myConnection.Open();
         }
-        public static void CloseConnection()
+
+        public static List<JobO> CloseConnection()
         {
-            myConnection.Close();
+            List<JobO> jList = new List<JobO>();
+            DateTime Finished;
+
+            OpenConnection();
+            SqlCommand getJ = new SqlCommand("  SELECT * FROM Job WHERE (DATEADD(hh,durationhours,ExecutionTime) < getdate())", myConnection);
+            SqlDataReader reader = getJ.ExecuteReader();
+            while (reader.Read())
+            {
+                JobO j = new JobO();
+                j.JobID = reader.GetInt32(0);
+                j.JobName = reader.GetString(6);
+                j.Priority = reader.GetByte(5);
+                j.ResourceID = reader.GetInt32(1);
+                j.Deadline = reader.GetDateTime(3);
+                j.Created = reader.GetDateTime(4);
+                j.CreatedUserID = reader.GetInt32(2);
+                jList.Add(j);
+            }
+            CloseConnection();
+            return jList;
         }
+        
 
         public static void InsertUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, string UserName)
         {
@@ -42,6 +63,11 @@ namespace KHMB
             insertRName.Parameters["@IsAdmin"].Value = IsDmn;
             insertRName.ExecuteNonQuery();
             CloseConnection();
+        }
+
+        internal static List<JobO> SelectExecutedJobs()
+        {
+            throw new NotImplementedException();
         }
 
         internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
