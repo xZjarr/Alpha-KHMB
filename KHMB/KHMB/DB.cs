@@ -442,9 +442,20 @@ namespace KHMB
                 throw ex;
             }
         }
-        public static void EditJob (int JobID, int UserId, int Prio, DateTime Deadline)
+        public static void EditJob (int ResourceID,int JobID, int UserId, int Prio, DateTime Deadline)
         {
-
+            OpenConnection();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [Job] SET DeadLine=@DeadLine, Priority=@Priority, ResourceID=@ResourceID WHERE JobID=@JobID", myConnection);
+            UpdateUser.Parameters.Add("@DeadLine", SqlDbType.DateTime);
+            UpdateUser.Parameters["@DeadLine"].Value = Deadline;
+            UpdateUser.Parameters.Add("@Priority", SqlDbType.TinyInt);
+            UpdateUser.Parameters["@Priority"].Value = Prio;
+            UpdateUser.Parameters.Add("@ResourceID", SqlDbType.Int);
+            UpdateUser.Parameters["@ResourceID"].Value = ResourceID;
+            UpdateUser.Parameters.Add("@JobID", SqlDbType.Int);
+            UpdateUser.Parameters["@JobID"].Value = JobID;
+            UpdateUser.ExecuteNonQuery();
+            CloseConnection();
         }
         //Klaus
         public static bool DeleteTarifESP(string callerClass, int callerID)

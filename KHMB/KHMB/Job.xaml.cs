@@ -108,9 +108,9 @@ namespace KHMB
             Job nw = new Job();
                 nw.Show();
         }
-        public void EditJob(int PrioEdit, DateTime DeadLineEdit)
+        public void EditJob(int ResourceID,int PrioEdit, DateTime DeadLineEdit)
         {
-            
+            DB.EditJob(ResourceID, EditingJobID, EditingJobUserID, PrioEdit, DeadLineEdit);
         }
 
         public void DeleteJob(int JobID)
