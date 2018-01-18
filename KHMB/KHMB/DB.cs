@@ -46,6 +46,9 @@ namespace KHMB
 
         internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
         {
+            //Hardcoding an exetime, just to be able to see how this code works
+            exeTime = DateTime.Now;
+
             List<ESPO> eList = new List<ESPO>();
             OpenConnection();
             SqlCommand getESP = new SqlCommand("SELECT DISTINCT * FROM ESP WHERE (StartDate > @startDate OR StartDate < @endDate) OR (EndDate > @startDate OR EndDate < @endDate) ORDER BY EnergySurplus DESC", myConnection);
@@ -310,7 +313,7 @@ namespace KHMB
             OpenConnection();
             try
             {
-                SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime); ", myConnection);
+                SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime],[DurationHours])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime,@duration); ", myConnection);
                 insertJob.Parameters.Add("@name", SqlDbType.VarChar);
                 insertJob.Parameters["@name"].Value = jobToAdd.JobName;
                 insertJob.Parameters.Add("@resource", SqlDbType.Int);
@@ -325,6 +328,8 @@ namespace KHMB
                 insertJob.Parameters["@priority"].Value = jobToAdd.Priority;
                 insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
                 insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
+                insertJob.Parameters.Add("@duration", SqlDbType.Int);
+                insertJob.Parameters["@duration"].Value = jobToAdd.DurationHours;
                 insertJob.ExecuteNonQuery();
                 CloseConnection();
                 return true;
