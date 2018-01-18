@@ -29,7 +29,8 @@ namespace KHMB
                 JobO chosenJob = SelectedTemp.ChosenJob;
                 lbl_CreatedFill.Content = chosenJob.Created;
                 lbl_DeadlineFill.Content = chosenJob.Deadline;
-                lbl_CreatedByFill.Content = chosenJob.Created;
+                UserO createdBy = DB.GetUser(chosenJob.CreatedUserID);
+                lbl_CreatedByFill.Content = (createdBy.FirstName+""+createdBy.SurName);
                 lbl_NameFill.Content = chosenJob.JobName;
                 lbl_PriorityFill.Content = chosenJob.Priority;
             }
