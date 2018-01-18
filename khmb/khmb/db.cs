@@ -116,8 +116,6 @@ namespace KHMB
             insertRName.Parameters.Add("@name", SqlDbType.VarChar);
             insertRName.Parameters["@name"].Value = R;
             insertRName.ExecuteNonQuery();
-            //SqlCommand insertRName = new SqlCommand("INSERT INTO Resource (name) VALUES (@name)", myConnection);
-
             CloseConnection();
         }
         public static void InsertRT(string RT)
@@ -363,6 +361,7 @@ namespace KHMB
             }
         }
 
+        //Klaus
         public static bool Delete(string callerClass, int callerID)
         {
             OpenConnection();
@@ -371,6 +370,45 @@ namespace KHMB
                 string tablestring = "[" + callerClass + "]";
                 string iDColumn = callerClass + "ID";
                 SqlCommand delete = new SqlCommand("DELETE FROM " + tablestring + " WHERE " + iDColumn + " = @ID;", myConnection);
+                delete.Parameters.Add("@ID", SqlDbType.Int);
+                delete.Parameters["@ID"].Value = callerID;
+                delete.ExecuteNonQuery();
+                CloseConnection();
+                return true;
+            }
+            catch (Exception)
+            {
+                CloseConnection();
+                return false;
+            }
+        }
+        public static void EditUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, int EditUserId)
+        {
+            OpenConnection();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [User] SET Password=@Password, Name=@Name, Surname=@Surname, IsAdmin=@IsAdmin WHERE UserID=@UserID", myConnection);
+            UpdateUser.Parameters.Add("@Password", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Password"].Value = Psswrd;
+            UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Name"].Value = FrstName;
+            UpdateUser.Parameters.Add("@Surname", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Surname"].Value = SrNm;
+            UpdateUser.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
+            UpdateUser.Parameters["@IsAdmin"].Value = IsDmn;
+            UpdateUser.Parameters.Add("@UserID", SqlDbType.Int);
+            UpdateUser.Parameters["@UserID"].Value = EditUserId;
+            UpdateUser.ExecuteNonQuery();
+            CloseConnection();
+        }
+
+        //Klaus
+        public static bool DeleteTarifESP(string callerClass, int callerID)
+        {
+            //Var nødt til at have egen metode, da deres ID kolonne var navngivet anderledes
+            OpenConnection();
+            try
+            {
+                string tablestring = "[" + callerClass + "]";
+                SqlCommand delete = new SqlCommand("DELETE FROM " + tablestring + " WHERE ID = @ID;", myConnection);
                 delete.Parameters.Add("@ID", SqlDbType.Int);
                 delete.Parameters["@ID"].Value = callerID;
                 delete.ExecuteNonQuery();
