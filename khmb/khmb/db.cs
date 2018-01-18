@@ -71,7 +71,7 @@ namespace KHMB
             return jList;
         }
 
-        internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
+        internal static List<ESPO> GetESPs(DateTime now, DateTime endDate)
         {
             List<ESPO> eList = new List<ESPO>();
             OpenConnection();
@@ -116,7 +116,11 @@ namespace KHMB
         {
             bool available = true;
             OpenConnection();
-            SqlCommand getJ = new SqlCommand("SELECT DISTINCT ExecutionTime FROM Job WHERE ResourceID=@ResourceID AND ( (DATEADD(hour, DurationHours, ExecutionTime)>@PossibleStart AND DATEADD(hour, DurationHours, ExecutionTime)>@SoonestEnd) OR (ExecutionTime<=@PossibleStart AND ExecutionTime>@SoonestEnd) )", myConnection);
+            SqlCommand getJ = new SqlCommand("SELECT DISTINCT ExecutionTime FROM Job WHERE ResourceID=@ResourceID AND " +
+                "( (DATEADD(hour, DurationHours, ExecutionTime)>@PossibleStart AND DATEADD(hour, DurationHours, ExecutionTime)<@SoonestEnd) " +
+                "OR (ExecutionTime>=@PossibleStart AND ExecutionTime<@SoonestEnd) " +
+                "OR (ExecutionTime<@PossibleStart AND DATEADD(hour, DurationHours, ExecutionTime)>@PossibleStart) " +
+                "OR (ExecutionTime<@SoonestEnd AND DATEADD(hour, DurationHours, ExecutionTime)>@SoonestEnd) )", myConnection);
             getJ.Parameters.Add("@ResourceID", SqlDbType.Int);
             getJ.Parameters["@ResourceID"].Value = currentJob.ResourceID;
             getJ.Parameters.Add("@PossibleStart", SqlDbType.DateTime);
@@ -124,7 +128,15 @@ namespace KHMB
             getJ.Parameters.Add("@SoonestEnd", SqlDbType.DateTime);
             getJ.Parameters["@SoonestEnd"].Value = soonestEnd;
             SqlDataReader reader = getJ.ExecuteReader();
-            if(reader.Read())
+            string query = getJ.CommandText;
+
+            // This is here in case of debugging the above statement
+            foreach (SqlParameter p in getJ.Parameters)
+            {
+                query = query.Replace(p.ParameterName, p.Value.ToString());
+            }
+
+            if (reader.Read())
             {
                 DateTime executionTime = reader.GetDateTime(0);
                 available = false;
@@ -226,6 +238,26 @@ namespace KHMB
             CloseConnection();
             return tList;
         }
+
+        public static List<TO> SelectAllTarifs(bool OrderByAsc)
+        {
+            List<TO> tList = new List<TO>();
+            OpenConnection();
+            SqlCommand getT = new SqlCommand("SELECT * FROM Tarif ORDER BY Price ASC", myConnection);
+            SqlDataReader reader = getT.ExecuteReader();
+            while (reader.Read())
+            {
+                TO t = new TO();
+                t.StartTime = reader.GetTimeSpan(1);
+                t.EndTime = reader.GetTimeSpan(2);
+                t.Cost = reader.GetDouble(3);
+                t.TarifID = reader.GetInt32(0);
+                tList.Add(t);
+            }
+            CloseConnection();
+            return tList;
+        }
+
         public static List<ESPO> SelectAllESP()
         {
             List<ESPO> eList = new List<ESPO>();
@@ -473,6 +505,19 @@ namespace KHMB
             UpdateUser.Parameters["@ResourceID"].Value = ResourceID;
             UpdateUser.Parameters.Add("@JobID", SqlDbType.Int);
             UpdateUser.Parameters["@JobID"].Value = JobID;
+            UpdateUser.ExecuteNonQuery();
+            CloseConnection();
+        }
+        public static void EditResource(string resourceName, int resourceTypeID)
+        {
+            OpenConnection();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [Resource] SET [Name]=@Name, TypeID=@TypeID WHERE ResourceID=@ResourceID", myConnection);
+            UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Name"].Value = resourceName;
+            UpdateUser.Parameters.Add("@TypeID", SqlDbType.Int);
+            UpdateUser.Parameters["@TypeID"].Value = resourceTypeID;
+            UpdateUser.Parameters.Add("@ResourceID", SqlDbType.Int);
+            UpdateUser.Parameters["@ResourceID"].Value = Resource.editingResourceID;
             UpdateUser.ExecuteNonQuery();
             CloseConnection();
         }
