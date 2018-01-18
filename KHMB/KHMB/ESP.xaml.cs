@@ -67,10 +67,9 @@ namespace KHMB
         }
 
         //By Klaus Kristensen
-        public void Delete(int PlaceHolder)
-            //stop breaking my spaghetti <3 Mikkel
+        public void Delete(int IDToDelete)
         {
-
+            DB.DeleteTarifESP("ESP", IDToDelete);
         }
         // (StartDate, EndDate)
         static void CheckAvailable()
