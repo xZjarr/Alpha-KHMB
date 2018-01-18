@@ -22,28 +22,9 @@ namespace KHMB
             myConnection.Open();
         }
 
-        public static List<JobO> CloseConnection()
+        public static void CloseConnection()
         {
-            List<JobO> jList = new List<JobO>();
-            DateTime Finished;
-
-            OpenConnection();
-            SqlCommand getJ = new SqlCommand("  SELECT * FROM Job WHERE (DATEADD(hh,durationhours,ExecutionTime) < getdate())", myConnection);
-            SqlDataReader reader = getJ.ExecuteReader();
-            while (reader.Read())
-            {
-                JobO j = new JobO();
-                j.JobID = reader.GetInt32(0);
-                j.JobName = reader.GetString(6);
-                j.Priority = reader.GetByte(5);
-                j.ResourceID = reader.GetInt32(1);
-                j.Deadline = reader.GetDateTime(3);
-                j.Created = reader.GetDateTime(4);
-                j.CreatedUserID = reader.GetInt32(2);
-                jList.Add(j);
-            }
-            CloseConnection();
-            return jList;
+            myConnection.Close();
         }
         
 
@@ -67,7 +48,27 @@ namespace KHMB
 
         internal static List<JobO> SelectExecutedJobs()
         {
-            throw new NotImplementedException();
+
+            List<JobO> jList = new List<JobO>();
+            DateTime Finished;
+
+            OpenConnection();
+            SqlCommand getJ = new SqlCommand("  SELECT * FROM Job WHERE (DATEADD(hh,durationhours,ExecutionTime) < getdate())", myConnection);
+            SqlDataReader reader = getJ.ExecuteReader();
+            while (reader.Read())
+            {
+                JobO j = new JobO();
+                j.JobID = reader.GetInt32(0);
+                j.JobName = reader.GetString(6);
+                j.Priority = reader.GetByte(5);
+                j.ResourceID = reader.GetInt32(1);
+                j.Deadline = reader.GetDateTime(3);
+                j.Created = reader.GetDateTime(4);
+                j.CreatedUserID = reader.GetInt32(2);
+                jList.Add(j);
+            }
+            CloseConnection();
+            return jList;
         }
 
         internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
