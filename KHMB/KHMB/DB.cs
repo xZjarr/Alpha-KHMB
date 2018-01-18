@@ -71,7 +71,7 @@ namespace KHMB
             return jList;
         }
 
-        internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
+        internal static List<ESPO> GetESPs(DateTime now, DateTime endDate)
         {
             List<ESPO> eList = new List<ESPO>();
             OpenConnection();
