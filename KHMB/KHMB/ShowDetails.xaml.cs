@@ -22,6 +22,11 @@ namespace KHMB
         public ShowDetails(string subject)
         {
             InitializeComponent();
+            if (CurrentUser.IsAdmin==false)
+            {
+                btn_Delete.IsEnabled = false;
+                btn_Edit.IsEnabled = false;
+            }
 
             if (subject == "Jobs")
             {
@@ -160,15 +165,13 @@ namespace KHMB
                 case "Tarif":
                     {
                         Tarif chosenTarif = new Tarif();
-                        //Hardcoded ID because they don't have IDs yet
-                        chosenTarif.Delete(2);
+                        chosenTarif.Delete(SelectedTemp.ChosenTarif.TarifID);
                     }
                     break;
                 case "ESP":
                     {
                         ESP chosenESP = new ESP();
-                        //Hardcoded ID because they don't have IDs yet
-                        chosenESP.Delete(2);
+                        chosenESP.Delete(SelectedTemp.ChosenESP.ESP_ID);
                     }
                     break;
                 case "Resource":
@@ -180,8 +183,7 @@ namespace KHMB
                 case "Resource type":
                     {
                         ResourceType chosenType = new ResourceType();
-                        //Hardcoded ID because they don't have IDs yet
-                        chosenType.Delete(2);
+                        chosenType.Delete(SelectedTemp.ChosenRT.ResourceTypeID);
                     }
                     break;
                 default:

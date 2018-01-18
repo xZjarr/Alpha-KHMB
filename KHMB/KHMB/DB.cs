@@ -175,6 +175,7 @@ namespace KHMB
                 t.StartTime = reader.GetTimeSpan(1);
                 t.EndTime = reader.GetTimeSpan(2);
                 t.Cost = reader.GetDouble(3);
+                t.TarifID = reader.GetInt32(0);
                 tList.Add(t);
             }
             CloseConnection();
@@ -194,6 +195,7 @@ namespace KHMB
                 e.StartTime = reader.GetTimeSpan(3);
                 e.EndTime = reader.GetTimeSpan(4);
                 e.EnergySurplus = reader.GetDouble(5);
+                e.ESP_ID = reader.GetInt32(0);
                 eList.Add(e);
             }
             CloseConnection();
@@ -209,6 +211,7 @@ namespace KHMB
             {
                 RTO rt = new RTO();
                 rt.Name = reader.GetString(1);
+                rt.ResourceTypeID = reader.GetInt32(0);
                 rtList.Add(rt);
             }
             CloseConnection();
@@ -288,6 +291,7 @@ namespace KHMB
             return uList;
         }
 
+        //By Klaus
         public static List<JobO> FillQueue(int resource)
         {
             //Get jobs to add to the queue
@@ -306,8 +310,8 @@ namespace KHMB
             CloseConnection();
             return queueJobs;
         }
-        //random comment
 
+        //By Klaus
         public static bool InsertJob(JobO jobToAdd)
         {
             OpenConnection();
