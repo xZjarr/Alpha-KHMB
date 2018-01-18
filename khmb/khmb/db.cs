@@ -21,10 +21,12 @@ namespace KHMB
                 );
             myConnection.Open();
         }
+
         public static void CloseConnection()
         {
             myConnection.Close();
         }
+        
 
         public static void InsertUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, string UserName)
         {
@@ -44,8 +46,36 @@ namespace KHMB
             CloseConnection();
         }
 
+        internal static List<JobO> SelectExecutedJobs()
+        {
+
+            List<JobO> jList = new List<JobO>();
+            DateTime Finished;
+
+            OpenConnection();
+            SqlCommand getJ = new SqlCommand("  SELECT * FROM Job WHERE (DATEADD(hh,durationhours,ExecutionTime) < getdate())", myConnection);
+            SqlDataReader reader = getJ.ExecuteReader();
+            while (reader.Read())
+            {
+                JobO j = new JobO();
+                j.JobID = reader.GetInt32(0);
+                j.JobName = reader.GetString(6);
+                j.Priority = reader.GetByte(5);
+                j.ResourceID = reader.GetInt32(1);
+                j.Deadline = reader.GetDateTime(3);
+                j.Created = reader.GetDateTime(4);
+                j.CreatedUserID = reader.GetInt32(2);
+                jList.Add(j);
+            }
+            CloseConnection();
+            return jList;
+        }
+
         internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
         {
+            //Hardcoding an exetime, just to be able to see how this code works
+            exeTime = DateTime.Now;
+
             List<ESPO> eList = new List<ESPO>();
             OpenConnection();
             SqlCommand getESP = new SqlCommand("SELECT DISTINCT * FROM ESP WHERE (StartDate > @startDate OR StartDate < @endDate) OR (EndDate > @startDate OR EndDate < @endDate) ORDER BY EnergySurplus DESC", myConnection);
@@ -172,6 +202,7 @@ namespace KHMB
                 t.StartTime = reader.GetTimeSpan(1);
                 t.EndTime = reader.GetTimeSpan(2);
                 t.Cost = reader.GetDouble(3);
+                t.TarifID = reader.GetInt32(0);
                 tList.Add(t);
             }
             CloseConnection();
@@ -191,6 +222,7 @@ namespace KHMB
                 e.StartTime = reader.GetTimeSpan(3);
                 e.EndTime = reader.GetTimeSpan(4);
                 e.EnergySurplus = reader.GetDouble(5);
+                e.ESP_ID = reader.GetInt32(0);
                 eList.Add(e);
             }
             CloseConnection();
@@ -206,6 +238,7 @@ namespace KHMB
             {
                 RTO rt = new RTO();
                 rt.Name = reader.GetString(1);
+                rt.ResourceTypeID = reader.GetInt32(0);
                 rtList.Add(rt);
             }
             CloseConnection();
@@ -285,6 +318,7 @@ namespace KHMB
             return uList;
         }
 
+        //By Klaus
         public static List<JobO> FillQueue(int resource)
         {
             //Get jobs to add to the queue
@@ -303,14 +337,14 @@ namespace KHMB
             CloseConnection();
             return queueJobs;
         }
-        //random comment
 
+        //By Klaus
         public static bool InsertJob(JobO jobToAdd)
         {
             OpenConnection();
             try
             {
-                SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime); ", myConnection);
+                SqlCommand insertJob = new SqlCommand("INSERT INTO Job ([Name],[ResourceID],[CreatedByUserID],[Deadline],[Created],[Priority],[ExecutionTime],[DurationHours])VALUES(@name,@resource,@UserID,@deadline,@creation,@priority,@exeTime,@duration); ", myConnection);
                 insertJob.Parameters.Add("@name", SqlDbType.VarChar);
                 insertJob.Parameters["@name"].Value = jobToAdd.JobName;
                 insertJob.Parameters.Add("@resource", SqlDbType.Int);
@@ -325,6 +359,8 @@ namespace KHMB
                 insertJob.Parameters["@priority"].Value = jobToAdd.Priority;
                 insertJob.Parameters.Add("@exeTime", SqlDbType.DateTime);
                 insertJob.Parameters["@exeTime"].Value = jobToAdd.ExeTime;
+                insertJob.Parameters.Add("@duration", SqlDbType.Int);
+                insertJob.Parameters["@duration"].Value = jobToAdd.DurationHours;
                 insertJob.ExecuteNonQuery();
                 CloseConnection();
                 return true;
@@ -384,22 +420,44 @@ namespace KHMB
         }
         public static void EditUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, int EditUserId)
         {
+            try
+            {
+                OpenConnection();
+                SqlCommand UpdateUser = new SqlCommand("UPDATE [User] SET Password=@Password, Name=@Name, Surname=@Surname, IsAdmin=@IsAdmin WHERE UserID=@UserID", myConnection);
+                UpdateUser.Parameters.Add("@Password", SqlDbType.VarChar);
+                UpdateUser.Parameters["@Password"].Value = Psswrd;
+                UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
+                UpdateUser.Parameters["@Name"].Value = FrstName;
+                UpdateUser.Parameters.Add("@Surname", SqlDbType.VarChar);
+                UpdateUser.Parameters["@Surname"].Value = SrNm;
+                UpdateUser.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
+                UpdateUser.Parameters["@IsAdmin"].Value = IsDmn;
+                UpdateUser.Parameters.Add("@UserID", SqlDbType.Int);
+                UpdateUser.Parameters["@UserID"].Value = EditUserId;
+                UpdateUser.ExecuteNonQuery();
+                CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                CloseConnection();
+                throw ex;
+            }
+        }
+        public static void EditJob (int ResourceID,int JobID, int UserId, int Prio, DateTime Deadline)
+        {
             OpenConnection();
-            SqlCommand UpdateUser = new SqlCommand("UPDATE [User] SET Password=@Password, Name=@Name, Surname=@Surname, IsAdmin=@IsAdmin WHERE UserID=@UserID", myConnection);
-            UpdateUser.Parameters.Add("@Password", SqlDbType.VarChar);
-            UpdateUser.Parameters["@Password"].Value = Psswrd;
-            UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
-            UpdateUser.Parameters["@Name"].Value = FrstName;
-            UpdateUser.Parameters.Add("@Surname", SqlDbType.VarChar);
-            UpdateUser.Parameters["@Surname"].Value = SrNm;
-            UpdateUser.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
-            UpdateUser.Parameters["@IsAdmin"].Value = IsDmn;
-            UpdateUser.Parameters.Add("@UserID", SqlDbType.Int);
-            UpdateUser.Parameters["@UserID"].Value = EditUserId;
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [Job] SET DeadLine=@DeadLine, Priority=@Priority, ResourceID=@ResourceID WHERE JobID=@JobID", myConnection);
+            UpdateUser.Parameters.Add("@DeadLine", SqlDbType.DateTime);
+            UpdateUser.Parameters["@DeadLine"].Value = Deadline;
+            UpdateUser.Parameters.Add("@Priority", SqlDbType.TinyInt);
+            UpdateUser.Parameters["@Priority"].Value = Prio;
+            UpdateUser.Parameters.Add("@ResourceID", SqlDbType.Int);
+            UpdateUser.Parameters["@ResourceID"].Value = ResourceID;
+            UpdateUser.Parameters.Add("@JobID", SqlDbType.Int);
+            UpdateUser.Parameters["@JobID"].Value = JobID;
             UpdateUser.ExecuteNonQuery();
             CloseConnection();
         }
-
         //Klaus
         public static bool DeleteTarifESP(string callerClass, int callerID)
         {
