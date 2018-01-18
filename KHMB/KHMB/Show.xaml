@@ -9,6 +9,7 @@
     <Grid>
         <ComboBox x:Name="cmbBox_Chose" HorizontalAlignment="Left" Margin="48,112,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem x:Name="cbxi_Jobs" IsSelected="True" Content="Jobs"></ComboBoxItem>
+            <ComboBoxItem x:Name="cbxi_Executed" Content="Executed jobs"></ComboBoxItem>
             <ComboBoxItem x:Name="cbxi_Resources" Content="Resources"></ComboBoxItem>
             <ComboBoxItem x:Name="cbxi_ResourceTypes" Content="ResourceTypes" IsEnabled="False"></ComboBoxItem>
             <ComboBoxItem x:Name="cbxi_Users" Content="Users" IsEnabled="False"></ComboBoxItem>

@@ -58,6 +58,7 @@ namespace KHMB
         // skal kun kunne ses af admin
         private void btn_CreateUser_Click(object sender, RoutedEventArgs e)
         {
+            User.Editing = false;
             User newUser = new User();
             newUser.Show();
         }

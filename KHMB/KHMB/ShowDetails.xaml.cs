@@ -22,6 +22,11 @@ namespace KHMB
         public ShowDetails(string subject)
         {
             InitializeComponent();
+            if (CurrentUser.IsAdmin==false)
+            {
+                btn_Delete.IsEnabled = false;
+                btn_Edit.IsEnabled = false;
+            }
 
             if (subject == "Jobs")
             {
@@ -29,7 +34,8 @@ namespace KHMB
                 JobO chosenJob = SelectedTemp.ChosenJob;
                 lbl_CreatedFill.Content = chosenJob.Created;
                 lbl_DeadlineFill.Content = chosenJob.Deadline;
-                lbl_CreatedByFill.Content = chosenJob.Created;
+                UserO createdBy = DB.GetUser(chosenJob.CreatedUserID);
+                lbl_CreatedByFill.Content = (createdBy.FirstName+""+createdBy.SurName);
                 lbl_NameFill.Content = chosenJob.JobName;
                 lbl_PriorityFill.Content = chosenJob.Priority;
             }
@@ -108,16 +114,23 @@ namespace KHMB
 
         private void Btn_Edit_Click(object sender, RoutedEventArgs e)
         {
+
             if ((string)lbl_Title.Content == "Job")
             {
+                Job.Editing = true;
                 Job chosenJob = new Job();
-                chosenJob.EditJob(SelectedTemp.ChosenJob.JobID, SelectedTemp.ChosenJob.CreatedUserID);
+                chosenJob.EditJobShow(SelectedTemp.ChosenJob.JobID, SelectedTemp.ChosenJob.CreatedUserID);
+                Job.EditingJobID = SelectedTemp.ChosenJob.JobID;
+                Job.EditingJobUserID = SelectedTemp.ChosenJob.CreatedUserID;
             }
+            // done
             else if ((string)lbl_Title.Content == "User")
             {
+                User.Editing = true;
                 User chosenUser = new User();
                 UserO selectedUser = SelectedTemp.ChosenUser;
-                chosenUser.EditUser(selectedUser.UserID);
+                chosenUser.EditUserShow(selectedUser.UserID);
+                User.EditUserID = selectedUser.UserID;
             }
             else if ((string)lbl_Title.Content == "Tarif")
             {
@@ -125,7 +138,7 @@ namespace KHMB
             }
             else if ((string)lbl_Title.Content == "ESP")
             {
-                ESP.Edit();
+                //ESP.Edit();
             }
             else if ((string)lbl_Title.Content == "Resource")
             {
@@ -157,15 +170,13 @@ namespace KHMB
                 case "Tarif":
                     {
                         Tarif chosenTarif = new Tarif();
-                        //Hardcoded ID because they don't have IDs yet
-                        chosenTarif.Delete(2);
+                        chosenTarif.Delete(SelectedTemp.ChosenTarif.TarifID);
                     }
                     break;
                 case "ESP":
                     {
                         ESP chosenESP = new ESP();
-                        //Hardcoded ID because they don't have IDs yet
-                        chosenESP.Delete(2);
+                        chosenESP.Delete(SelectedTemp.ChosenESP.ESP_ID);
                     }
                     break;
                 case "Resource":
@@ -177,8 +188,7 @@ namespace KHMB
                 case "Resource type":
                     {
                         ResourceType chosenType = new ResourceType();
-                        //Hardcoded ID because they don't have IDs yet
-                        chosenType.Delete(2);
+                        chosenType.Delete(SelectedTemp.ChosenRT.ResourceTypeID);
                     }
                     break;
                 default:

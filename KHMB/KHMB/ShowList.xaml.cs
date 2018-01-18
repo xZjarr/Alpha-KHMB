@@ -37,6 +37,10 @@ namespace KHMB
             {
                 ShowJob();
             }
+            else if (chosenObject == "Executed jobs")
+            {
+                ShowExecutedJob();
+            }
             else if (chosenObject == "Users")
             {
                 ShowUsers();
@@ -49,6 +53,12 @@ namespace KHMB
             {
                 ShowESPs();
             }
+        }
+
+        private void ShowExecutedJob()
+        {
+            List<JobO> job = DB.SelectExecutedJobs();
+            listbox_Show.ItemsSource = job;
         }
 
         private void listbox_Show_SelectionChanged(object sender, SelectionChangedEventArgs e)

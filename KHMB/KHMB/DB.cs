@@ -44,7 +44,32 @@ namespace KHMB
             CloseConnection();
         }
 
-        internal static List<ESPO> GetESPs(DateTime now, DateTime endDate)
+        internal static List<JobO> SelectExecutedJobs()
+        {
+
+            List<JobO> jList = new List<JobO>();
+            DateTime Finished;
+
+            OpenConnection();
+            SqlCommand getJ = new SqlCommand("  SELECT * FROM Job WHERE (DATEADD(hh,durationhours,ExecutionTime) < getdate())", myConnection);
+            SqlDataReader reader = getJ.ExecuteReader();
+            while (reader.Read())
+            {
+                JobO j = new JobO();
+                j.JobID = reader.GetInt32(0);
+                j.JobName = reader.GetString(6);
+                j.Priority = reader.GetByte(5);
+                j.ResourceID = reader.GetInt32(1);
+                j.Deadline = reader.GetDateTime(3);
+                j.Created = reader.GetDateTime(4);
+                j.CreatedUserID = reader.GetInt32(2);
+                jList.Add(j);
+            }
+            CloseConnection();
+            return jList;
+        }
+
+        internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
         {
             List<ESPO> eList = new List<ESPO>();
             OpenConnection();
@@ -137,8 +162,6 @@ namespace KHMB
             insertRName.Parameters.Add("@name", SqlDbType.VarChar);
             insertRName.Parameters["@name"].Value = R;
             insertRName.ExecuteNonQuery();
-            //SqlCommand insertRName = new SqlCommand("INSERT INTO Resource (name) VALUES (@name)", myConnection);
-
             CloseConnection();
         }
         public static void InsertRT(string RT)
@@ -404,6 +427,23 @@ namespace KHMB
                 CloseConnection();
                 return false;
             }
+        }
+        public static void EditUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, int EditUserId)
+        {
+            OpenConnection();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [User] SET Password=@Password, Name=@Name, Surname=@Surname, IsAdmin=@IsAdmin WHERE UserID=@UserID", myConnection);
+            UpdateUser.Parameters.Add("@Password", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Password"].Value = Psswrd;
+            UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Name"].Value = FrstName;
+            UpdateUser.Parameters.Add("@Surname", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Surname"].Value = SrNm;
+            UpdateUser.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
+            UpdateUser.Parameters["@IsAdmin"].Value = IsDmn;
+            UpdateUser.Parameters.Add("@UserID", SqlDbType.Int);
+            UpdateUser.Parameters["@UserID"].Value = EditUserId;
+            UpdateUser.ExecuteNonQuery();
+            CloseConnection();
         }
 
         //Klaus
