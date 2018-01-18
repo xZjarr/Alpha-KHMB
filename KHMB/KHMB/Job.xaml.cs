@@ -76,7 +76,7 @@ namespace KHMB
             jobToBeScheduled.Deadline = Deadline;
             jobToBeScheduled.CreatedUserID = CurrentUser.ID;
             jobToBeScheduled.Created = DateTime.Now;
-            jobToBeScheduled.DurationHours = 4;
+            jobToBeScheduled.DurationHours = 45;
             bool isSucces = Scheduler.FindPlaceInQueue(jobToBeScheduled);
             if (isSucces)
             {

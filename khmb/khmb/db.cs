@@ -44,7 +44,7 @@ namespace KHMB
             CloseConnection();
         }
 
-        internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
+        internal static List<ESPO> GetESPs(DateTime now, DateTime endDate)
         {
             List<ESPO> eList = new List<ESPO>();
             OpenConnection();
@@ -52,7 +52,7 @@ namespace KHMB
             getESP.Parameters.Add("@startDate", SqlDbType.DateTime);
             getESP.Parameters["@startDate"].Value = now;
             getESP.Parameters.Add("@endDate", SqlDbType.DateTime);
-            getESP.Parameters["@endDate"].Value = exeTime;
+            getESP.Parameters["@endDate"].Value = endDate;
             SqlDataReader reader = getESP.ExecuteReader();
             while (reader.Read())
             {
@@ -83,6 +83,27 @@ namespace KHMB
             }
             CloseConnection();
             return r;
+        }
+
+        internal static bool IsResourceAvailable(DateTime possibleStart, DateTime soonestEnd, JobO currentJob)
+        {
+            bool available = true;
+            OpenConnection();
+            SqlCommand getJ = new SqlCommand("SELECT DISTINCT ExecutionTime FROM Job WHERE ResourceID=@ResourceID AND ( (DATEADD(hour, DurationHours, ExecutionTime)>@PossibleStart AND DATEADD(hour, DurationHours, ExecutionTime)>@SoonestEnd) OR (ExecutionTime<=@PossibleStart AND ExecutionTime>@SoonestEnd) )", myConnection);
+            getJ.Parameters.Add("@ResourceID", SqlDbType.Int);
+            getJ.Parameters["@ResourceID"].Value = currentJob.ResourceID;
+            getJ.Parameters.Add("@PossibleStart", SqlDbType.DateTime);
+            getJ.Parameters["@PossibleStart"].Value = possibleStart;
+            getJ.Parameters.Add("@SoonestEnd", SqlDbType.DateTime);
+            getJ.Parameters["@SoonestEnd"].Value = soonestEnd;
+            SqlDataReader reader = getJ.ExecuteReader();
+            if(reader.Read())
+            {
+                DateTime executionTime = reader.GetDateTime(0);
+                available = false;
+            }
+            CloseConnection();
+            return available;
         }
 
         internal static UserO GetUser(int createdUserID)
@@ -363,6 +384,7 @@ namespace KHMB
             }
         }
 
+        //Klaus
         public static bool Delete(string callerClass, int callerID)
         {
             OpenConnection();
@@ -371,6 +393,28 @@ namespace KHMB
                 string tablestring = "[" + callerClass + "]";
                 string iDColumn = callerClass + "ID";
                 SqlCommand delete = new SqlCommand("DELETE FROM " + tablestring + " WHERE " + iDColumn + " = @ID;", myConnection);
+                delete.Parameters.Add("@ID", SqlDbType.Int);
+                delete.Parameters["@ID"].Value = callerID;
+                delete.ExecuteNonQuery();
+                CloseConnection();
+                return true;
+            }
+            catch (Exception)
+            {
+                CloseConnection();
+                return false;
+            }
+        }
+
+        //Klaus
+        public static bool DeleteTarifESP(string callerClass, int callerID)
+        {
+            //Var nødt til at have egen metode, da deres ID kolonne var navngivet anderledes
+            OpenConnection();
+            try
+            {
+                string tablestring = "[" + callerClass + "]";
+                SqlCommand delete = new SqlCommand("DELETE FROM " + tablestring + " WHERE ID = @ID;", myConnection);
                 delete.Parameters.Add("@ID", SqlDbType.Int);
                 delete.Parameters["@ID"].Value = callerID;
                 delete.ExecuteNonQuery();

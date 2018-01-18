@@ -41,17 +41,25 @@ namespace KHMB
         private static DateTime CalculateBestSpot(Queue queue, JobO currentJob)
         {
             DateTime now = DateTime.Now;
+            DateTime? ESPtempTime;
             DateTime tempTime = new DateTime();
-            List<ESPO> avaibleESPs = DB.GetESPs(now, currentJob.ExeTime);
+            List<ESPO> avaibleESPs = DB.GetESPs(now, currentJob.Deadline);
             List<TO> avaibleTarifs = DB.SelectAllTarifs();
 
             for (int i=0; i<avaibleESPs.Count; i++)
             {
                 ESPO currentESP = avaibleESPs[i];
-                FindSpotInEsp(currentESP, currentJob, now);
+                ESPtempTime = FindSpotInEsp(currentESP, currentJob, now);
+                if (ESPtempTime != null)
+                {
+                    tempTime = (DateTime)ESPtempTime;
+                    i = avaibleESPs.Count;
+                }
             }
 
-            int hour = 00;
+            return tempTime;
+
+            /*int hour = 00;
             tempTime = Convert.ToDateTime($"{hour}:00:00");
             int index = queue.jobsInQueue.FindIndex(item => item.ExeTime == tempTime);
             if (index < 0)
@@ -63,27 +71,55 @@ namespace KHMB
                 hour++;
                 tempTime = Convert.ToDateTime($"{hour}:00:00");
                 return tempTime;
-            }
+            }*/
         }
 
-        private static void FindSpotInEsp(ESPO currentESP, JobO currentJob, DateTime now)
+        private static DateTime? FindSpotInEsp(ESPO currentESP, JobO currentJob, DateTime now)
         {
             DateTime soonestStart = DateTime.Today + currentESP.StartTime;
-            DateTime soonestEnd;
+            DateTime ESPEnd, possibleStart, possibleEnd;
+            DateTime? startDateTime = soonestStart;
+            bool spotFound;
+
             if (currentESP.EndTime < currentESP.StartTime)
             {
-                soonestEnd = DateTime.Today.AddDays(1) + currentESP.EndTime;
+                ESPEnd = soonestStart.AddDays(1) + currentESP.EndTime;
             }
             else
             {
-                soonestEnd = DateTime.Today + currentESP.EndTime;
+                ESPEnd = soonestStart + currentESP.EndTime;
             }
-            if (currentJob.ExeTime > soonestEnd)
-            {
-                int jobMinutes = currentJob.DurationHours;
-            }
-            
 
+            while (soonestStart < ESPEnd) {
+
+
+                if (currentJob.Deadline < ESPEnd)
+                {
+                    possibleStart = soonestStart;
+
+                    int jobHours = currentJob.DurationHours;
+                    possibleEnd = possibleStart.AddHours(jobHours);
+                    while (possibleEnd < ESPEnd) {
+                        spotFound = DB.IsResourceAvailable(possibleStart, ESPEnd, currentJob);
+                        if (spotFound == true)
+                        {
+                            startDateTime = possibleStart;
+                            return startDateTime;
+                        }
+                        possibleStart.AddHours(1);
+                        possibleEnd = possibleStart.AddHours(jobHours);
+                    }
+                    startDateTime = null;
+                }
+                else
+                {
+                    startDateTime = null;
+                }
+                soonestStart.AddDays(1);
+                ESPEnd.AddDays(1);
+            }
+
+            return startDateTime;
         }
 
         // This will only be relevant in the case of us being able to select a resource-type instead of a specific resource when creating a job
