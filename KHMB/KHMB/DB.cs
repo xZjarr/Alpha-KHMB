@@ -116,7 +116,11 @@ namespace KHMB
         {
             bool available = true;
             OpenConnection();
-            SqlCommand getJ = new SqlCommand("SELECT DISTINCT ExecutionTime FROM Job WHERE ResourceID=@ResourceID AND ( (DATEADD(hour, DurationHours, ExecutionTime)>@PossibleStart AND DATEADD(hour, DurationHours, ExecutionTime)>@SoonestEnd) OR (ExecutionTime<=@PossibleStart AND ExecutionTime>@SoonestEnd) )", myConnection);
+            SqlCommand getJ = new SqlCommand("SELECT DISTINCT ExecutionTime, DATEADD(hour, DurationHours, ExecutionTime) FROM Job WHERE ResourceID=@ResourceID AND " +
+                "( (DATEADD(hour, DurationHours, ExecutionTime)>@PossibleStart AND DATEADD(hour, DurationHours, ExecutionTime)>@SoonestEnd) " +
+                "OR (ExecutionTime>=@PossibleStart AND ExecutionTime<@SoonestEnd) " +
+                "OR (ExecutionTime<@PossibleStart AND DATEADD(hour, DurationHours, ExecutionTime)>@PossibleStart) " +
+                "OR (ExecutionTime<@SoonestEnd AND DATEADD(hour, DurationHours, ExecutionTime)>@SoonestEnd) )", myConnection);
             getJ.Parameters.Add("@ResourceID", SqlDbType.Int);
             getJ.Parameters["@ResourceID"].Value = currentJob.ResourceID;
             getJ.Parameters.Add("@PossibleStart", SqlDbType.DateTime);
@@ -124,9 +128,18 @@ namespace KHMB
             getJ.Parameters.Add("@SoonestEnd", SqlDbType.DateTime);
             getJ.Parameters["@SoonestEnd"].Value = soonestEnd;
             SqlDataReader reader = getJ.ExecuteReader();
-            if(reader.Read())
+            string query = getJ.CommandText;
+
+            // This is here in case of debugging the above statement
+            /*foreach (SqlParameter p in getJ.Parameters)
+            {
+                query = query.Replace(p.ParameterName, p.Value.ToString());
+            }*/
+
+            if (reader.Read())
             {
                 DateTime executionTime = reader.GetDateTime(0);
+                DateTime executedTime = reader.GetDateTime(1);
                 available = false;
             }
             CloseConnection();

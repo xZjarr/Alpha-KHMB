@@ -23,7 +23,7 @@ namespace KHMB
         public MainWindow()
         {
             InitializeComponent();
-            CurrentUser.ID = 6;
+            CurrentUser.ID = 5;
             CurrentUser.IsAdmin = true;
             if (CurrentUser.ID <= 0)
             {

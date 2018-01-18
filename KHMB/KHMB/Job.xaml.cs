@@ -49,9 +49,16 @@ namespace KHMB
         {
             if (Editing == false)
             {
+                try
+                {
                 Deadline = Deadline.Date + DeadlineTimeConverter(cbx_Deadline).TimeOfDay;
                 Priority = Convert.ToInt32(cbx_Priority.Text);
-                CreateJob(ResourceID.ResourceID, CreatedUserID, Priority, Deadline);
+                CreateJob(ResourceID.ResourceID, CreatedUserID, Priority, Deadline, Convert.ToInt32(tbx_DurationHours.Text));
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Could not create job");
+                }
                 this.Close();
             }
             else if (Editing == true)
@@ -83,7 +90,7 @@ namespace KHMB
         }
 
 
-        public static void CreateJob(int Resource, int User, int Priority, DateTime Deadline)
+        public static void CreateJob(int Resource, int User, int Priority, DateTime Deadline, int duration)
         {
             JobO jobToBeScheduled = new JobO();
             jobToBeScheduled.ResourceID = Resource;
@@ -92,7 +99,7 @@ namespace KHMB
             jobToBeScheduled.Deadline = Deadline;
             jobToBeScheduled.CreatedUserID = CurrentUser.ID;
             jobToBeScheduled.Created = DateTime.Now;
-            jobToBeScheduled.DurationHours = 45;
+            jobToBeScheduled.DurationHours = duration;
             bool isSucces = Scheduler.FindPlaceInQueue(jobToBeScheduled);
             if (isSucces)
             {

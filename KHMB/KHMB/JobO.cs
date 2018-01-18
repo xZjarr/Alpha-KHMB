@@ -16,7 +16,20 @@ namespace KHMB
         public DateTime Deadline { get; set; }
         public DateTime Created { get; set; }
         public DateTime ExeTime { get; set; }
-        public int DurationHours { get; set; }
+        private int durationHours;
+        public int DurationHours
+        {
+            get { return durationHours; }
+            set
+            {
+                if (value <= 24)
+                {
+                    durationHours = value;
+                }
+            }
+        }
+
+
         public override string ToString()
         {
             return string.Format("Name: {0}", JobName);
