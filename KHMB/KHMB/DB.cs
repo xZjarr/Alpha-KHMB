@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
-
+//Sync Comment
 
 
 namespace KHMB
@@ -71,7 +71,7 @@ namespace KHMB
             return jList;
         }
 
-        internal static List<ESPO> GetESPs(DateTime now, DateTime endDate)
+        internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
         {
             List<ESPO> eList = new List<ESPO>();
             OpenConnection();
