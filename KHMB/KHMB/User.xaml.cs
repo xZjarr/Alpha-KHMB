@@ -46,6 +46,7 @@ namespace KHMB
         private void EditUser(string FrstName, string SrNm, string Psswrd, bool IsDmn)
         {
             DB.EditUser(FrstName, SrNm, Psswrd, IsDmn, EditUserID);
+            this.Close();
         }
         public void DeleteUser(int IDToDelete)
         {

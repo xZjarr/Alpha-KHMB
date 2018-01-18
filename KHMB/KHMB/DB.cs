@@ -384,22 +384,33 @@ namespace KHMB
         }
         public static void EditUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, int EditUserId)
         {
-            OpenConnection();
-            SqlCommand UpdateUser = new SqlCommand("UPDATE [User] SET Password=@Password, Name=@Name, Surname=@Surname, IsAdmin=@IsAdmin WHERE UserID=@UserID", myConnection);
-            UpdateUser.Parameters.Add("@Password", SqlDbType.VarChar);
-            UpdateUser.Parameters["@Password"].Value = Psswrd;
-            UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
-            UpdateUser.Parameters["@Name"].Value = FrstName;
-            UpdateUser.Parameters.Add("@Surname", SqlDbType.VarChar);
-            UpdateUser.Parameters["@Surname"].Value = SrNm;
-            UpdateUser.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
-            UpdateUser.Parameters["@IsAdmin"].Value = IsDmn;
-            UpdateUser.Parameters.Add("@UserID", SqlDbType.Int);
-            UpdateUser.Parameters["@UserID"].Value = EditUserId;
-            UpdateUser.ExecuteNonQuery();
-            CloseConnection();
+            try
+            {
+                OpenConnection();
+                SqlCommand UpdateUser = new SqlCommand("UPDATE [User] SET Password=@Password, Name=@Name, Surname=@Surname, IsAdmin=@IsAdmin WHERE UserID=@UserID", myConnection);
+                UpdateUser.Parameters.Add("@Password", SqlDbType.VarChar);
+                UpdateUser.Parameters["@Password"].Value = Psswrd;
+                UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
+                UpdateUser.Parameters["@Name"].Value = FrstName;
+                UpdateUser.Parameters.Add("@Surname", SqlDbType.VarChar);
+                UpdateUser.Parameters["@Surname"].Value = SrNm;
+                UpdateUser.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
+                UpdateUser.Parameters["@IsAdmin"].Value = IsDmn;
+                UpdateUser.Parameters.Add("@UserID", SqlDbType.Int);
+                UpdateUser.Parameters["@UserID"].Value = EditUserId;
+                UpdateUser.ExecuteNonQuery();
+                CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                CloseConnection();
+                throw ex;
+            }
         }
+        public static void EditJob (int JobID, int UserId, int Prio, DateTime Deadline)
+        {
 
+        }
         //Klaus
         public static bool DeleteTarifESP(string callerClass, int callerID)
         {

@@ -109,11 +109,16 @@ namespace KHMB
 
         private void Btn_Edit_Click(object sender, RoutedEventArgs e)
         {
+
             if ((string)lbl_Title.Content == "Job")
             {
+                Job.Editing = true;
                 Job chosenJob = new Job();
-                chosenJob.EditJob(SelectedTemp.ChosenJob.JobID, SelectedTemp.ChosenJob.CreatedUserID);
+                chosenJob.EditJobShow(SelectedTemp.ChosenJob.JobID, SelectedTemp.ChosenJob.CreatedUserID);
+                Job.EditingJobID = chosenJob.JobID;
+                Job.EditingJobUserID = chosenJob.CreatedUserID;
             }
+            // done
             else if ((string)lbl_Title.Content == "User")
             {
                 User.Editing = true;

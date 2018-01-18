@@ -18,17 +18,23 @@ namespace KHMB
     public partial class Job : Window
     {
         public int CreatedUserID, JobID, Priority;
+        public static int EditingJobID,EditingJobUserID;
         RO ResourceID;
         string JobName;
         bool Succes;
         DateTime Deadline;
         DateTime Created;
+        public static bool Editing=false;
 
         public Job()
         {
             InitializeComponent();
             FillResourceList();
             Created = DateTime.Today;
+            if (Editing == true)
+            {
+                btn_AddJob.Content = "Save Changes";
+            }
         }
 
         private void FillResourceList()
@@ -41,10 +47,20 @@ namespace KHMB
 
         private void btn_AddJob_Click(object sender, RoutedEventArgs e)
         {
-            Deadline = Deadline.Date + DeadlineTimeConverter(cbx_Deadline).TimeOfDay;
-            Priority = Convert.ToInt32(cbx_Priority.Text);
-            CreateJob(ResourceID.ResourceID, CreatedUserID, Priority, Deadline);
-            this.Close();
+            if (Editing == false)
+            {
+                Deadline = Deadline.Date + DeadlineTimeConverter(cbx_Deadline).TimeOfDay;
+                Priority = Convert.ToInt32(cbx_Priority.Text);
+                CreateJob(ResourceID.ResourceID, CreatedUserID, Priority, Deadline);
+                this.Close();
+            }
+            else if (Editing == true)
+            {
+                Deadline = Deadline.Date + DeadlineTimeConverter(cbx_Deadline).TimeOfDay;
+                Priority = Convert.ToInt32(cbx_Priority.Text);
+                EditJob(ResourceID.ResourceID, Priority, Deadline);
+                this.Close();
+            }
         }
 
         private DateTime DeadlineTimeConverter(ComboBox cbx_time)
@@ -87,10 +103,14 @@ namespace KHMB
                 MessageBox.Show("Job could not be added to queue");
             }
         }
-
-        public void EditJob(int JobID, int UserID)
+        public void EditJobShow(int JobID, int UserID)
         {
-
+            Job nw = new Job();
+                nw.Show();
+        }
+        public void EditJob(int PrioEdit, DateTime DeadLineEdit)
+        {
+            
         }
 
         public void DeleteJob(int JobID)
