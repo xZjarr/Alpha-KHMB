@@ -71,7 +71,7 @@ namespace KHMB
             return jList;
         }
 
-        internal static List<ESPO> GetESPs(DateTime now, DateTime endDate)
+        internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
         {
             List<ESPO> eList = new List<ESPO>();
             OpenConnection();
@@ -486,6 +486,19 @@ namespace KHMB
             UpdateUser.Parameters["@ResourceID"].Value = ResourceID;
             UpdateUser.Parameters.Add("@JobID", SqlDbType.Int);
             UpdateUser.Parameters["@JobID"].Value = JobID;
+            UpdateUser.ExecuteNonQuery();
+            CloseConnection();
+        }
+        public static void EditResource(string resourceName, int resourceTypeID)
+        {
+            OpenConnection();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [Resource] SET [Name]=@Name, TypeID=@TypeID WHERE ResourceID=@ResourceID", myConnection);
+            UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Name"].Value = resourceName;
+            UpdateUser.Parameters.Add("@TypeID", SqlDbType.Int);
+            UpdateUser.Parameters["@TypeID"].Value = resourceTypeID;
+            UpdateUser.Parameters.Add("@ResourceID", SqlDbType.Int);
+            UpdateUser.Parameters["@ResourceID"].Value = Resource.editingResourceID;
             UpdateUser.ExecuteNonQuery();
             CloseConnection();
         }

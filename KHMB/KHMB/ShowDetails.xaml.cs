@@ -142,7 +142,9 @@ namespace KHMB
             }
             else if ((string)lbl_Title.Content == "Resource")
             {
-                Resource.EditResource(SelectedTemp.ChosenR.ResourceID);
+                Resource.EditResourceShow(SelectedTemp.ChosenR.ResourceID);
+                Resource.editing = true;
+                Resource.editingResourceID = SelectedTemp.ChosenR.ResourceID;
             }
             else if ((string)lbl_Title.Content == "Resource type")
             {

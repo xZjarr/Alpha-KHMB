@@ -31,9 +31,15 @@ namespace KHMB
         double EnergyComsumption { get; set; }
         public string Query;
         public ComboBox RT;
+        public static bool editing;
+        public static int editingResourceID;
         public Resource()
         {
             InitializeComponent();
+            if (editing == true)
+            {
+                Btn_Sv.Content = "Save Changes";
+            }
             FillCombo();
         }
         void FillCombo()
@@ -65,9 +71,16 @@ namespace KHMB
         {
         DB.InsertR(Bx_N.Text, typeID);
         }
-        public static void EditResource(int ResourceID)
+        public static void EditResourceShow(int ResourceID)
         {
-
+            editing = true;
+            Resource nw = new Resource();
+            nw.Show();
+        }
+        private void EditResource(int RTID)
+        {
+            DB.EditResource(Bx_N.Text,RTID);
+            this.Close();
         }
         public void DeleteResource(int IDToDelete)
         {
@@ -76,9 +89,18 @@ namespace KHMB
 
         private void Btn_Sv_Click(object sender, RoutedEventArgs e)
         {
-            string RTID = (string)Bx_RT.SelectedValue;
-            int ID = Convert.ToInt32(RTID.Substring(0, 2)); // WE'LL FIX LATER, WE HAVE ISSUES AFTER 99 RESOURCES
-            CreateResource(ID);
+            if (editing == true)
+            {
+                string RTID = (string)Bx_RT.SelectedValue;
+                int ID = Convert.ToInt32(RTID.Substring(0, 2));
+                EditResource(ID);
+            }
+            else if (editing == false)
+            {
+                string RTID = (string)Bx_RT.SelectedValue;
+                int ID = Convert.ToInt32(RTID.Substring(0, 2)); // WE'LL FIX LATER, WE HAVE ISSUES AFTER 99 RESOURCES
+                CreateResource(ID);
+            }
         }
 
         private void Bx_RT_SelectionChanged(object sender, SelectionChangedEventArgs e)
