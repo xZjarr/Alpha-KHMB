@@ -476,6 +476,19 @@ namespace KHMB
             UpdateUser.ExecuteNonQuery();
             CloseConnection();
         }
+        public static void EditResource(string resourceName, int resourceTypeID)
+        {
+            OpenConnection();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [Resource] SET [Name]=@Name, TypeID=@TypeID WHERE ResourceID=@ResourceID", myConnection);
+            UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Name"].Value = resourceName;
+            UpdateUser.Parameters.Add("@TypeID", SqlDbType.Int);
+            UpdateUser.Parameters["@TypeID"].Value = resourceTypeID;
+            UpdateUser.Parameters.Add("@ResourceID", SqlDbType.Int);
+            UpdateUser.Parameters["@ResourceID"].Value = Resource.editingResourceID;
+            UpdateUser.ExecuteNonQuery();
+            CloseConnection();
+        }
         //Klaus
         public static bool DeleteTarifESP(string callerClass, int callerID)
         {
