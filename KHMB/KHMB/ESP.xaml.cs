@@ -67,7 +67,8 @@ namespace KHMB
         }
 
         //By Klaus Kristensen
-        public void Delete()
+        public void Delete(int PlaceHolder)
+            //stop breaking my spaghetti <3 Mikkel
         {
 
         }

@@ -19,7 +19,7 @@ namespace KHMB
         Random rnd = new Random();
         string UserName, Password, FirstName, SurName;
         public int UserID;
-        private int EditUserID;
+        public static int EditUserID;
         bool IsAdmin, LogInSucces;
         public static bool Editing=false;
         public User()
@@ -40,7 +40,6 @@ namespace KHMB
         }
         public void EditUserShow(int UserID)
         {
-            int EditUserId = UserID;
             User nw = new User();
             nw.Show();
         }

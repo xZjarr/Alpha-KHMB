@@ -385,16 +385,18 @@ namespace KHMB
         public static void EditUser(string FrstName, string SrNm, string Psswrd, bool IsDmn, int EditUserId)
         {
             OpenConnection();
-            SqlCommand insertRName = new SqlCommand("UPDATE [User] SET (UserName, Password, Name, Surname, IsAdmin) VALUES (@UserName,@Password,@Name,@SurName,@IsAdmin)", myConnection);
-            insertRName.Parameters.Add("@Password", SqlDbType.VarChar);
-            insertRName.Parameters["@Password"].Value = Psswrd;
-            insertRName.Parameters.Add("@Name", SqlDbType.VarChar);
-            insertRName.Parameters["@Name"].Value = FrstName;
-            insertRName.Parameters.Add("@Surname", SqlDbType.VarChar);
-            insertRName.Parameters["@Surname"].Value = SrNm;
-            insertRName.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
-            insertRName.Parameters["@IsAdmin"].Value = IsDmn;
-            insertRName.ExecuteNonQuery();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [User] SET Password=@Password, Name=@Name, Surname=@Surname, IsAdmin=@IsAdmin WHERE UserID=@UserID", myConnection);
+            UpdateUser.Parameters.Add("@Password", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Password"].Value = Psswrd;
+            UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Name"].Value = FrstName;
+            UpdateUser.Parameters.Add("@Surname", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Surname"].Value = SrNm;
+            UpdateUser.Parameters.Add("@IsAdmin", SqlDbType.VarChar);
+            UpdateUser.Parameters["@IsAdmin"].Value = IsDmn;
+            UpdateUser.Parameters.Add("@UserID", SqlDbType.Int);
+            UpdateUser.Parameters["@UserID"].Value = EditUserId;
+            UpdateUser.ExecuteNonQuery();
             CloseConnection();
         }
 

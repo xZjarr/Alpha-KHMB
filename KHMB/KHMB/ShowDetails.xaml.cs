@@ -119,6 +119,7 @@ namespace KHMB
                 User chosenUser = new User();
                 UserO selectedUser = SelectedTemp.ChosenUser;
                 chosenUser.EditUserShow(selectedUser.UserID);
+                User.EditUserID = selectedUser.UserID;
             }
             else if ((string)lbl_Title.Content == "Tarif")
             {
@@ -126,7 +127,7 @@ namespace KHMB
             }
             else if ((string)lbl_Title.Content == "ESP")
             {
-                ESP.Edit();
+                //ESP.Edit();
             }
             else if ((string)lbl_Title.Content == "Resource")
             {
