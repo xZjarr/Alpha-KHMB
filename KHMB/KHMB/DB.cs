@@ -115,7 +115,7 @@ namespace KHMB
         {
             bool available = true;
             OpenConnection();
-            SqlCommand getJ = new SqlCommand("SELECT DISTINCT ExecutionTime FROM Job WHERE ResourceID=@ResourceID AND " +
+            SqlCommand getJ = new SqlCommand("SELECT DISTINCT JobID, Priority FROM Job WHERE ResourceID=@ResourceID" +
                 "( (DATEADD(hour, DurationHours, ExecutionTime)>@PossibleStart AND DATEADD(hour, DurationHours, ExecutionTime)<@SoonestEnd) " +
                 "OR (ExecutionTime>=@PossibleStart AND ExecutionTime<@SoonestEnd) " +
                 "OR (ExecutionTime<@PossibleStart AND DATEADD(hour, DurationHours, ExecutionTime)>@PossibleStart) " +
@@ -130,14 +130,16 @@ namespace KHMB
             string query = getJ.CommandText;
 
             // This is here in case of debugging the above statement
-            foreach (SqlParameter p in getJ.Parameters)
+            /*foreach (SqlParameter p in getJ.Parameters)
             {
                 query = query.Replace(p.ParameterName, p.Value.ToString());
-            }
-
+            }*/
+            
             if (reader.Read())
             {
                 DateTime executionTime = reader.GetDateTime(0);
+                int existingJobPriority = reader.GetInt32(1);
+
                 available = false;
             }
             CloseConnection();

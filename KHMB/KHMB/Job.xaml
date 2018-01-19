@@ -40,8 +40,8 @@
         <Label Content="Select priority" HorizontalAlignment="Left" Margin="30,170,0,0" VerticalAlignment="Top"/>
         <Label Content="Select resource" HorizontalAlignment="Left" Margin="221,10,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbx_Priority" HorizontalAlignment="Left" Margin="68,201,0,0" VerticalAlignment="Top" Width="102">
-            <ComboBoxItem IsSelected="True" Content="1"></ComboBoxItem>
-            <ComboBoxItem Content="2"></ComboBoxItem>
+            <ComboBoxItem Content="1"></ComboBoxItem>
+            <ComboBoxItem IsSelected="True" Content="2"></ComboBoxItem>
             <ComboBoxItem Content="3"></ComboBoxItem>
         </ComboBox>
         <Label Content="Select deadline time" HorizontalAlignment="Left" Margin="30,90,0,0" VerticalAlignment="Top"/>
