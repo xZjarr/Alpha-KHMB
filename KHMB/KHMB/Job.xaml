@@ -46,5 +46,7 @@
         </ComboBox>
         <Label Content="Select deadline time" HorizontalAlignment="Left" Margin="30,90,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbx_Resources" HorizontalAlignment="Left" Height="187" Margin="221,36,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="lbx_Resources_SelectionChanged"/>
+        <Label Content="How many hours" HorizontalAlignment="Left" Margin="30,223,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbx_DurationHours" HorizontalAlignment="Left" Height="23" Margin="68,249,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

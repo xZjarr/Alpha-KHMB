@@ -38,30 +38,20 @@ namespace KHMB
         private void fillStartDropDown()
         {
             CheckAvailable();
-            for (int hour = 0; hour <= 24; hour++)
+            for (int hour = 00; hour < 24; hour++)
             {
                 drpBox_TariffStartClock.Items.Add(hour + ":00");
-                if (hour < 24)
-                {
-                    drpBox_TariffStartClock.Items.Add(hour + ":15");
-                    drpBox_TariffStartClock.Items.Add(hour + ":30");
-                    drpBox_TariffStartClock.Items.Add(hour + ":45");
-                }
+                
             }
 
         }
 
         private void fillEndDropDown()
         {
-            for (int hour = 0; hour <= 24; hour++)
+            for (int hour = 00; hour < 24; hour++)
             {
                 drpBox_TariffEndClock.Items.Add(hour + ":00");
-                if (hour < 24)
-                {
-                    drpBox_TariffEndClock.Items.Add(hour + ":15");
-                    drpBox_TariffEndClock.Items.Add(hour + ":30");
-                    drpBox_TariffEndClock.Items.Add(hour + ":45");
-                }
+               
             }
 
         }

@@ -41,10 +41,11 @@ namespace KHMB
         private static DateTime CalculateBestSpot(Queue queue, JobO currentJob)
         {
             DateTime now = DateTime.Now;
-            DateTime? ESPtempTime;
+            DateTime? ESPtempTime = null;
+            DateTime? TarifTempTime = null;
             DateTime tempTime = new DateTime();
             List<ESPO> avaibleESPs = DB.GetESPs(now, currentJob.Deadline);
-            List<TO> avaibleTarifs = DB.SelectAllTarifs();
+            List<TO> avaibleTarifs = DB.SelectAllTarifs(true);
 
             for (int i=0; i<avaibleESPs.Count; i++)
             {
@@ -56,6 +57,20 @@ namespace KHMB
                     i = avaibleESPs.Count;
                 }
             }
+            if (ESPtempTime == null)
+            {
+                for (int t = 0; t < avaibleTarifs.Count; t++)
+                {
+                    TO currentTarif = avaibleTarifs[t];
+                    TarifTempTime = FindSpotInTarif(currentTarif, currentJob, now);
+                    if (TarifTempTime != null)
+                    {
+                        tempTime = (DateTime)TarifTempTime;
+                        t = avaibleTarifs.Count;
+                    }
+                }
+            }
+            
 
             return tempTime;
 
@@ -74,39 +89,107 @@ namespace KHMB
             }*/
         }
 
-        private static DateTime? FindSpotInEsp(ESPO currentESP, JobO currentJob, DateTime now)
+        private static DateTime? FindSpotInTarif(TO currentTarif, JobO currentJob, DateTime now)
         {
-            DateTime soonestStart = DateTime.Today + currentESP.StartTime;
-            DateTime ESPEnd, possibleStart, possibleEnd;
-            DateTime? startDateTime = soonestStart;
+            DateTime tarifStart = DateTime.Today + currentTarif.StartTime;
+            DateTime? startDateTime = null;
+            DateTime tarifEnd = DateTime.Today + currentTarif.EndTime, possibleStart = now, possibleEnd, soonestStart = now;
             bool spotFound;
+            bool needToResetToTarifStart = true;
 
-            if (currentESP.EndTime < currentESP.StartTime)
+            if (currentTarif.EndTime < currentTarif.StartTime)
             {
-                ESPEnd = soonestStart.AddDays(1) + currentESP.EndTime;
+                tarifEnd = DateTime.Today.AddDays(1) + currentTarif.EndTime;
             }
             else
             {
-                ESPEnd = soonestStart + currentESP.EndTime;
+                tarifEnd = DateTime.Today + currentTarif.EndTime;
             }
 
-            while (soonestStart < ESPEnd) {
+            if(tarifStart < now && tarifEnd < now)
+            {
+                tarifEnd = tarifEnd.AddDays(1);
+                tarifStart = tarifStart.AddDays(1);
+
+            }
+
+            if (tarifStart > possibleStart)
+            {
+                soonestStart = tarifStart;
+                needToResetToTarifStart = false;
+            }
+            DateTime testDeadline = currentJob.Deadline.AddDays(1);
+            while (testDeadline >= tarifEnd) {
+                possibleStart = soonestStart;
+
+                int jobHours = currentJob.DurationHours;
+                possibleEnd = possibleStart.AddHours(jobHours);
+                while (possibleEnd <= tarifEnd && currentJob.Deadline>=possibleEnd)
+                {
+                    spotFound = DB.IsResourceAvailable(possibleStart, possibleEnd, currentJob);
+                    if (spotFound == true)
+                    {
+                        startDateTime = possibleStart;
+                        return startDateTime;
+                    }
+                    possibleStart = possibleStart.AddHours(1);
+                    possibleEnd = possibleStart.AddHours(jobHours);
+                }
+                if (needToResetToTarifStart)
+                {
+                    soonestStart = tarifStart.AddDays(1);
+                }
+                else
+                {
+                    soonestStart = soonestStart.AddDays(1);
+                    needToResetToTarifStart = false;
+                }
+                
+                tarifEnd = tarifEnd.AddDays(1);
+            }
+
+            return startDateTime;
+        }
+
+        private static DateTime? FindSpotInEsp(ESPO currentESP, JobO currentJob, DateTime now)
+        {
+            DateTime soonestStart = DateTime.Today + currentESP.StartTime;
+            DateTime ESPEnd, possibleStart, possibleEnd, ESPFinalEnd = currentESP.EndDate+currentESP.EndTime;
+            DateTime? startDateTime = soonestStart;
+            bool spotFound;
+
+           
+            if (currentESP.EndTime < currentESP.StartTime)
+            {
+                ESPEnd = DateTime.Today.AddDays(1) + currentESP.EndTime;
+            }
+            else
+            {
+                ESPEnd = DateTime.Today + currentESP.EndTime;
+            }
+            if (soonestStart < now && ESPEnd < now)
+            {
+                soonestStart = soonestStart.AddDays(1);
+                ESPEnd = ESPEnd.AddDays(1);
+            }
+
+            while (soonestStart < currentESP.EndDate) {
 
 
-                if (currentJob.Deadline < ESPEnd)
+                if (currentJob.Deadline > ESPEnd)
                 {
                     possibleStart = soonestStart;
 
                     int jobHours = currentJob.DurationHours;
                     possibleEnd = possibleStart.AddHours(jobHours);
-                    while (possibleEnd < ESPEnd) {
-                        spotFound = DB.IsResourceAvailable(possibleStart, ESPEnd, currentJob);
+                    while (possibleEnd <= ESPEnd) {
+                        spotFound = DB.IsResourceAvailable(possibleStart, possibleEnd, currentJob);
                         if (spotFound == true)
                         {
                             startDateTime = possibleStart;
                             return startDateTime;
                         }
-                        possibleStart.AddHours(1);
+                        possibleStart = possibleStart.AddHours(1);
                         possibleEnd = possibleStart.AddHours(jobHours);
                     }
                     startDateTime = null;
@@ -115,8 +198,8 @@ namespace KHMB
                 {
                     startDateTime = null;
                 }
-                soonestStart.AddDays(1);
-                ESPEnd.AddDays(1);
+                soonestStart = soonestStart.AddDays(1);
+                ESPEnd = ESPEnd.AddDays(1);
             }
 
             return startDateTime;
