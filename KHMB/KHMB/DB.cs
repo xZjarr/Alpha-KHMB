@@ -71,7 +71,7 @@ namespace KHMB
             return jList;
         }
 
-        internal static List<ESPO> GetESPs(DateTime now, DateTime exeTime)
+        internal static List<ESPO> GetESPs(DateTime now, DateTime endDate)
         {
             List<ESPO> eList = new List<ESPO>();
             OpenConnection();
@@ -486,6 +486,52 @@ namespace KHMB
             UpdateUser.Parameters["@TypeID"].Value = resourceTypeID;
             UpdateUser.Parameters.Add("@ResourceID", SqlDbType.Int);
             UpdateUser.Parameters["@ResourceID"].Value = Resource.editingResourceID;
+            UpdateUser.ExecuteNonQuery();
+            CloseConnection();
+        }
+
+            public static void EditResourceType(string editName)
+        {
+            OpenConnection();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [ResourceType] SET [Name]=@Name WHERE ResourceTypeID=@ResourceTypeID", myConnection);
+            UpdateUser.Parameters.Add("@Name", SqlDbType.VarChar);
+            UpdateUser.Parameters["@Name"].Value = editName;
+            UpdateUser.Parameters.Add("@ResourceTypeID", SqlDbType.Int);
+            UpdateUser.Parameters["@ResourceTypeID"].Value = ResourceType.EditResourceTypeID;
+            UpdateUser.ExecuteNonQuery();
+            CloseConnection();
+        }
+        public static void EditTarif(string tariffValue, string tarifStartTime, string tarifEndDate)
+        {
+            OpenConnection();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [Tarif] SET [StartTime]=@StartTime, [EndTime]=@EndTime, [Price]=@Price WHERE [ID]=@ID", myConnection);
+            UpdateUser.Parameters.Add("@StartTime", SqlDbType.Time);
+            UpdateUser.Parameters["@StartTime"].Value = tarifStartTime;
+            UpdateUser.Parameters.Add("@EndTime", SqlDbType.Time);
+            UpdateUser.Parameters["@EndTime"].Value = tarifEndDate;
+            UpdateUser.Parameters.Add("@Price", SqlDbType.Float);
+            UpdateUser.Parameters["@Price"].Value = tariffValue;
+            UpdateUser.Parameters.Add("@ID", SqlDbType.Int);
+            UpdateUser.Parameters["@ID"].Value = Tarif.editingTarifID;
+            UpdateUser.ExecuteNonQuery();
+            CloseConnection();
+        }
+        public static void EditESP(string ESPValue, string ESPStartClock, string ESPEndClock, string ESPStartDate, string ESPEndDate)
+        {
+            OpenConnection();
+            SqlCommand UpdateUser = new SqlCommand("UPDATE [ESP] SET [StartDate]=@StartDate, [EndDate]=@EndDate, [StartTime]=@StartTime, [EndTime]=@EndTime, [EnergySurplus]=@EnergySurplus WHERE [ID]=@ID", myConnection);
+            UpdateUser.Parameters.Add("@StartDate", SqlDbType.DateTime);
+            UpdateUser.Parameters["@StartDate"].Value = ESPStartDate;
+            UpdateUser.Parameters.Add("@EndDate", SqlDbType.DateTime);
+            UpdateUser.Parameters["@EndDate"].Value = ESPEndDate;
+            UpdateUser.Parameters.Add("@StartTime", SqlDbType.Time);
+            UpdateUser.Parameters["@StartTime"].Value = ESPStartClock;
+            UpdateUser.Parameters.Add("@EndTime", SqlDbType.Time);
+            UpdateUser.Parameters["@EndTime"].Value = ESPEndClock;
+            UpdateUser.Parameters.Add("@EnergySurplus", SqlDbType.Float);
+            UpdateUser.Parameters["@EnergySurplus"].Value = ESPValue;
+            UpdateUser.Parameters.Add("@ID", SqlDbType.Int);
+            UpdateUser.Parameters["@ID"].Value = ESP.editingESPID;
             UpdateUser.ExecuteNonQuery();
             CloseConnection();
         }
