@@ -50,8 +50,7 @@ namespace KHMB
         {
 
             List<JobO> jList = new List<JobO>();
-            DateTime Finished;
-
+            
             OpenConnection();
             SqlCommand getJ = new SqlCommand("  SELECT * FROM Job WHERE (DATEADD(hh,durationhours,ExecutionTime) < getdate())", myConnection);
             SqlDataReader reader = getJ.ExecuteReader();
