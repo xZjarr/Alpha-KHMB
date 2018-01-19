@@ -134,11 +134,16 @@ namespace KHMB
             }
             else if ((string)lbl_Title.Content == "Tarif")
             {
-                Tarif.Edit(SelectedTemp.ChosenTarif.Cost, SelectedTemp.ChosenTarif.StartTime, SelectedTemp.ChosenTarif.EndTime);
+                Tarif.editing = true;
+                Tarif.editingTarifID = SelectedTemp.ChosenTarif.TarifID;
+                Tarif.EditShow(SelectedTemp.ChosenTarif.Cost, SelectedTemp.ChosenTarif.StartTime, SelectedTemp.ChosenTarif.EndTime, SelectedTemp.ChosenTarif.TarifID);
+                
             }
             else if ((string)lbl_Title.Content == "ESP")
             {
-                //ESP.Edit();
+                ESP.editing = true;
+                ESP.editingESPID = SelectedTemp.ChosenESP.ESP_ID;
+                ESP.EditShow(SelectedTemp.ChosenESP.ESP_ID);
             }
             else if ((string)lbl_Title.Content == "Resource")
             {
@@ -148,7 +153,9 @@ namespace KHMB
             }
             else if ((string)lbl_Title.Content == "Resource type")
             {
-                ResourceType.Edit(SelectedTemp.ChosenRT.Name);
+                ResourceType.EditShow(SelectedTemp.ChosenRT.ResourceTypeID);
+                ResourceType.editing = true;
+                ResourceType.EditResourceTypeID = SelectedTemp.ChosenRT.ResourceTypeID;
             }
         }
 

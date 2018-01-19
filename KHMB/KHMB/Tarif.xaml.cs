@@ -22,9 +22,15 @@ namespace KHMB
         public double cost;
         public TimeSpan startTime;
         public TimeSpan endTime;
+        public static bool editing = false;
+        public static int editingTarifID;
         public Tarif()
         {
             InitializeComponent();
+            if (editing == true)
+            {
+                btn_TariffCreate.Content = "Save changes";
+            }
             fillStartDropDown();
             fillEndDropDown();
         }
@@ -49,11 +55,11 @@ namespace KHMB
             }
 
         }
-        public static void Edit(double cost, TimeSpan start, TimeSpan End)
+        public static void EditShow(double cost, TimeSpan start, TimeSpan End, int ID)
         {
-
+            Tarif nw = new Tarif();
+            nw.Show();
         }
-
         //By Klaus
         public void Delete(int IDToDelete)
         {
@@ -72,8 +78,21 @@ namespace KHMB
 
         private void btn_TariffCreate_Click(object sender, RoutedEventArgs e)
         {
-            DB.InsertTariff(txtBox_TariffValue.Text, drpBox_TariffStartClock.Text, drpBox_TariffEndClock.Text);
-            this.Close();
+            if (editing == true)
+            {
+                DB.EditTarif(txtBox_TariffValue.Text, drpBox_TariffStartClock.Text, drpBox_TariffEndClock.Text);
+                this.Close();
+            }
+            else if (editing == false)
+            {
+                DB.InsertTariff(txtBox_TariffValue.Text, drpBox_TariffStartClock.Text, drpBox_TariffEndClock.Text);
+                this.Close();
+            }
+        }
+
+        private void txtBox_TariffValue_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

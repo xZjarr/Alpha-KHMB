@@ -19,9 +19,15 @@ namespace KHMB
     /// </summary>
     public partial class ESP : Window
     {
+        public static bool editing=false;
+        public static int editingESPID;
         public ESP()
         {
             InitializeComponent();
+            if (editing == true)
+            {
+                btn_ESPCreate.Content = "Save Changes";
+            }
             fillStartDropDown();
             fillEndDropDown();
 
@@ -61,9 +67,10 @@ namespace KHMB
         {
 
         }
-        public static void Edit(int IDToDelete)
+        public static void EditShow(int IDToDelete)
         {
-            DB.DeleteTarifESP("ESP", IDToDelete);
+            ESP nw = new ESP();
+                nw.Show();
         }
 
         //By Klaus Kristensen
@@ -84,8 +91,16 @@ namespace KHMB
 
         private void btn_ESPCreate_Click(object sender, RoutedEventArgs e)
         {
-            DB.InsertESP(txtBox_ESPValue.Text, drpBox_ESPStartClock.Text, drpBox_ESPEndClock.Text, datePicker_ESPStartDate.Text, datePicker_ESPEndDate.Text);
-            this.Close();
+            if (editing == true)
+            {
+                DB.EditESP(txtBox_ESPValue.Text, drpBox_ESPStartClock.Text, drpBox_ESPEndClock.Text, datePicker_ESPStartDate.Text, datePicker_ESPEndDate.Text);
+                this.Close();
+            }
+            else if (editing == false)
+            {
+                DB.InsertESP(txtBox_ESPValue.Text, drpBox_ESPStartClock.Text, drpBox_ESPEndClock.Text, datePicker_ESPStartDate.Text, datePicker_ESPEndDate.Text);
+                this.Close();
+            }
         }
 
         private void drpBox_ESPEndClock_SelectionChanged(object sender, SelectionChangedEventArgs e)

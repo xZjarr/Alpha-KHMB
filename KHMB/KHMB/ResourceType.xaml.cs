@@ -20,10 +20,15 @@ namespace KHMB
     public partial class ResourceType : Window
     {
         //<List> Resources
-        bool Access;
+        public static bool editing = false;
+        public static int EditResourceTypeID;
         public ResourceType()
         { 
             InitializeComponent();
+            if (editing == true)
+            {
+                Btn_Save.Content = "Save Changes";
+            }
         }
         public void GetResources(int ID)
         {
@@ -40,17 +45,30 @@ namespace KHMB
 
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
-            CreateResourceType(Bx_Nm.Text);
-            this.Close();
+            if (editing == false)
+            {
+                CreateResourceType(Bx_Nm.Text);
+                this.Close();
+            }
+            else if (editing == true)
+            {
+                Edit();
+                this.Close();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        public static void Edit(string name)
+        public static void EditShow(int RTID)
         {
-
+            ResourceType nw = new ResourceType();
+            nw.Show();
+        }
+        private void Edit()
+        {
+            DB.EditResourceType(Bx_Nm.Text);
         }
         public void Delete(int IDToDelete)
         {
